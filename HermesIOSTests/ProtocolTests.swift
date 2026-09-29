@@ -34,7 +34,7 @@ final class ProtocolTests: XCTestCase {
         var transcript = Transcript()
         transcript.apply(event(1, "message.start"))
         transcript.apply(event(2, "message.delta", text: ""))
-        XCTAssertEqual(transcript.activity, "Réfléchit…")
+        XCTAssertEqual(transcript.activity, "Thinking…")
         XCTAssertTrue(transcript.messages.isEmpty)
     }
 

@@ -5,9 +5,10 @@ struct OnboardingView: View {
     var adding = false
     var existing: SavedConnection?
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var step = 0
     @State private var address = ""
-    @State private var name = "Mon Hermes"
+    @State private var name = String(localized: "My Hermes")
     @State private var username = ""
     @State private var password = ""
     @State private var token = ""
@@ -20,75 +21,71 @@ struct OnboardingView: View {
         NavigationStack {
             GeometryReader { geo in
                 ScrollView {
-                    VStack(alignment: .leading, spacing: 28) {
+                    VStack(alignment: .leading, spacing: DS.Space.xxl) {
                         HStack {
-                            HStack(spacing: 10) { AgentMark(size: 28); Text("Hermès iOS").font(.system(size: 26, weight: .semibold, design: .rounded)) }
+                            Wordmark()
                             Spacer()
-                            Text(step == 0 ? "BONJOUR" : "CONNEXION").font(.caption2.weight(.semibold)).tracking(2).foregroundStyle(.secondary)
-                        }.padding(.top, 14)
+                            Text(step == 0 ? "WELCOME" : "CONNECT").textStyle(.overline).foregroundStyle(DS.Palette.textSecondary)
+                        }.padding(.top, DS.Space.s)
                         if step == 0 && !adding {
-                            Spacer(minLength: 20)
+                            Spacer(minLength: DS.Space.l)
                             hero
-                            VStack(alignment: .leading, spacing: 14) {
-                                Text("Votre agent.\nTout simplement.").font(.system(size: 43, weight: .regular, design: .serif)).tracking(-1.8).fixedSize(horizontal: false, vertical: true)
-                                Text("Un endroit calme pour parler à Hermes.\nVos idées, vos agents, votre rythme.")
-                                    .font(.body).foregroundStyle(.secondary).lineSpacing(5)
+                            VStack(alignment: .leading, spacing: DS.Space.s) {
+                                Text("Your agent.\nSimply.").textStyle(.hero).fixedSize(horizontal: false, vertical: true)
+                                    .accessibilityAddTraits(.isHeader)
+                                Text("A calm place to talk with Hermes.\nYour ideas, your agents, your pace.")
+                                    .textStyle(.body).foregroundStyle(DS.Palette.textSecondary)
                             }
-                            HStack(spacing: 20) {
-                                Label("100 % natif", systemImage: "iphone")
-                                Label("Chez vous", systemImage: "lock.shield")
-                            }.font(.caption).foregroundStyle(.secondary)
-                            Spacer(minLength: 14)
-                            VStack(spacing: 18) {
-                                PrimaryButton(title: "Rencontrer mon Hermes") { withAnimation { step = 1 } }
-                                Button("Découvrir l’interface") { model.loadDemo() }
-                                    .font(.subheadline).foregroundStyle(.secondary).padding(.bottom, 8)
+                            HStack(spacing: DS.Space.l) {
+                                Label("100% native", systemImage: "iphone")
+                                Label("Self-hosted", systemImage: "lock.shield")
+                            }.textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                            Spacer(minLength: DS.Space.s)
+                            VStack(spacing: DS.Space.xs) {
+                                PrimaryButton(title: "Meet my Hermes") {
+                                    withAnimation(DS.Motion.adaptive(DS.Motion.standard, reduceMotion: reduceMotion)) { step = 1 }
+                                }
+                                Button("Explore the interface") { model.loadDemo() }
+                                    .buttonStyle(HermesButtonStyle(kind: .quiet)).padding(.bottom, DS.Space.xs)
                             }
                         } else {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("Faisons le lien.").font(.system(size: 38, weight: .regular, design: .serif)).tracking(-1)
-                                Text("Ouvrez Tailscale sur votre iPhone, puis entrez l’adresse de votre serveur Hermes.")
-                                    .foregroundStyle(.secondary).lineSpacing(4)
-                            }.padding(.top, 24)
-                            VStack(alignment: .leading, spacing: 18) {
-                                field("Nom de la connexion", text: $name, placeholder: "Mon Hermes")
-                                field("Adresse Hermes", text: $address, placeholder: "https://hermes.tailnet.ts.net", url: true)
-                                Picker("Authentification", selection: $mode) {
-                                    Text("Identifiants Hermes").tag("basic")
-                                    Text("Jeton existant").tag("token")
+                            ScreenHeader(Text("Let’s connect."), subtitle: Text("Open Tailscale on your iPhone, then enter your Hermes server’s address."))
+                                .padding(.top, DS.Space.l)
+                            VStack(alignment: .leading, spacing: DS.Space.l) {
+                                field("Connection name", text: $name, placeholder: "My Hermes")
+                                field("Hermes address", text: $address, placeholder: "https://hermes.tailnet.ts.net", url: true)
+                                Picker("Authentication", selection: $mode) {
+                                    Text("Hermes credentials").tag("basic")
+                                    Text("Existing token").tag("token")
                                 }.pickerStyle(.segmented)
                                 if mode == "basic" {
-                                    field("Utilisateur", text: $username, placeholder: "admin")
-                                    VStack(alignment: .leading, spacing: 8) {
-                                        Text("Mot de passe").font(.caption.weight(.medium)).foregroundStyle(.secondary)
-                                        SecureField("Mot de passe Hermes", text: $password).textContentType(.password)
-                                            .padding(15).background(AppTheme.background, in: RoundedRectangle(cornerRadius: 14))
+                                    field("Username", text: $username, placeholder: "admin")
+                                    FormField(label: "Password") {
+                                        SecureField("Hermes password", text: $password).textContentType(.password)
                                     }
                                 } else {
-                                    SecureField("Jeton de session du serveur", text: $token)
-                                        .padding(15).background(AppTheme.background, in: RoundedRectangle(cornerRadius: 14))
-                                    Text("Le jeton de session Hermes, pas une clé de fournisseur de modèle.").font(.caption).foregroundStyle(.secondary)
+                                    FormField(label: "Server session token") {
+                                        SecureField("Server session token", text: $token)
+                                    }
+                                    Text("The Hermes session token, not a model provider key.").textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                                 }
-                            }.hermesCard()
-                            if let error {
-                                Label(error, systemImage: "exclamationmark.circle").font(.subheadline).foregroundStyle(AppTheme.accent).fixedSize(horizontal: false, vertical: true)
-                            }
-                            PrimaryButton(title: "Connecter mon agent", symbol: "link", busy: busy) { connect() }
+                            }.card()
+                            if let error { InlineMessage(error) }
+                            PrimaryButton(title: "Connect my agent", symbol: "link", busy: busy) { connect() }
                                 .disabled(address.isEmpty || (mode == "basic" ? password.isEmpty || username.isEmpty : token.isEmpty))
                                 .accessibilityIdentifier("connect-agent")
                             Button { showGuide = true } label: {
-                                Label("Où trouver ces informations ?", systemImage: "questionmark.circle")
-                                    .font(.subheadline).frame(maxWidth: .infinity)
-                            }
-                            Label("Connexion directe à Hermes. Vos identifiants restent dans le trousseau de cet iPhone.", systemImage: "lock")
-                                .font(.caption).foregroundStyle(.secondary).lineSpacing(3)
-                            Spacer(minLength: 12)
+                                Label("Where do I find this?", systemImage: "questionmark.circle")
+                            }.buttonStyle(HermesButtonStyle(kind: .quiet))
+                            Label("Direct connection to Hermes. Your credentials stay in this iPhone’s Keychain.", systemImage: "lock")
+                                .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                            Spacer(minLength: DS.Space.s)
                         }
-                    }.padding(.horizontal, 28).frame(maxWidth: 540).frame(minHeight: geo.size.height).frame(maxWidth: .infinity)
-                }.scrollDismissesKeyboard(.interactively).background(AppTheme.background)
+                    }.padding(.horizontal, DS.Space.xxl).frame(maxWidth: DS.Size.formWidth).frame(minHeight: geo.size.height).frame(maxWidth: .infinity)
+                }.scrollDismissesKeyboard(.interactively).background(DS.Palette.background)
             }
             .toolbar {
-                if adding { ToolbarItem(placement: .cancellationAction) { Button("Fermer") { dismiss() } } }
+                if adding { ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } } }
                 else if step > 0 { ToolbarItem(placement: .topBarLeading) { Button { step = 0 } label: { Image(systemName: "arrow.left") } } }
             }
             .sheet(isPresented: $showGuide) { ConnectionGuide() }
@@ -101,24 +98,22 @@ struct OnboardingView: View {
 
     private var hero: some View {
         ZStack {
-            Circle().fill(AppTheme.accent.opacity(0.045)).frame(width: 246, height: 246)
-            Circle().strokeBorder(AppTheme.accent.opacity(0.13), lineWidth: 1).frame(width: 205, height: 205)
-            Circle().strokeBorder(AppTheme.accent.opacity(0.07), lineWidth: 1).frame(width: 274, height: 274)
+            Circle().fill(DS.Palette.accent.opacity(0.045)).frame(width: 246, height: 246)
+            Circle().strokeBorder(DS.Palette.accent.opacity(0.13), lineWidth: 1).frame(width: 205, height: 205)
+            Circle().strokeBorder(DS.Palette.accent.opacity(0.07), lineWidth: 1).frame(width: 274, height: 274)
             AgentMark(size: 116)
-            Text("vous").font(.caption.weight(.medium)).padding(.horizontal, 17).padding(.vertical, 9)
-                .background(AppTheme.surface, in: Capsule()).rotationEffect(.degrees(-8)).offset(x: -95, y: 62)
-            HStack(spacing: 5) { Circle().fill(.green).frame(width: 5, height: 5); Text("Hermes") }.font(.caption.weight(.medium))
-                .padding(.horizontal, 15).padding(.vertical, 10).background(AppTheme.surface, in: Capsule())
-                .rotationEffect(.degrees(7)).offset(x: 93, y: -61)
+            Text("you").textStyle(.captionEmphasis).padding(.horizontal, DS.Space.m).padding(.vertical, DS.Space.xs)
+                .background(DS.Palette.surface, in: Capsule()).elevation(.floating).rotationEffect(.degrees(-8)).offset(x: -95, y: 62)
+            HStack(spacing: DS.Space.xxs) { StatusDot(color: DS.Palette.success, size: 5); Text(verbatim: "Hermes") }.textStyle(.captionEmphasis)
+                .padding(.horizontal, DS.Space.m).padding(.vertical, DS.Space.xs + 2).background(DS.Palette.surface, in: Capsule())
+                .elevation(.floating).rotationEffect(.degrees(7)).offset(x: 93, y: -61)
         }.frame(maxWidth: .infinity).frame(height: 260).accessibilityHidden(true)
     }
 
-    private func field(_ label: String, text: Binding<String>, placeholder: String, url: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(label).font(.caption.weight(.medium)).foregroundStyle(.secondary)
+    private func field(_ label: LocalizedStringKey, text: Binding<String>, placeholder: LocalizedStringKey, url: Bool = false) -> some View {
+        FormField(label: label) {
             TextField(placeholder, text: text).textInputAutocapitalization(.never).autocorrectionDisabled()
                 .keyboardType(url ? .URL : .default).accessibilityLabel(label)
-                .padding(15).background(AppTheme.background, in: RoundedRectangle(cornerRadius: 14))
         }
     }
 
@@ -141,29 +136,33 @@ struct ConnectionGuide: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
-                    Text("Votre Hermes,\ndans votre poche.").font(.system(size: 34, design: .serif))
-                    instruction("1", "Le même réseau privé", "Connectez votre serveur et votre iPhone au même compte Tailscale. Gardez Tailscale activé sur l’iPhone.")
-                    instruction("2", "L’accès natif de Hermes", "Sur votre serveur, configurez les identifiants du tableau de bord Hermes dans son fichier .env, avec un secret de signature stable.")
-                    Text("HERMES_DASHBOARD_BASIC_AUTH_USERNAME\nHERMES_DASHBOARD_BASIC_AUTH_PASSWORD\nHERMES_DASHBOARD_BASIC_AUTH_SECRET")
-                        .font(.system(.caption2, design: .monospaced)).textSelection(.enabled).hermesCard()
-                    instruction("3", "Démarrer le serveur", "Lancez le serveur officiel avec son adresse privée Tailscale. Hermès iOS utilise son API directement.")
-                    Text("hermes serve --host <IP-Tailscale> --port 9119")
-                        .font(.system(.caption, design: .monospaced)).textSelection(.enabled).hermesCard()
-                    Text("Dans Hermès iOS, entrez http://<IP-Tailscale>:9119. Si vous utilisez Tailscale Serve avec HTTPS, entrez plutôt son adresse https://…ts.net.")
-                        .font(.subheadline).foregroundStyle(.secondary)
-                    Link("Ouvrir la documentation officielle", destination: URL(string: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop#connecting-to-a-remote-backend")!)
-                    Text("L’authentification par mot de passe est prévue pour votre réseau privé. Hermès iOS ne configure pas votre serveur à votre place.")
-                        .font(.caption).foregroundStyle(.secondary)
-                }.padding(24)
-            }.background(AppTheme.background).navigationTitle("Connexion").navigationBarTitleDisplayMode(.inline)
-                .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Terminé") { dismiss() } } }
+                VStack(alignment: .leading, spacing: DS.Space.xl) {
+                    Text("Your Hermes,\nin your pocket.").textStyle(.display).accessibilityAddTraits(.isHeader)
+                    instruction("1", "The same private network", "Connect your server and your iPhone to the same Tailscale account. Keep Tailscale on while using the iPhone.")
+                    instruction("2", "Hermes’ native access", "On your server, set the Hermes dashboard credentials in its .env file, along with a stable signing secret.")
+                    Text(verbatim: "HERMES_DASHBOARD_BASIC_AUTH_USERNAME\nHERMES_DASHBOARD_BASIC_AUTH_PASSWORD\nHERMES_DASHBOARD_BASIC_AUTH_SECRET")
+                        .textStyle(.codeSmall).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).card(padding: DS.Space.m)
+                    instruction("3", "Start the server", "Run the official server on its private Tailscale address. Hermès iOS talks to its API directly.")
+                    Text(verbatim: "hermes serve --host <Tailscale-IP> --port 9119")
+                        .textStyle(.codeSmall).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).card(padding: DS.Space.m)
+                    Text("In Hermès iOS, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.")
+                        .textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
+                    Link("Open the official documentation", destination: URL(string: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop#connecting-to-a-remote-backend")!)
+                    Text("Password authentication is meant for your private network. Hermès iOS doesn’t configure your server for you.")
+                        .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                }.padding(DS.Space.xl).readableWidth(DS.Size.formWidth)
+            }.background(DS.Palette.background).navigationTitle("Connection").navigationBarTitleDisplayMode(.inline)
+                .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
     }
-    private func instruction(_ n: String, _ title: String, _ detail: String) -> some View {
-        HStack(alignment: .top, spacing: 14) {
-            Text(n).font(.subheadline.weight(.semibold)).frame(width: 30, height: 30).background(AppTheme.accent.opacity(0.1), in: Circle()).foregroundStyle(AppTheme.accent)
-            VStack(alignment: .leading, spacing: 6) { Text(title).font(.headline); Text(detail).font(.subheadline).foregroundStyle(.secondary).lineSpacing(3) }
-        }
+    private func instruction(_ n: String, _ title: LocalizedStringKey, _ detail: LocalizedStringKey) -> some View {
+        HStack(alignment: .top, spacing: DS.Space.s + 2) {
+            Text(verbatim: n).textStyle(.label).frame(width: 30, height: 30).background(DS.Palette.accentSoft, in: Circle()).foregroundStyle(DS.Palette.accentText)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: DS.Space.xxs + 2) {
+                Text(title).textStyle(.headline)
+                Text(detail).textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
+            }
+        }.accessibilityElement(children: .combine)
     }
 }

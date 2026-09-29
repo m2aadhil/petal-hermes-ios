@@ -6,34 +6,34 @@ enum AppDestination: String, Identifiable, CaseIterable {
     var id: String { rawValue }
     var title: String {
         switch self {
-        case .spaces: "Outils"
-        case .profiles: "Profils"
-        case .history: "Conversations"
-        case .agents: "Agents"
-        case .groups: "Groupes"
-        case .routines: "Routines"
-        case .kanban: "Kanban"
-        case .workspace: "Workspace"
-        case .skills: "Skills"
-        case .models: "Modèles"
-        case .voice: "Voix"
-        case .settings: "Réglages"
+        case .spaces: String(localized: "Tools")
+        case .profiles: String(localized: "Profiles")
+        case .history: String(localized: "Conversations")
+        case .agents: String(localized: "Agents")
+        case .groups: String(localized: "Groups")
+        case .routines: String(localized: "Routines")
+        case .kanban: String(localized: "Kanban")
+        case .workspace: String(localized: "Workspace")
+        case .skills: String(localized: "Skills")
+        case .models: String(localized: "Models")
+        case .voice: String(localized: "Voice")
+        case .settings: String(localized: "Settings")
         }
     }
     var detail: String {
         switch self {
-        case .spaces: "Tout votre Hermes"
-        case .profiles: "Changer d’agent"
-        case .history: "Retrouver le fil"
-        case .agents: "Profils et Bot Mode"
-        case .groups: "Faire équipe"
-        case .routines: "Planifier · cron jobs"
-        case .kanban: "Suivre les tâches"
-        case .workspace: "Projets et dossiers"
-        case .skills: "Ses compétences"
-        case .models: "Choisir son modèle"
-        case .voice: "Parler avec votre agent"
-        case .settings: "Connexions et préférences"
+        case .spaces: String(localized: "All of your Hermes")
+        case .profiles: String(localized: "Switch agent")
+        case .history: String(localized: "Pick up the thread")
+        case .agents: String(localized: "Profiles and Bot Mode")
+        case .groups: String(localized: "Team up")
+        case .routines: String(localized: "Schedule · cron jobs")
+        case .kanban: String(localized: "Track tasks")
+        case .workspace: String(localized: "Projects and folders")
+        case .skills: String(localized: "Its skills")
+        case .models: String(localized: "Choose its model")
+        case .voice: String(localized: "Talk with your agent")
+        case .settings: String(localized: "Connections and preferences")
         }
     }
     var symbol: String {
@@ -58,9 +58,9 @@ private enum ToolCategory: String, CaseIterable {
     case work, agent, all
     var title: String {
         switch self {
-        case .work: "Travail"
-        case .agent: "Agent"
-        case .all: "Tout"
+        case .work: String(localized: "Work")
+        case .agent: String(localized: "Agent")
+        case .all: String(localized: "All")
         }
     }
     var destinations: [AppDestination] {
@@ -93,7 +93,7 @@ struct SpacesView: View {
             if let page { destination(page) }
             else { launcher }
         }
-        .background(AppTheme.background)
+        .background(DS.Palette.background)
         .environment(\.toolNavigation, ToolNavigation(showSpaces: { page = nil }, showChat: { dismiss() }))
         .presentationDetents(typeSize.isAccessibilitySize ? [.large] : [compactDetent, .large], selection: $detent)
         .onChange(of: page) { _, value in searching = false; detent = value == nil || value == .profiles ? compactDetent : .large }
@@ -111,62 +111,44 @@ struct SpacesView: View {
 
     private var launcher: some View {
         VStack(spacing: 0) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Outils").font(.system(size: 25, design: .serif)).tracking(-0.4)
-                    Text("Pour \(model.agent?.title ?? "Hermes")").font(.caption).foregroundStyle(.secondary)
-                }
-                Spacer()
-                Button { page = .settings } label: {
-                    Image(systemName: "gearshape").font(.system(size: 18))
-                        .frame(width: 44, height: 44).background(AppTheme.surface, in: Circle())
-                }.buttonStyle(.plain).accessibilityLabel("Réglages").accessibilityIdentifier("quick-settings")
-            }.padding(.horizontal, 24).padding(.top, 25).padding(.bottom, 16)
-            HStack(spacing: 4) {
+            ScreenHeader(Text("Tools"), subtitle: Text("For \(model.agent?.title ?? "Hermes")"), style: .title) {
+                IconButton("gearshape", label: "Settings", weight: .regular) { page = .settings }
+                    .accessibilityIdentifier("quick-settings")
+            }.padding(.horizontal, DS.Space.screen).padding(.top, DS.Space.xl).padding(.bottom, DS.Space.m)
+            HStack(spacing: DS.Space.xxs) {
                 ForEach(ToolCategory.allCases, id: \.self) { item in
                     Button { search = ""; searching = false; category = item } label: {
-                        Text(item.title).font(.subheadline.weight(.medium)).frame(maxWidth: .infinity).frame(minHeight: 44)
-                            .foregroundStyle(category == item ? Color.primary : .secondary)
-                            .background(category == item ? AppTheme.surface : Color.clear, in: Capsule())
+                        Text(item.title).textStyle(.label).frame(maxWidth: .infinity).frame(minHeight: DS.Size.tap)
+                            .foregroundStyle(category == item ? DS.Palette.textPrimary : DS.Palette.textSecondary)
+                            .background(category == item ? DS.Palette.surface : Color.clear, in: Capsule())
+                            .contentShape(Capsule())
                     }.buttonStyle(.plain).accessibilityIdentifier("tools-filter-" + item.rawValue)
                         .accessibilityAddTraits(category == item ? .isSelected : [])
                 }
-            }.padding(3).background(AppTheme.line.opacity(0.5), in: Capsule()).padding(.horizontal, 22).padding(.bottom, 10)
+            }.padding(DS.Space.hairline + 1).background(DS.Palette.line.opacity(0.5), in: Capsule()).padding(.horizontal, DS.Space.l).padding(.bottom, DS.Space.s)
             ScrollView {
                 VStack(spacing: 0) {
                     ForEach(entries) { entry in
                         Button { page = entry } label: {
-                            HStack(spacing: 14) {
-                                Image(systemName: entry.symbol).font(.system(size: 19, weight: .regular))
-                                    .foregroundStyle(AppTheme.accent).frame(width: 40, height: 40)
-                                    .background(AppTheme.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 13))
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(entry.title).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
-                                    Text(entry.detail).font(.caption).foregroundStyle(.secondary)
+                            HStack(spacing: DS.Space.s + 2) {
+                                IconTile(symbol: entry.symbol)
+                                VStack(alignment: .leading, spacing: DS.Space.xxs) {
+                                    Text(entry.title).textStyle(.label).foregroundStyle(DS.Palette.textPrimary)
+                                    Text(entry.detail).textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                                 }
                                 Spacer(minLength: 0)
-                                Image(systemName: "chevron.right").font(.system(size: 10, weight: .medium)).foregroundStyle(.tertiary)
-                            }.padding(.vertical, 12).contentShape(Rectangle())
-                        }.buttonStyle(.plain).accessibilityIdentifier("space-\(entry.rawValue)")
+                                Image(systemName: "chevron.right").icon(.xs, weight: .medium).foregroundStyle(DS.Palette.textTertiary)
+                            }.padding(.vertical, DS.Space.s).contentShape(Rectangle())
+                        }.buttonStyle(PressableStyle()).accessibilityIdentifier("space-\(entry.rawValue)")
                     }
                     if entries.isEmpty { ContentUnavailableView.search(text: search) }
-                }.padding(.horizontal, 26).padding(.bottom, 8)
+                }.padding(.horizontal, DS.Space.screen).padding(.bottom, DS.Space.xs)
             }.scrollDismissesKeyboard(.interactively)
-            HStack(spacing: 12) {
-                HStack(spacing: 10) {
-                    Image(systemName: "magnifyingglass").foregroundStyle(.tertiary)
-                    TextField("Chercher un outil", text: $search).font(.subheadline).focused($searching)
-                        .accessibilityIdentifier("spaces-search")
-                    if !search.isEmpty {
-                        Button { search = "" } label: { Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary) }
-                            .accessibilityLabel("Effacer la recherche")
-                    }
-                }.padding(.horizontal, 15).frame(height: 46).background(AppTheme.surface, in: Capsule())
-                Button { dismiss() } label: {
-                    Image(systemName: "chevron.down").font(.system(size: 14, weight: .semibold))
-                        .frame(width: 46, height: 46).background(AppTheme.surface, in: Circle())
-                }.buttonStyle(.plain).accessibilityLabel("Revenir au chat").accessibilityIdentifier("return-to-chat")
-            }.padding(.horizontal, 20).padding(.top, 8).padding(.bottom, 12)
+            HStack(spacing: DS.Space.s) {
+                SearchField("Search tools", text: $search, focus: $searching, identifier: "spaces-search")
+                IconButton("chevron.down", label: "Back to chat", scale: .medium, weight: .semibold) { dismiss() }
+                    .accessibilityIdentifier("return-to-chat")
+            }.padding(.horizontal, DS.Space.l).padding(.top, DS.Space.xs).padding(.bottom, DS.Space.s)
         }
     }
 
@@ -186,7 +168,7 @@ struct SpacesView: View {
         case .groups:
             Group {
                 if let connection = model.activeConnection { GroupsView(app: model, connectionID: connection.id) }
-                else { ContentUnavailableView("Faire équipe", systemImage: "person.2", description: Text("Connectez votre Hermes pour retrouver vos groupes.")) }
+                else { ContentUnavailableView("Team up", systemImage: "person.2", description: Text("Connect your Hermes to see your groups.")) }
             }.safeAreaInset(edge: .bottom, spacing: 0) { ToolDock() }
         }
     }
@@ -216,24 +198,23 @@ struct ToolDock<Actions: View>: View {
     private let actions: Actions
     init(@ViewBuilder actions: () -> Actions) { self.actions = actions() }
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: DS.Space.s) {
             if let navigation {
-                Button(action: navigation.showSpaces) {
-                    Image(systemName: "circle.grid.2x2").font(.system(size: 19))
-                        .frame(width: 44, height: 44).background(AppTheme.surface, in: Circle())
-                }.accessibilityLabel("Outils").accessibilityIdentifier("back-to-spaces")
+                IconButton("circle.grid.2x2", label: "Tools", weight: .regular, action: navigation.showSpaces)
+                    .accessibilityIdentifier("back-to-spaces")
             }
             HStack { Spacer(minLength: 0); actions; Spacer(minLength: 0) }
-                .font(.subheadline.weight(.medium))
+                .textStyle(.label)
             if let navigation {
                 Button(action: navigation.showChat) {
-                    Label("Chat", systemImage: "arrow.down.right").font(.subheadline.weight(.medium))
-                        .padding(.horizontal, 16).frame(height: 44).background(AppTheme.surface, in: Capsule())
-                }.accessibilityLabel("Revenir au chat").accessibilityIdentifier("return-to-chat")
+                    Label("Chat", systemImage: "arrow.down.right").textStyle(.label)
+                        .padding(.horizontal, DS.Space.m).frame(minHeight: DS.Size.tap)
+                        .background(DS.Palette.surface, in: Capsule()).overlay(Capsule().strokeBorder(DS.Palette.line))
+                }.buttonStyle(PressableStyle()).accessibilityLabel("Back to chat").accessibilityIdentifier("return-to-chat")
             }
-        }.buttonStyle(.plain).foregroundStyle(.primary)
-            .padding(.horizontal, 20).padding(.top, 8).padding(.bottom, 8)
-            .background(AppTheme.background)
+        }.buttonStyle(.plain).foregroundStyle(DS.Palette.textPrimary)
+            .padding(.horizontal, DS.Space.l).padding(.vertical, DS.Space.xs)
+            .background(DS.Palette.background)
     }
 }
 extension ToolDock where Actions == EmptyView {

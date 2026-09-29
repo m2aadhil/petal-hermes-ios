@@ -19,68 +19,68 @@ struct KanbanView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: DS.Space.xl) {
                     HStack(alignment: .center) {
                         Menu {
                             ForEach(boards.data["boards"].array, id: \.["slug"].string) { row in
                                 Button(row["name"].string.isEmpty ? row["slug"].string : row["name"].string) { slug = row["slug"].string }
                             }
                         } label: {
-                            HStack(spacing: 8) {
-                                Text(boards.data["boards"].array.first(where: { $0["slug"].string == slug })?["name"].string ?? "Tableaux")
-                                    .font(.system(size: 26, design: .serif)).tracking(-0.5)
-                                Image(systemName: "chevron.down").font(.system(size: 10, weight: .semibold)).foregroundStyle(.secondary)
-                            }.frame(minHeight: 44)
-                        }.buttonStyle(.plain).disabled(boards.data.isNull).accessibilityLabel("Choisir un tableau")
+                            HStack(spacing: DS.Space.xs) {
+                                Text(boards.data["boards"].array.first(where: { $0["slug"].string == slug })?["name"].string ?? String(localized: "Boards"))
+                                    .textStyle(.title).accessibilityAddTraits(.isHeader)
+                                Image(systemName: "chevron.down").icon(.xs, weight: .semibold).foregroundStyle(DS.Palette.textSecondary)
+                            }.frame(minHeight: DS.Size.tap)
+                        }.buttonStyle(.plain).disabled(boards.data.isNull).accessibilityLabel("Choose a board")
                         Spacer()
-                        Text("\(columns.reduce(0) { $0 + $1["tasks"].array.count }) tâches")
-                            .font(.caption).foregroundStyle(.secondary)
-                    }.padding(.top, 8)
+                        Text("\(columns.reduce(0) { $0 + $1["tasks"].array.count }) tasks")
+                            .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                    }.padding(.top, DS.Space.xs)
                     ToolFeedback(tools: boards)
                     ToolFeedback(tools: board)
                     ForEach(columns.filter { (filter == "all" || $0["name"].string == filter) && !$0["tasks"].array.isEmpty }, id: \.["name"].string) { column in
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack(spacing: 8) {
-                                Circle().fill(column["name"].string == "done" ? AppTheme.colors[1] : column["name"].string == "running" ? AppTheme.accent : Color.secondary.opacity(0.35)).frame(width: 6, height: 6)
-                                Text(statusName(column["name"].string).uppercased()).font(.system(size: 10, weight: .semibold)).tracking(1.3)
-                                Text("\(column["tasks"].array.count)").font(.caption2).foregroundStyle(.tertiary)
+                        VStack(alignment: .leading, spacing: DS.Space.s - 2) {
+                            HStack(spacing: DS.Space.xs) {
+                                StatusDot(color: statusColor(column["name"].string))
+                                Text(statusName(column["name"].string)).textStyle(.overline)
+                                Text(verbatim: "\(column["tasks"].array.count)").textStyle(.footnote).foregroundStyle(DS.Palette.textTertiary)
                                 Spacer()
-                            }.foregroundStyle(.secondary).padding(.horizontal, 3)
+                            }.foregroundStyle(DS.Palette.textSecondary).padding(.horizontal, DS.Space.xxs)
+                                .accessibilityElement(children: .combine).accessibilityAddTraits(.isHeader)
                             ForEach(column["tasks"].array, id: \.["id"].string) { task in
                                 Button { detail = task } label: {
-                                    VStack(alignment: .leading, spacing: 9) {
-                                        Text(task["title"].string).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
-                                        if !task["body"].string.isEmpty { Text(task["body"].string).font(.caption).foregroundStyle(.secondary).lineLimit(2) }
+                                    VStack(alignment: .leading, spacing: DS.Space.xs) {
+                                        Text(task["title"].string).textStyle(.label).foregroundStyle(DS.Palette.textPrimary)
+                                        if !task["body"].string.isEmpty { Text(task["body"].string).textStyle(.caption).foregroundStyle(DS.Palette.textSecondary).lineLimit(2) }
                                         if !task["assignee"].string.isEmpty {
-                                            HStack(spacing: 6) {
+                                            HStack(spacing: DS.Space.xxs + 2) {
                                                 AgentAvatar(name: task["assignee"].string, size: 18)
-                                                Text(task["assignee"].string).font(.caption2).foregroundStyle(.secondary)
+                                                Text(task["assignee"].string).textStyle(.footnote).foregroundStyle(DS.Palette.textSecondary)
                                             }
                                         }
-                                    }.frame(maxWidth: .infinity, alignment: .leading).padding(18)
-                                        .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 18))
-                                        .overlay(RoundedRectangle(cornerRadius: 18).strokeBorder(AppTheme.line.opacity(0.6)))
-                                }.buttonStyle(.plain)
+                                    }.frame(maxWidth: .infinity, alignment: .leading).padding(DS.Space.m)
+                                        .tile()
+                                }.buttonStyle(PressableStyle())
                             }
                         }
                     }
                     if !board.data.isNull && columns.filter({ filter == "all" || $0["name"].string == filter }).allSatisfy({ $0["tasks"].array.isEmpty }) {
-                        ContentUnavailableView("Une idée à organiser ?", systemImage: "rectangle.split.3x1", description: Text("Ajoutez une tâche pour la retrouver dans votre tableau Hermes."))
+                        ContentUnavailableView("An idea to organize?", systemImage: "rectangle.split.3x1", description: Text("Add a task to find it on your Hermes board."))
                     }
-                }.padding(.horizontal, 22).padding(.bottom, 24).frame(maxWidth: 680).frame(maxWidth: .infinity)
-            }.background(AppTheme.background)
+                }.padding(.horizontal, DS.Space.screen).padding(.bottom, DS.Space.xl).readableWidth()
+            }.background(DS.Palette.background)
                 .navigationTitle("Kanban").navigationBarTitleDisplayMode(.inline)
                 .safeAreaInset(edge: .bottom, spacing: 0) {
                     ToolDock {
                         Menu {
-                            Button("Tout voir") { filter = "all" }
+                            Button("Show all") { filter = "all" }
                             ForEach(columns, id: \.["name"].string) { column in
                                 Button(statusName(column["name"].string)) { filter = column["name"].string }
                             }
-                        } label: { Image(systemName: "line.3.horizontal.decrease").frame(width: 44, height: 44) }
-                            .accessibilityLabel("Filtrer les tâches")
-                        Button { creating = true } label: { Image(systemName: "plus").frame(width: 44, height: 44) }
-                            .disabled(slug.isEmpty || board.data.isNull || board.app.demo).accessibilityLabel("Nouvelle tâche")
+                        } label: { Image(systemName: "line.3.horizontal.decrease").icon(.m).frame(width: DS.Size.tap, height: DS.Size.tap) }
+                            .accessibilityLabel("Filter tasks")
+                        Button { creating = true } label: { Image(systemName: "plus").icon(.m).frame(width: DS.Size.tap, height: DS.Size.tap) }
+                            .disabled(slug.isEmpty || board.data.isNull || board.app.demo).accessibilityLabel("New task")
                     }
                 }
                 .refreshable { await refresh() }
@@ -107,22 +107,22 @@ struct KanbanView: View {
     private var createForm: some View {
         NavigationStack {
             Form {
-                TextField("Titre de la tâche", text: $title).disabled(board.busy)
+                TextField("Task title", text: $title).disabled(board.busy)
                     .onChange(of: title) { _, _ in if !board.busy { creationID = UUID().uuidString } }
-                TextField("Quelques détails…", text: $bodyText, axis: .vertical).lineLimit(4...10).disabled(board.busy)
+                TextField("A few details…", text: $bodyText, axis: .vertical).lineLimit(4...10).disabled(board.busy)
                     .onChange(of: bodyText) { _, _ in if !board.busy { creationID = UUID().uuidString } }
-                Text("Ajoutée dans À préciser. L’orchestration de cette idée reste gérée par Hermes.").font(.caption).foregroundStyle(.secondary)
+                Text("Added to Triage. Hermes still handles orchestrating this idea.").textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                 ToolFeedback(tools: board)
-            }.navigationTitle("Nouvelle tâche").navigationBarTitleDisplayMode(.inline)
+            }.navigationTitle("New task").navigationBarTitleDisplayMode(.inline)
                 .safeAreaInset(edge: .bottom) {
                     Button { Task { await board.perform {
                         let result = try await board.request("/api/plugins/kanban/tasks", method: "POST", body: ["title": .string(title), "body": .string(bodyText), "triage": true, "idempotency_key": .string(creationID)], query: query)
-                        guard !result["task"]["id"].string.isEmpty else { throw RPCFailure("Hermes n’a pas confirmé la création. Vérifiez le tableau avant de réessayer.") }
+                        guard !result["task"]["id"].string.isEmpty else { throw RPCFailure(String(localized: "Hermes didn’t confirm the task was created. Check the board before trying again.")) }
                         creating = false; title = ""; bodyText = ""; creationID = UUID().uuidString; await refresh()
-                    } } } label: { Text(board.busy ? "Ajout…" : "Ajouter au tableau").frame(maxWidth: .infinity, minHeight: 48) }
-                        .buttonStyle(.borderedProminent).disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || board.busy).padding(20)
+                    } } } label: { Text(board.busy ? "Adding…" : "Add to board") }
+                        .buttonStyle(HermesButtonStyle(kind: .primary)).disabled(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || board.busy).padding(DS.Space.l)
                 }
-                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Annuler") { creating = false } } }
+                .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Cancel") { creating = false } } }
         }.interactiveDismissDisabled(board.busy)
     }
 }
@@ -137,21 +137,25 @@ private struct KanbanDetailView: View {
         NavigationStack {
             List {
                 Section {
-                    Text(task["title"].string).font(.title2.weight(.semibold))
-                    Label(statusName(task["status"].string), systemImage: "circle.dotted").foregroundStyle(AppTheme.accent)
+                    Text(task["title"].string).textStyle(.title)
+                    HStack(spacing: DS.Space.xs) {
+                        StatusDot(color: statusColor(task["status"].string), size: 8)
+                        Text(statusName(task["status"].string)).textStyle(.label).foregroundStyle(DS.Palette.textSecondary)
+                    }.accessibilityElement(children: .combine)
                     Text(full["task"]["body"].isNull ? task["body"].string : full["task"]["body"].string).textSelection(.enabled)
                 }
                 ToolFeedback(tools: tools)
-                if !full["task"]["result"].string.isEmpty { Section("Résultat") { Text(full["task"]["result"].string).textSelection(.enabled) } }
+                if !full["task"]["result"].string.isEmpty { Section("Result") { Text(full["task"]["result"].string).textSelection(.enabled) } }
                 if !full["comments"].array.isEmpty {
-                    Section("Commentaires") {
+                    Section("Comments") {
                         ForEach(Array(full["comments"].array.enumerated()), id: \.offset) { _, comment in
-                            VStack(alignment: .leading, spacing: 6) { Text(comment["author"].string).font(.caption.weight(.semibold)); Text(comment["body"].string) }
+                            VStack(alignment: .leading, spacing: DS.Space.xxs + 2) { Text(comment["author"].string).textStyle(.sectionLabel); Text(comment["body"].string).textStyle(.body) }
                         }
                     }
                 }
-            }.navigationTitle("La tâche").navigationBarTitleDisplayMode(.inline)
-                .safeAreaInset(edge: .bottom) { Button("Revenir au tableau") { dismiss() }.buttonStyle(.borderedProminent).controlSize(.large).padding(16) }
+            }.navigationTitle("Task").navigationBarTitleDisplayMode(.inline)
+                .modernList()
+                .safeAreaInset(edge: .bottom) { Button("Back to board") { dismiss() }.buttonStyle(HermesButtonStyle(kind: .secondary)).padding(DS.Space.m) }
                 .task {
                     guard !tools.app.demo else { return }
                     await tools.perform {
@@ -162,6 +166,17 @@ private struct KanbanDetailView: View {
     }
 }
 
+/// Semantic colour for a Kanban status.
+private func statusColor(_ status: String) -> Color {
+    switch status {
+    case "done": DS.Palette.success
+    case "running", "review": DS.Palette.accent
+    case "blocked": DS.Palette.warning
+    case "failed": DS.Palette.critical
+    default: DS.Palette.disabledFill
+    }
+}
+
 private func statusName(_ status: String) -> String {
-    ["triage": "À préciser", "todo": "À faire", "ready": "Prêt", "running": "En cours", "blocked": "Bloqué", "review": "À valider", "done": "Terminé", "failed": "En échec", "archived": "Archivé"][status] ?? status.capitalized
+    ["triage": String(localized: "Triage", comment: "Kanban status"), "todo": String(localized: "To do", comment: "Kanban status"), "ready": String(localized: "Ready", comment: "Kanban status"), "running": String(localized: "In progress", comment: "Kanban status"), "blocked": String(localized: "Blocked", comment: "Kanban status"), "review": String(localized: "In review", comment: "Kanban status"), "done": String(localized: "Done", comment: "Kanban status"), "failed": String(localized: "Failed", comment: "Kanban status"), "archived": String(localized: "Archived", comment: "Kanban status")][status] ?? status.capitalized
 }

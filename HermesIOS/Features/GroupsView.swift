@@ -24,7 +24,7 @@ private final class GroupModel {
         do {
             let capabilities = try await call("groups.capabilities")
             supported = capabilities["driver"].bool && capabilities["methods"].array.contains("groups.send")
-            guard supported else { error = "Ce serveur n’expose pas encore les groupes natifs. Mettez Hermes à jour et relancez hermes serve."; return }
+            guard supported else { error = String(localized: "This server doesn’t expose native groups yet. Update Hermes and restart hermes serve."); return }
             try await refreshRooms()
         } catch { self.error = error.localizedDescription }
     }
@@ -76,7 +76,7 @@ private final class GroupModel {
             _ = try await call("groups.send", pending)
             data.pending.removeValue(forKey: room); data.drafts[room] = ""
             await refresh(room)
-        } catch { self.error = "Envoi en attente. Réessayer utilise le même identifiant et ne crée pas de doublon. \(error.localizedDescription)" }
+        } catch { self.error = String(localized: "Send pending. Retrying reuses the same ID and won’t create a duplicate. \(error.localizedDescription)") }
         await save()
     }
     func stop(_ room: String) async {
@@ -86,7 +86,7 @@ private final class GroupModel {
     func save() async {
         guard app.connections.contains(where: { $0.id == connectionID }) else { return }
         do { try await cache.save(data, key: connectionID.uuidString + "-groups") }
-        catch { self.error = "Le cache du groupe n’a pas pu être enregistré." }
+        catch { self.error = String(localized: "The group cache couldn’t be saved.") }
     }
 }
 
@@ -100,28 +100,28 @@ struct GroupsView: View {
         NavigationStack {
             List {
                 Section {
-                    Text("Plusieurs regards, une seule conversation. Hermes orchestre les agents sur votre serveur.").font(.subheadline).foregroundStyle(.secondary)
+                    Text("Many perspectives, one conversation. Hermes orchestrates the agents on your server.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
                 }
                 if let model {
                     ForEach(model.data.rooms, id: \.["room_id"].string) { room in
                         NavigationLink { GroupChatView(model: model, room: room) } label: {
-                            HStack(spacing: 14) {
-                                Image(systemName: "person.2.bubble").foregroundStyle(AppTheme.accent)
-                                VStack(alignment: .leading, spacing: 5) {
+                            HStack(spacing: DS.Space.s) {
+                                IconTile(symbol: "person.2.bubble", size: 32)
+                                VStack(alignment: .leading, spacing: DS.Space.xxs) {
                                     Text(room["name"].string)
-                                    Text("\(room["members"].array.count) agents").font(.caption).foregroundStyle(.secondary)
+                                    Text("\(room["members"].array.count) agents").textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                                 }
-                            }.padding(.vertical, 9)
+                            }.padding(.vertical, DS.Space.xs)
                         }
                     }
                     if model.data.rooms.isEmpty {
-                        ContentUnavailableView("Croiser les idées", systemImage: "person.2", description: Text("Invitez de deux à six agents de ce serveur dans un groupe."))
+                        ContentUnavailableView("Cross-pollinate ideas", systemImage: "person.2", description: Text("Invite two to six agents from this server into a group."))
                     }
-                    if let error = model.error { Text(error).font(.caption).foregroundStyle(AppTheme.accent) }
+                    if let error = model.error { InlineMessage(error) }
                 }
-            }.scrollContentBackground(.hidden).background(AppTheme.background).navigationTitle("Ensemble")
+            }.scrollContentBackground(.hidden).background(DS.Palette.background).navigationTitle("Together")
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) { Button("Fermer") { dismiss() } }
+                    ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
                     ToolbarItem(placement: .primaryAction) { Button { creating = true } label: { Image(systemName: "plus") }.disabled(model?.supported != true) }
                 }
                 .task { if model == nil { let m = GroupModel(app: app, connectionID: connectionID); model = m; await m.boot() } }
@@ -141,20 +141,20 @@ private struct GroupEditor: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField("Nom du groupe", text: $name)
-                Section("De 2 à 6 agents") {
+                TextField("Group name", text: $name)
+                Section("2 to 6 agents") {
                     ForEach(model.app.profiles) { agent in
                         Toggle(agent.title, isOn: Binding(get: { members.contains(agent.name) }, set: { enabled in
                             if enabled { members.insert(agent.name) } else { members.remove(agent.name) }
                         }))
                     }
                 }
-                if let error { Text(error).foregroundStyle(AppTheme.accent) }
-            }.navigationTitle("Nouveau groupe").navigationBarTitleDisplayMode(.inline)
+                if let error { Label(error, systemImage: "exclamationmark.circle.fill").foregroundStyle(DS.Palette.critical) }
+            }.navigationTitle("New group").navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) { Button("Annuler") { dismiss() } }
+                    ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Créer") {
+                        Button("Create") {
                             busy = true
                             Task {
                                 do { try await model.create(name: name, members: model.app.profiles.filter { members.contains($0.name) }, id: roomID); dismiss() }
@@ -175,29 +175,30 @@ private struct GroupChatView: View {
     private var id: String { room["room_id"].string }
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 25) {
+            LazyVStack(alignment: .leading, spacing: DS.Space.xl) {
                 Text(room["members"].array.map { $0["display_name"].string.isEmpty ? $0["profile"].string : $0["display_name"].string }.joined(separator: " · "))
-                    .font(.caption).foregroundStyle(.secondary).frame(maxWidth: .infinity)
+                    .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary).frame(maxWidth: .infinity)
                 ForEach(model.data.events[id] ?? [], id: \.["event_id"].string) { event in
                     if ["message.user", "message.member"].contains(event["kind"].string) {
                         let member = room["members"].array.first { $0["member_id"] == event["actor"]["id"] }
                         MessageView(message: .init(id: event["event_id"].string, role: event["kind"].string == "message.user" ? "user" : "assistant", text: event["payload"]["text"].string), agent: member?["display_name"].string ?? event["actor"]["id"].string)
                     } else if event["kind"].string == "room.status" {
-                        Text(event["payload"]["status"].string).font(.caption).foregroundStyle(.secondary)
+                        Text(event["payload"]["status"].string).textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                     }
                 }
-                if let error = model.error { Text(error).font(.caption).foregroundStyle(AppTheme.accent) }
-            }.padding(24)
-        }.defaultScrollAnchor(.bottom).scrollDismissesKeyboard(.interactively).background(AppTheme.background)
+                if let error = model.error { InlineMessage(error) }
+            }.padding(DS.Space.screen).readableWidth(DS.Size.chatWidth)
+        }.defaultScrollAnchor(.bottom).scrollDismissesKeyboard(.interactively).background(DS.Palette.background)
             .navigationTitle(room["name"].string).navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .primaryAction) { Button { Task { await model.stop(id) } } label: { Image(systemName: "stop.circle") }.accessibilityLabel("Arrêter les agents") } }
+            .toolbar { ToolbarItem(placement: .primaryAction) { Button { Task { await model.stop(id) } } label: { Image(systemName: "stop.circle") }.accessibilityLabel("Stop the agents") } }
             .safeAreaInset(edge: .bottom) {
-                HStack {
-                    TextField("Une idée à partager…", text: Binding(get: { model.data.drafts[id] ?? "" }, set: { model.data.drafts[id] = $0 }), axis: .vertical).lineLimit(1...5)
-                    Button(model.data.pending[id] == nil ? "Envoyer" : "Réessayer") {
+                HStack(spacing: DS.Space.s) {
+                    TextField("An idea to share…", text: Binding(get: { model.data.drafts[id] ?? "" }, set: { model.data.drafts[id] = $0 }), axis: .vertical).lineLimit(1...5).fieldStyle()
+                    Button(model.data.pending[id] == nil ? "Send" : "Try again") {
                         Task { await model.send(id, text: model.data.drafts[id] ?? "") }
                     }.disabled(model.busy || ((model.data.drafts[id] ?? "").isEmpty && model.data.pending[id] == nil))
-                }.padding(18).background(AppTheme.surface)
+                    .buttonStyle(.borderedProminent).controlSize(.large)
+                }.padding(DS.Space.m).background(DS.Palette.surface).overlay(alignment: .top) { Divider() }
             }
             .task(id: phase) {
                 guard phase == .active else { await model.save(); return }

@@ -31,13 +31,13 @@ struct NativeVoiceAPI {
     func transcribe(_ recording: Data, mimeType: String) async throws -> String {
         let result = try await audioRequest("/api/audio/transcribe", body: [
             "data_url": .string("data:\(mimeType);base64,\(recording.base64EncodedString())"), "mime_type": .string(mimeType)
-        ], unavailable: "Ce serveur Hermes ne propose pas la transcription depuis l’iPhone. Mettez Hermes à jour ou vérifiez que son API audio est accessible à cette adresse.")
+        ], unavailable: String(localized: "This Hermes server doesn’t offer transcription from iPhone. Update Hermes or check that its audio API is reachable at this address."))
         return result["transcript"].string.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     func speech(_ text: String) async throws -> String {
         let result = try await audioRequest("/api/audio/speak", body: ["text": .string(text)],
-            unavailable: "Ce serveur Hermes ne propose pas la lecture vocale sur l’iPhone. La réponse reste dans le chat. Mettez Hermes à jour ou vérifiez l’accès à son API audio.")
+            unavailable: String(localized: "This Hermes server doesn’t offer spoken playback on iPhone. The reply stays in the chat. Update Hermes or check access to its audio API."))
         return result["data_url"].string
     }
 

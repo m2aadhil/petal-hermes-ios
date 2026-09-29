@@ -8,33 +8,34 @@ struct RoutinesView: View {
         NavigationStack {
             List { Group {
                 Section {
-                    Text("Les routines de \(model.agent?.title ?? "Hermes") continuent sur votre serveur, même quand Hermès iOS est fermé.").font(.subheadline).foregroundStyle(.secondary)
+                    Text("Routines for \(model.agent?.title ?? "Hermes") keep running on your server, even when Hermès iOS is closed.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
                 }
                 if model.routines.isEmpty {
-                    ContentUnavailableView("Un rythme à inventer", systemImage: "sun.max", description: Text("Un briefing du matin, une veille, un bilan. Confiez une habitude à votre agent."))
+                    ContentUnavailableView("A rhythm to invent", systemImage: "sun.max", description: Text("A morning briefing, a watchlist, a weekly review. Hand a habit to your agent."))
                 }
                 ForEach(model.routines) { routine in
-                    VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: DS.Space.xs) {
                         HStack {
-                            Text(routine.name).font(.headline)
+                            Text(routine.name).textStyle(.headline)
                             Spacer()
                             Button { Task { await model.toggleRoutine(routine) } } label: {
-                                Image(systemName: routine.paused ? "play.circle" : "pause.circle").font(.title2)
-                            }.buttonStyle(.borderless).accessibilityLabel(routine.paused ? "Reprendre" : "Mettre en pause")
+                                Image(systemName: routine.paused ? "play.circle" : "pause.circle").icon(.xl)
+                                    .frame(minWidth: DS.Size.tap, minHeight: DS.Size.tap)
+                            }.buttonStyle(.borderless).accessibilityLabel(routine.paused ? "Resume" : "Pause")
                         }
-                        Text(routine.prompt).font(.subheadline).foregroundStyle(.secondary).lineLimit(3)
-                        Label(routine.paused ? "En pause" : routine.schedule, systemImage: "clock").font(.caption).foregroundStyle(.secondary)
-                    }.padding(.vertical, 10)
+                        Text(routine.prompt).textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary).lineLimit(3)
+                        Label(routine.paused ? String(localized: "Paused") : routine.schedule, systemImage: "clock").textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                    }.padding(.vertical, DS.Space.xs)
                 }
             }.listRowBackground(Color.clear)
 }.modernList()
-                .navigationTitle("Les routines").navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Routines").navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) { Button("Fermer") { dismiss() } }
+                    ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
 
                 }
                 .safeAreaInset(edge: .bottom, spacing: 0) {
-                    ToolDock { Button { creating = true } label: { Label("Ajouter", systemImage: "plus").frame(minHeight: 44) }.disabled(model.demo).accessibilityLabel("Nouvelle routine") }
+                    ToolDock { Button { creating = true } label: { Label("Add", systemImage: "plus").frame(minHeight: 44) }.disabled(model.demo).accessibilityLabel("New routine") }
                 }.task { await model.loadRoutines() }
                 .sheet(isPresented: $creating) { RoutineEditor(model: model) }
         }
@@ -52,24 +53,24 @@ struct RoutineEditor: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Une petite habitude") {
-                    TextField("Nom de la routine", text: $name)
-                    TextField("Que doit faire votre agent ?", text: $prompt, axis: .vertical).lineLimit(4...8)
+                Section("A small habit") {
+                    TextField("Routine name", text: $name)
+                    TextField("What should your agent do?", text: $prompt, axis: .vertical).lineLimit(4...8)
                 }
                 Section {
-                    Picker("Rythme", selection: $schedule) {
-                        Text("Chaque matin à 8 h").tag("0 8 * * *")
-                        Text("En semaine à 9 h").tag("0 9 * * 1-5")
-                        Text("Le vendredi à 17 h").tag("0 17 * * 5")
-                        Text("Toutes les heures").tag("0 * * * *")
+                    Picker("Schedule", selection: $schedule) {
+                        Text("Every morning at 8 AM").tag("0 8 * * *")
+                        Text("Weekdays at 9 AM").tag("0 9 * * 1-5")
+                        Text("Fridays at 5 PM").tag("0 17 * * 5")
+                        Text("Every hour").tag("0 * * * *")
                     }
-                } footer: { Text("Heure du serveur Hermes. Le résultat arrive dans le Bot Chat de cet agent.") }
-                if let error { Text(error).foregroundStyle(AppTheme.accent) }
+                } footer: { Text("Hermes server time. The result arrives in this agent’s Bot Chat.") }
+                if let error { Label(error, systemImage: "exclamationmark.circle.fill").foregroundStyle(DS.Palette.critical) }
             }.modernList()
-                .navigationTitle("Nouvelle routine").navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("New routine").navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) { Button("Annuler") { dismiss() } }
-                    ToolbarItem(placement: .confirmationAction) { Button(busy ? "Création…" : "Créer") { create() }.disabled(name.isEmpty || prompt.isEmpty || busy) }
+                    ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
+                    ToolbarItem(placement: .confirmationAction) { Button(busy ? "Creating…" : "Create") { create() }.disabled(name.isEmpty || prompt.isEmpty || busy) }
                 }
         }
     }

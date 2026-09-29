@@ -8,7 +8,7 @@ struct HermesIOSApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(model: model)
-                .tint(AppTheme.accent)
+                .tint(DS.Palette.accent)
                 .task { await model.boot() }
                 .onChange(of: phase) { _, value in
                     // A temporary inactive phase must not tear down the chat socket.

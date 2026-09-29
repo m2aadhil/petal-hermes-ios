@@ -3,7 +3,7 @@ import SwiftUI
 struct MarkdownText: View {
     let text: String
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: DS.Space.s) {
             ForEach(Array(ChatMarkdown.parse(text).enumerated()), id: \.offset) { _, block in
                 MarkdownBlockView(block: block).equatable()
             }
@@ -16,23 +16,23 @@ private struct MarkdownBlockView: View, Equatable {
     let block: ChatMarkdown.Block
     var body: some View {
         switch block {
-        case .paragraph(let text): inline(text).font(.body).lineSpacing(5)
+        case .paragraph(let text): inline(text).textStyle(.body)
         case .heading(let level, let text):
             inline(text).font(level == 1 ? .title2.weight(.semibold) : level == 2 ? .title3.weight(.semibold) : .headline)
-                .padding(.top, 5).accessibilityAddTraits(.isHeader)
+                .padding(.top, DS.Space.xxs).accessibilityAddTraits(.isHeader)
         case .quote(let text):
-            HStack(alignment: .top, spacing: 12) {
-                RoundedRectangle(cornerRadius: 2).fill(AppTheme.accent.opacity(0.45)).frame(width: 3)
-                inline(text).foregroundStyle(.secondary).lineSpacing(4)
-            }.fixedSize(horizontal: false, vertical: true).padding(.vertical, 3)
+            HStack(alignment: .top, spacing: DS.Space.s) {
+                RoundedRectangle(cornerRadius: DS.Space.hairline).fill(DS.Palette.accent.opacity(0.45)).frame(width: 3)
+                inline(text).foregroundStyle(DS.Palette.textSecondary).lineSpacing(4)
+            }.fixedSize(horizontal: false, vertical: true).padding(.vertical, DS.Space.hairline)
         case .item(let depth, let marker, let text, let checked):
-            HStack(alignment: .firstTextBaseline, spacing: 9) {
+            HStack(alignment: .firstTextBaseline, spacing: DS.Space.xs) {
                 if let checked {
-                    Image(systemName: checked ? "checkmark.circle.fill" : "circle").foregroundStyle(AppTheme.accent)
-                        .accessibilityLabel(checked ? "Terminé" : "À faire")
-                } else { Text(marker).foregroundStyle(.secondary).monospacedDigit() }
+                    Image(systemName: checked ? "checkmark.circle.fill" : "circle").foregroundStyle(DS.Palette.accent)
+                        .accessibilityLabel(checked ? "Completed" : "Not completed")
+                } else { Text(marker).foregroundStyle(DS.Palette.textSecondary).monospacedDigit() }
                 inline(text).lineSpacing(4).frame(maxWidth: .infinity, alignment: .leading)
-            }.padding(.leading, CGFloat(depth) * 14)
+            }.padding(.leading, CGFloat(depth) * DS.Space.m)
         case .code(let language, let text): CodeBlock(language: language, text: text)
         case .table(let rows):
             ScrollView(.horizontal) {
@@ -40,18 +40,19 @@ private struct MarkdownBlockView: View, Equatable {
                     ForEach(Array(rows.enumerated()), id: \.offset) { index, row in
                         GridRow {
                             ForEach(Array(row.enumerated()), id: \.offset) { _, cell in
-                                inline(cell).font(.subheadline).fontWeight(index == 0 ? .semibold : .regular)
-                                    .frame(minWidth: 95, maxWidth: 230, alignment: .leading).padding(12)
+                                inline(cell).textStyle(.subheadline).fontWeight(index == 0 ? .semibold : .regular)
+                                    .frame(minWidth: 95, maxWidth: 230, alignment: .leading).padding(DS.Space.s)
                                     .frame(maxHeight: .infinity, alignment: .topLeading)
-                                    .background(index == 0 ? AppTheme.line : Color.clear)
-                                    .overlay(alignment: .bottom) { Rectangle().fill(AppTheme.line).frame(height: 1) }
+                                    .background(index == 0 ? DS.Palette.line : Color.clear)
+                                    .overlay(alignment: .bottom) { Rectangle().fill(DS.Palette.line).frame(height: 1) }
                             }
                         }
                     }
                 }.fixedSize(horizontal: false, vertical: true)
-            }.background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 14))
-                .clipShape(RoundedRectangle(cornerRadius: 14)).accessibilityIdentifier("markdown-table")
-        case .rule: Divider().padding(.vertical, 5)
+            }.background(DS.Palette.surface, in: RoundedRectangle(cornerRadius: DS.Radius.m, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: DS.Radius.m, style: .continuous))
+                .overlay(RoundedRectangle(cornerRadius: DS.Radius.m, style: .continuous).strokeBorder(DS.Palette.line)).accessibilityIdentifier("markdown-table")
+        case .rule: Divider().padding(.vertical, DS.Space.xxs)
         }
     }
 
@@ -73,22 +74,22 @@ private struct CodeBlock: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text(language.isEmpty ? "Code" : language).font(.caption.weight(.medium)).lineLimit(1)
+                Text(language.isEmpty ? String(localized: "Code") : language).textStyle(.captionEmphasis).lineLimit(1)
                 Spacer(minLength: 12)
                 Button {
                     UIPasteboard.general.string = text; copied = true
                 } label: {
-                    Label(copied ? "Copié" : "Copier", systemImage: copied ? "checkmark" : "doc.on.doc")
-                        .font(.caption).frame(minHeight: 44)
-                }.buttonStyle(.plain).accessibilityLabel("Copier le code")
-            }.foregroundStyle(.secondary).padding(.horizontal, 14)
+                    Label(copied ? "Copied" : "Copy", systemImage: copied ? "checkmark" : "doc.on.doc")
+                        .textStyle(.caption).frame(minHeight: 44)
+                }.buttonStyle(.plain).accessibilityLabel("Copy code")
+            }.foregroundStyle(DS.Palette.textSecondary).padding(.horizontal, DS.Space.s + 2)
             Divider()
             ScrollView(.horizontal) {
-                Text(verbatim: text).font(.system(.callout, design: .monospaced))
-                    .textSelection(.enabled).fixedSize(horizontal: true, vertical: false).padding(14)
+                Text(verbatim: text).textStyle(.code)
+                    .textSelection(.enabled).fixedSize(horizontal: true, vertical: false).padding(DS.Space.s + 2)
             }
-        }.background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 16))
-            .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(AppTheme.line))
+        }.background(DS.Palette.surface, in: RoundedRectangle(cornerRadius: DS.Radius.m, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: DS.Radius.m, style: .continuous).strokeBorder(DS.Palette.line))
             .onChange(of: text) { _, _ in copied = false }
             .task(id: copied) { if copied { try? await Task.sleep(for: .seconds(2)); if !Task.isCancelled { copied = false } } }
             .accessibilityIdentifier("markdown-code")

@@ -6,6 +6,8 @@ The checked-in Xcode project is generated from `project.yml`. Run `xcodegen gene
 
 Run `swift test` for protocol/state changes. Run the Hermès iOS UI tests for interaction changes. Use the opt-in HermesIOSIntegration scheme with the isolated official Hermes backend for authentication, session ownership, replay, profile, bot or routine changes. See [testing](docs/TESTING.md).
 
+UI changes should use the design-system tokens and components ([design system](docs/DESIGN_SYSTEM.md)), and user-facing strings must be localizable ([localization](docs/LOCALIZATION.md)).
+
 Important invariants:
 
 - Server/profile/stored-session/runtime-session identities are separate. Capture the owner before awaiting a network operation.

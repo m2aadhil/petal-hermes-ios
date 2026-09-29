@@ -1,11 +1,14 @@
 import XCTest
 
+/// Pin the UI language so label-based queries are deterministic regardless of the simulator's locale.
+private let englishLocale = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
+
 @MainActor
 final class HermesIOSUITests: XCTestCase {
     override func setUp() { continueAfterFailure = false }
     func testChatAndAgents() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo"]
+        app.launchArguments = ["--demo"] + englishLocale
         app.launch()
         XCTAssertTrue(app.textFields["chat-composer"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.tabBars.firstMatch.exists)
@@ -15,11 +18,11 @@ final class HermesIOSUITests: XCTestCase {
         assertControlsInsideComposer(in: app)
         capture("01-chat")
         openNavigation("Agents", in: app)
-        XCTAssertTrue(app.staticTexts["Vos agents."].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["Your agents."].waitForExistence(timeout: 3))
         capture("02-agents")
         app.buttons.containing(.staticText, identifier: "Atlas").firstMatch.tap()
-        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Bonjour, je suis Atlas")).firstMatch.waitForExistence(timeout: 3))
-        openNavigation("Réglages", in: app)
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Hello, I’m Atlas")).firstMatch.waitForExistence(timeout: 3))
+        openNavigation("Settings", in: app)
         XCTAssertTrue(app.buttons["close-settings"].waitForExistence(timeout: 3))
         capture("03-settings")
         app.buttons["close-settings"].tap()
@@ -28,16 +31,16 @@ final class HermesIOSUITests: XCTestCase {
 
     func testAttachmentsMenuAndVoicePreserveDraft() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo"]
+        app.launchArguments = ["--demo"] + englishLocale
         app.launch()
         let composer = app.textFields["chat-composer"]
         XCTAssertTrue(composer.waitForExistence(timeout: 10))
         composer.tap(); composer.typeText("Mon brouillon écrit")
         app.buttons["message-actions"].tap()
-        XCTAssertTrue(app.buttons["Ajouter une photo"].waitForExistence(timeout: 3))
-        XCTAssertTrue(app.buttons["Ajouter un fichier"].exists)
-        XCTAssertFalse(app.buttons["Mentionner un agent"].exists)
-        XCTAssertFalse(app.buttons["Dicter un message"].exists)
+        XCTAssertTrue(app.buttons["Add a photo"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["Add a file"].exists)
+        XCTAssertFalse(app.buttons["Mention an agent"].exists)
+        XCTAssertFalse(app.buttons["Dictate a message"].exists)
         capture("18-attachments-menu")
         app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: 30, dy: 150)).tap()
         app.buttons["voice-mode"].tap()
@@ -51,19 +54,19 @@ final class HermesIOSUITests: XCTestCase {
 
     func testOnboarding() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo", "--demo-onboarding"]
+        app.launchArguments = ["--demo", "--demo-onboarding"] + englishLocale
         app.launch()
-        XCTAssertTrue(app.buttons["Rencontrer mon Hermes"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.buttons["Meet my Hermes"].waitForExistence(timeout: 10))
         capture("04-welcome")
-        app.buttons["Rencontrer mon Hermes"].tap()
-        XCTAssertTrue(app.textFields["Adresse Hermes"].waitForExistence(timeout: 3))
+        app.buttons["Meet my Hermes"].tap()
+        XCTAssertTrue(app.textFields["Hermes address"].waitForExistence(timeout: 3))
         capture("05-connect")
         XCTAssertFalse(app.buttons["connect-agent"].isEnabled)
     }
 
     func testDraftSurvivesThumbNavigation() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo"]
+        app.launchArguments = ["--demo"] + englishLocale
         app.launch()
         let composer = app.textFields["chat-composer"]
         XCTAssertTrue(composer.waitForExistence(timeout: 10))
@@ -75,7 +78,7 @@ final class HermesIOSUITests: XCTestCase {
         app.buttons["return-to-chat"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 3))
         XCTAssertEqual(composer.value as? String, "Mon brouillon reste ici")
-        openNavigation("Réglages", in: app)
+        openNavigation("Settings", in: app)
         XCTAssertTrue(app.buttons["close-settings"].waitForExistence(timeout: 3))
         app.buttons["close-settings"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 3))
@@ -83,16 +86,16 @@ final class HermesIOSUITests: XCTestCase {
     }
 
     private func connectFixtureIfNeeded(_ app: XCUIApplication) {
-        if app.buttons["Rencontrer mon Hermes"].waitForExistence(timeout: 5) {
-            app.buttons["Rencontrer mon Hermes"].tap()
-            let address = app.textFields["Adresse Hermes"]
+        if app.buttons["Meet my Hermes"].waitForExistence(timeout: 5) {
+            app.buttons["Meet my Hermes"].tap()
+            let address = app.textFields["Hermes address"]
             XCTAssertTrue(address.waitForExistence(timeout: 3))
             address.tap(); address.typeText("http://127.0.0.1:19119")
-            let user = app.textFields["Utilisateur"]
+            let user = app.textFields["Username"]
             user.tap()
             user.typeText("hermes-ios-test")
             XCTAssertEqual(user.value as? String, "hermes-ios-test")
-            let password = app.secureTextFields["Mot de passe Hermes"]
+            let password = app.secureTextFields["Hermes password"]
             password.tap(); password.typeText("hermes-ios-local-fixture")
             app.swipeUp()
             app.buttons["connect-agent"].tap()
@@ -108,8 +111,8 @@ final class HermesIOSUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         connectFixtureIfNeeded(app)
-        XCTAssertTrue(app.staticTexts["Connecté à Hermes"].waitForExistence(timeout: 40))
-        app.buttons["Nouvelle conversation"].tap()
+        XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 40))
+        app.buttons["New conversation"].tap()
         let composer = app.textFields["chat-composer"]
         composer.tap(); composer.typeText("HERMES_IOS_MARKDOWN_TEST")
         app.buttons["send-message"].tap()
@@ -132,11 +135,11 @@ final class HermesIOSUITests: XCTestCase {
     func testNativeSendThenImmediatelyBackground() throws {
         guard ProcessInfo.processInfo.environment["HERMES_IOS_INTEGRATION"] == "1" else { throw XCTSkip("Requires isolated Hermes fixture") }
         let app = XCUIApplication()
-        app.launchArguments = ["--integration-test"]
+        app.launchArguments = ["--integration-test"] + englishLocale
         app.launch()
         connectFixtureIfNeeded(app)
-        XCTAssertTrue(app.staticTexts["Connecté à Hermes"].waitForExistence(timeout: 40))
-        app.buttons["Nouvelle conversation"].tap()
+        XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 40))
+        app.buttons["New conversation"].tap()
         let composer = app.textFields["chat-composer"]
         composer.tap(); composer.typeText("HERMES_IOS_BACKGROUND_TEST")
         app.buttons["send-message"].tap()
@@ -153,19 +156,19 @@ final class HermesIOSUITests: XCTestCase {
         capture("22-background-completed")
         app.terminate(); app.launch()
         XCTAssertTrue(final.firstMatch.waitForExistence(timeout: 15))
-        XCTAssertTrue(app.staticTexts["Connecté à Hermes"].waitForExistence(timeout: 40))
+        XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 40))
     }
 
     func testNativeHermesConnectionAndResume() throws {
         guard ProcessInfo.processInfo.environment["HERMES_IOS_INTEGRATION"] == "1" else { throw XCTSkip("Start the isolated Hermes integration server and set HERMES_IOS_INTEGRATION=1.") }
         let app = XCUIApplication()
-        app.launchArguments = ["--integration-test", "--voice-fixture"]
+        app.launchArguments = ["--integration-test", "--voice-fixture"] + englishLocale
         app.launch()
         connectFixtureIfNeeded(app)
         XCTAssertTrue(app.textFields["chat-composer"].waitForExistence(timeout: 40))
-        XCTAssertTrue(app.staticTexts["Connecté à Hermes"].waitForExistence(timeout: 40))
+        XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 40))
         openNavigation("Conversations", in: app)
-        let newChat = try XCTUnwrap(app.buttons.matching(identifier: "Nouvelle conversation").allElementsBoundByIndex.first(where: { $0.isHittable }))
+        let newChat = try XCTUnwrap(app.buttons.matching(identifier: "New conversation").allElementsBoundByIndex.first(where: { $0.isHittable }))
         newChat.tap()
         let composer = app.textFields["chat-composer"]
         composer.tap(); composer.typeText("Bonjour depuis HermesIOS sur iPhone")
@@ -182,7 +185,7 @@ final class HermesIOSUITests: XCTestCase {
         capture("06-live-hermes")
         app.terminate(); app.launch()
         XCTAssertTrue(final.firstMatch.waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Connecté à Hermes"].waitForExistence(timeout: 30))
+        XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 30))
 
         // check_tools_contract.py seeds only the disposable research profile.
         app.buttons["switch-profile"].tap()
@@ -193,7 +196,7 @@ final class HermesIOSUITests: XCTestCase {
         let skill = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "mobile-fixture-")).firstMatch
         XCTAssertTrue(skill.waitForExistence(timeout: 15))
         skill.tap()
-        let toggle = app.switches["Disponible pour l’agent"]
+        let toggle = app.switches["Available to the agent"]
         XCTAssertTrue(toggle.waitForExistence(timeout: 10))
         let ready = XCTNSPredicateExpectation(predicate: NSPredicate(format: "enabled == true"), object: toggle)
         XCTAssertEqual(XCTWaiter.wait(for: [ready], timeout: 10), .completed)
@@ -206,7 +209,7 @@ final class HermesIOSUITests: XCTestCase {
         capture("09-native-skill")
         XCTAssertEqual(outcome, .completed)
         app.buttons["return-to-chat"].tap()
-        openNavigation("Modèles", in: app)
+        openNavigation("Models", in: app)
         XCTAssertTrue(app.staticTexts["hermes-ios-fixture-mobile"].firstMatch.waitForExistence(timeout: 20))
         app.buttons["return-to-chat"].tap()
         openNavigation("Workspace", in: app)
@@ -220,8 +223,8 @@ final class HermesIOSUITests: XCTestCase {
         composer.tap(); composer.typeText("Brouillon préservé pendant la voix")
         app.buttons["voice-mode"].tap()
         XCTAssertTrue(app.staticTexts["Bonjour Hermes, résume mon projet."].waitForExistence(timeout: 30))
-        XCTAssertTrue(app.staticTexts["Hermes vous répond."].waitForExistence(timeout: 45))
-        XCTAssertTrue(app.staticTexts["Je vous écoute."].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.staticTexts["Hermes is answering."].waitForExistence(timeout: 45))
+        XCTAssertTrue(app.staticTexts["I’m listening."].waitForExistence(timeout: 15))
         capture("20-native-voice-loop")
         app.buttons["return-to-chat"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 5))
@@ -230,7 +233,7 @@ final class HermesIOSUITests: XCTestCase {
 
     func testSpacesDiscoveryAndTools() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo"]
+        app.launchArguments = ["--demo"] + englishLocale
         app.launch()
         XCTAssertTrue(app.buttons["app-navigation"].waitForExistence(timeout: 10))
         app.buttons["app-navigation"].tap()
@@ -242,7 +245,7 @@ final class HermesIOSUITests: XCTestCase {
         XCTAssertTrue(app.buttons["space-skills"].waitForExistence(timeout: 3))
         XCTAssertFalse(app.buttons["space-kanban"].exists)
         capture("11-agent-tools")
-        for (query, identifier, title) in [("cron", "routines", "Les routines"), ("skills", "skills", "Skills"), ("kanban", "kanban", "Kanban"), ("workspace", "workspace", "Workspace"), ("modèle", "models", "Modèles"), ("voix", "voice", "Voix")] {
+        for (query, identifier, title) in [("cron", "routines", "Routines"), ("skills", "skills", "Skills"), ("kanban", "kanban", "Kanban"), ("workspace", "workspace", "Workspace"), ("model", "models", "Models"), ("voice", "voice", "Voice")] {
             let search = app.textFields["spaces-search"]
             search.tap(); search.typeText(query)
             let button = app.buttons["space-" + identifier]
@@ -254,11 +257,11 @@ final class HermesIOSUITests: XCTestCase {
                 XCTAssertEqual(app.buttons["voice-listen"].frame.midY, app.buttons["return-to-chat"].frame.midY, accuracy: 1)
             }
             if identifier == "kanban" {
-                XCTAssertTrue(app.buttons["Nouvelle tâche"].exists)
-                XCTAssertLessThanOrEqual(app.buttons["Nouvelle tâche"].frame.maxY, app.buttons["return-to-chat"].frame.maxY)
+                XCTAssertTrue(app.buttons["New task"].exists)
+                XCTAssertLessThanOrEqual(app.buttons["New task"].frame.maxY, app.buttons["return-to-chat"].frame.maxY)
             }
             capture("08-" + identifier)
-            if identifier == "kanban" { XCTAssertTrue(app.staticTexts["Préparer la prochaine idée"].waitForExistence(timeout: 5)) }
+            if identifier == "kanban" { XCTAssertTrue(app.staticTexts["Prepare the next idea"].waitForExistence(timeout: 5)) }
             app.buttons["back-to-spaces"].tap()
             XCTAssertTrue(app.textFields["spaces-search"].waitForExistence(timeout: 3))
             app.buttons["Effacer la recherche"].tap()
@@ -275,14 +278,14 @@ final class HermesIOSUITests: XCTestCase {
         }
         if destination == "Conversations" { app.buttons["quick-history"].tap(); return }
         app.buttons["app-navigation"].tap()
-        if destination == "Réglages" {
+        if destination == "Settings" {
             XCTAssertTrue(app.buttons["quick-settings"].waitForExistence(timeout: 3))
             app.buttons["quick-settings"].tap(); return
         }
         let search = app.textFields["spaces-search"]
         XCTAssertTrue(search.waitForExistence(timeout: 3))
         search.tap(); search.typeText(destination)
-        let identifier = destination == "Réglages" ? "settings" : destination == "Modèles" ? "models" : destination == "Conversations" ? "history" : destination.lowercased()
+        let identifier = destination == "Settings" ? "settings" : destination == "Models" ? "models" : destination == "Conversations" ? "history" : destination.lowercased()
         let button = app.buttons["space-" + identifier]
         XCTAssertTrue(button.waitForExistence(timeout: 3))
         button.tap()
@@ -290,7 +293,7 @@ final class HermesIOSUITests: XCTestCase {
 
     func testQuickProfileSwitchKeepsSeparateDrafts() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--demo"]
+        app.launchArguments = ["--demo"] + englishLocale
         app.launch()
         let composer = app.textFields["chat-composer"]
         XCTAssertTrue(composer.waitForExistence(timeout: 10))
@@ -303,7 +306,7 @@ final class HermesIOSUITests: XCTestCase {
         XCTAssertEqual(composer.value as? String, "Une idee pour Hermes")
         app.buttons["switch-profile"].tap()
         app.buttons["quick-profile-research"].tap()
-        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Bonjour, je suis Atlas")).firstMatch.waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Hello, I’m Atlas")).firstMatch.waitForExistence(timeout: 3))
         XCTAssertEqual(composer.value as? String, "Message…")
         composer.tap(); composer.typeText("Une recherche pour Atlas")
         app.buttons["switch-profile"].tap()

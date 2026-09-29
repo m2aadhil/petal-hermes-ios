@@ -10,9 +10,9 @@ struct RootView: View {
                 ChatView(model: model)
             }
         }
-        .background(AppTheme.background)
-        .alert("Hermès iOS", isPresented: Binding(get: { model.notice != nil }, set: { if !$0 { model.notice = nil } })) {
-            Button("Compris", role: .cancel) { model.notice = nil }
+        .background(DS.Palette.background)
+        .alert(Text(verbatim: "Hermès iOS"), isPresented: Binding(get: { model.notice != nil }, set: { if !$0 { model.notice = nil } })) {
+            Button("Got it", role: .cancel) { model.notice = nil }
         } message: { Text(model.notice ?? "") }
     }
 }

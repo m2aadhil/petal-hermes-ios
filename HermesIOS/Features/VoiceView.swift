@@ -26,7 +26,7 @@ private final class PhoneAudio: NSObject, AVAudioPlayerDelegate {
         if fixture { fixtureSamples = 0; recording = true; return }
         #endif
         let attempt = UUID(); generation = attempt
-        guard await AVAudioApplication.requestRecordPermission() else { throw RPCFailure("Autorisez le microphone dans les réglages iOS pour parler avec Hermes.") }
+        guard await AVAudioApplication.requestRecordPermission() else { throw RPCFailure(String(localized: "Allow microphone access in iOS Settings to talk with Hermes.")) }
         guard attempt == generation else { throw CancellationError() }
         stopPlayback()
         let session = AVAudioSession.sharedInstance()
@@ -37,7 +37,7 @@ private final class PhoneAudio: NSObject, AVAudioPlayerDelegate {
         let recorder = try AVAudioRecorder(url: url, settings: [AVFormatIDKey: kAudioFormatMPEG4AAC, AVSampleRateKey: 24000, AVNumberOfChannelsKey: 1, AVEncoderBitRateKey: 64000])
         recorder.isMeteringEnabled = true
         self.recorder = recorder
-        guard recorder.record(forDuration: 120) else { cleanup(); throw RPCFailure("Le microphone n’a pas pu démarrer.") }
+        guard recorder.record(forDuration: 120) else { cleanup(); throw RPCFailure(String(localized: "The microphone couldn’t start.")) }
         recording = true
     }
     func power() -> Double {
@@ -51,19 +51,19 @@ private final class PhoneAudio: NSObject, AVAudioPlayerDelegate {
         if fixture { recording = false; return Data(base64Encoded: "UklGRuQSAABXQVZFZm10IBAAAAABAAEAwF0AAIC7AAACABAAZGF0YcASAAA=")! + Data(repeating: 0, count: 4800) }
         #endif
         recorder?.stop(); recording = false
-        guard let file else { throw RPCFailure("Aucun enregistrement disponible.") }
+        guard let file else { throw RPCFailure(String(localized: "No recording available.")) }
         defer { cleanup() }
         return try Data(contentsOf: file)
     }
     func play(_ dataURL: String) throws {
-        guard let comma = dataURL.firstIndex(of: ","), let data = Data(base64Encoded: String(dataURL[dataURL.index(after: comma)...])) else { throw RPCFailure("Hermes n’a pas renvoyé d’audio lisible.") }
+        guard let comma = dataURL.firstIndex(of: ","), let data = Data(base64Encoded: String(dataURL[dataURL.index(after: comma)...])) else { throw RPCFailure(String(localized: "Hermes didn’t return playable audio.")) }
         stopPlayback()
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(.playback, mode: .spokenAudio)
         try session.setActive(true)
         let player = try AVAudioPlayer(data: data); self.player = player; player.delegate = self
         playing = player.play()
-        if !playing { throw RPCFailure("Impossible de lire cet audio.") }
+        if !playing { throw RPCFailure(String(localized: "Couldn’t play this audio.")) }
     }
     func stopPlayback() {
         player?.stop(); player = nil; playing = false
@@ -75,7 +75,12 @@ private final class PhoneAudio: NSObject, AVAudioPlayerDelegate {
         stopPlayback()
     }
     nonisolated func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        Task { @MainActor [weak self] in if self?.player === player { self?.stopPlayback() } }
+        let finishedID = ObjectIdentifier(player)
+        Task { @MainActor [weak self] in
+            guard let self, let current = self.player,
+                  ObjectIdentifier(current) == finishedID else { return }
+            self.stopPlayback()
+        }
     }
 }
 
@@ -103,12 +108,12 @@ private final class VoiceConversation {
     }
     var title: String {
         switch phase {
-        case .ready: "Parlons simplement."
-        case .listening: "Je vous écoute."
-        case .transcribing: "Je vous ai entendu."
-        case .thinking: "Hermes réfléchit."
-        case .speaking: "Hermes vous répond."
-        case .paused: "On reprend ?"
+        case .ready: String(localized: "Let’s just talk.")
+        case .listening: String(localized: "I’m listening.")
+        case .transcribing: String(localized: "I heard you.")
+        case .thinking: String(localized: "Hermes is thinking.")
+        case .speaking: String(localized: "Hermes is answering.")
+        case .paused: String(localized: "Shall we continue?")
         }
     }
     func start(standardMode: Bool = false) {
@@ -134,7 +139,7 @@ private final class VoiceConversation {
                 _ = try? await tools.request("/api/audio/tts-lease", method: "POST", body: ["lease": .string(leaseID), "active": true])
                 while true {
                     try validate(attempt)
-                    guard !tools.app.transcript.running else { throw RPCFailure("Attendez la fin de la réponse dans le chat.") }
+                    guard !tools.app.transcript.running else { throw RPCFailure(String(localized: "Wait for the reply in the chat to finish.")) }
                     phase = .listening; finishUtterance = false
                     var activity = VoiceActivity(threshold: preferences.threshold, silenceDuration: preferences.silenceDuration)
                     try await audio.start()
@@ -142,10 +147,10 @@ private final class VoiceConversation {
                         try await Task.sleep(for: .milliseconds(50)); try validate(attempt)
                         let ended = activity.sample(decibels: audio.power(), interval: 0.05)
                         if ended || finishUtterance || activity.elapsed >= 120 { break }
-                        if activity.elapsed >= 15, !activity.hasSpeech { throw RPCFailure("L’écoute est en pause. Touchez le micro pour reprendre.") }
+                        if activity.elapsed >= 15, !activity.hasSpeech { throw RPCFailure(String(localized: "Listening is paused. Tap the mic to resume.")) }
                     }
                     let recording = try audio.finish()
-                    guard activity.hasSpeech else { throw RPCFailure("Aucune parole détectée. Touchez le micro pour réessayer.") }
+                    guard activity.hasSpeech else { throw RPCFailure(String(localized: "No speech detected. Tap the mic to try again.")) }
                     phase = .transcribing
                     let transcription = try await voiceAPI.transcribe(recording, mimeType: audio.mimeType)
                     try validate(attempt)
@@ -161,16 +166,16 @@ private final class VoiceConversation {
                         try await Task.sleep(for: .milliseconds(100)); try validate(attempt)
                         let transcript = tools.app.transcript
                         if transcript.approval != nil || transcript.clarification != nil || transcript.credential != nil {
-                            throw RPCFailure("Hermes attend votre réponse dans le chat.")
+                            throw RPCFailure(String(localized: "Hermes is waiting for your answer in the chat."))
                         }
-                        guard Date() < deadline else { throw RPCFailure("Hermes travaille encore. Retrouvez sa réponse dans le chat.") }
+                        guard Date() < deadline else { throw RPCFailure(String(localized: "Hermes is still working. You’ll find its reply in the chat.")) }
                     }
                     try validate(attempt)
                     if let failure = tools.app.transcript.failure { throw RPCFailure(failure) }
                     let messages = tools.app.transcript.messages
-                    guard let index = messages.firstIndex(where: { $0.id == message }) else { throw RPCFailure("La conversation a changé. Retrouvez la réponse dans le chat.") }
+                    guard let index = messages.firstIndex(where: { $0.id == message }) else { throw RPCFailure(String(localized: "The conversation changed. You’ll find the reply in the chat.")) }
                     answer = messages.dropFirst(index + 1).filter { $0.role == "assistant" }.map(\.text).joined(separator: "\n\n")
-                    guard !answer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw RPCFailure("Hermes n’a pas renvoyé de réponse à lire.") }
+                    guard !answer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { throw RPCFailure(String(localized: "Hermes didn’t return a reply to read aloud.")) }
                     let speech = try await voiceAPI.speech(answer)
                     try validate(attempt)
                     phase = .speaking
@@ -223,54 +228,53 @@ struct VoiceView: View {
         NavigationStack {
             VStack(spacing: 0) {
                 ScrollView {
-                    VStack(spacing: 28) {
-                        Text(app.agent?.title ?? "Hermes").font(.caption.weight(.medium)).foregroundStyle(.secondary)
+                    VStack(spacing: DS.Space.xxl) {
+                        Text(app.agent?.title ?? "Hermes").textStyle(.captionEmphasis).foregroundStyle(DS.Palette.textSecondary)
                         ZStack {
-                            Circle().fill(AppTheme.accent.opacity(0.045)).frame(width: 190, height: 190)
-                            Circle().fill(AppTheme.accent.opacity(0.07)).frame(width: 144, height: 144)
+                            Circle().fill(DS.Palette.accent.opacity(0.045)).frame(width: 190, height: 190)
+                            Circle().fill(DS.Palette.accent.opacity(0.07)).frame(width: 144, height: 144)
                             Image(systemName: conversation.phase == .speaking ? "waveform" : "mic")
-                                .font(.system(size: 42, weight: .light)).foregroundStyle(AppTheme.accent)
+                                .icon(.hero, weight: .light).foregroundStyle(DS.Palette.accent)
                                 .symbolEffect(.pulse, isActive: conversation.phase == .listening || conversation.phase == .speaking)
-                        }.padding(.top, 22)
-                        VStack(spacing: 12) {
-                            Text(conversation.title).font(.system(size: 31, design: .serif)).multilineTextAlignment(.center)
-                            Text("Votre agent, sa voix.\nL’écoute reprend après sa réponse.").font(.subheadline).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                        }.padding(.top, DS.Space.l).accessibilityHidden(true)
+                        VStack(spacing: DS.Space.s) {
+                            Text(conversation.title).textStyle(.display).multilineTextAlignment(.center)
+                                .accessibilityAddTraits(.updatesFrequently)
+                            Text("Your agent, its voice.\nListening resumes after it replies.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary).multilineTextAlignment(.center)
                         }
-                        if app.demo { Text("Connectez votre Hermes pour démarrer une conversation vocale.").font(.subheadline).foregroundStyle(.secondary).multilineTextAlignment(.center) }
+                        if app.demo { Text("Connect your Hermes to start a voice conversation.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary).multilineTextAlignment(.center) }
                         if conversation.requiresStandardMode {
-                            Text("Ce profil utilise GPT-Live, qui n’est pas encore disponible sur iOS. Vous pouvez utiliser la conversation vocale standard pour cet appel.").font(.subheadline).foregroundStyle(.secondary)
-                            Button("Utiliser la voix standard") { conversation.start(standardMode: true) }.buttonStyle(.bordered)
+                            Text("This profile uses GPT-Live, which isn’t available on iOS yet. You can use standard voice conversation for this call.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
+                            Button("Use standard voice") { conversation.start(standardMode: true) }.buttonStyle(.bordered)
                         }
-                        if let error = conversation.error { Text(error).font(.subheadline).foregroundStyle(AppTheme.accent).multilineTextAlignment(.center) }
+                        if let error = conversation.error { InlineMessage(error) }
                         if !conversation.heard.isEmpty {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text(conversation.heard).foregroundStyle(.secondary)
+                            VStack(alignment: .leading, spacing: DS.Space.s) {
+                                Text(conversation.heard).foregroundStyle(DS.Palette.textSecondary)
                                 if !conversation.answer.isEmpty { Text(conversation.answer) }
-                            }.font(.subheadline).lineSpacing(4).frame(maxWidth: .infinity, alignment: .leading).hermesCard()
+                            }.textStyle(.subheadline).lineSpacing(4).frame(maxWidth: .infinity, alignment: .leading).card()
                         }
-                    }.padding(28).frame(maxWidth: 600).frame(maxWidth: .infinity)
+                    }.padding(DS.Space.xxl).readableWidth(600)
                 }
-                HStack(spacing: 24) {
-                    Button { conversation.pause(); returnToChat() } label: {
-                        Image(systemName: "xmark").font(.system(size: 20)).frame(width: 58, height: 58).background(AppTheme.surface, in: Circle())
-                    }.accessibilityLabel("Terminer et revenir au chat").accessibilityIdentifier("return-to-chat")
-                    Button { conversation.speakNow() } label: {
-                        Image(systemName: conversation.phase == .speaking ? "waveform" : "mic.fill").font(.system(size: 25))
-                            .frame(width: 76, height: 76).foregroundStyle(AppTheme.surface).background(AppTheme.accent, in: Circle())
-                    }.accessibilityLabel(conversation.phase == .speaking ? "Interrompre et parler" : conversation.phase == .listening ? "Envoyer ma parole" : "Reprendre l’écoute")
+                HStack(spacing: DS.Space.xl) {
+                    IconButton("xmark", label: "End and return to chat", scale: .large, weight: .regular) { conversation.pause(); returnToChat() }
+                        .accessibilityIdentifier("return-to-chat")
+                    IconButton(conversation.phase == .speaking ? "waveform" : "mic.fill",
+                               label: conversation.phase == .speaking ? "Interrupt and speak" : conversation.phase == .listening ? "Send what I said" : "Resume listening",
+                               style: .accent, scale: .hero, weight: .regular) { conversation.speakNow() }
+                        .elevation(.floating)
                         .accessibilityIdentifier("voice-listen")
                         .disabled(app.demo || [.thinking, .transcribing].contains(conversation.phase) || conversation.requiresStandardMode)
-                    Button { conversation.pause() } label: {
-                        Image(systemName: "pause.fill").font(.system(size: 20)).frame(width: 58, height: 58).background(AppTheme.surface, in: Circle())
-                    }.accessibilityLabel("Mettre l’écoute en pause").disabled(app.demo || conversation.phase == .paused)
-                }.buttonStyle(.plain).padding(.vertical, 22)
-            }.background(AppTheme.background).navigationTitle("Voix").navigationBarTitleDisplayMode(.inline)
+                    IconButton("pause.fill", label: "Pause listening", scale: .large, weight: .regular) { conversation.pause() }
+                        .disabled(app.demo || conversation.phase == .paused)
+                }.padding(.vertical, DS.Space.l)
+            }.background(DS.Palette.background).navigationTitle("Voice").navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     if let navigation {
                         ToolbarItem(placement: .topBarLeading) {
                             Button { conversation.pause(); navigation.showSpaces() } label: {
-                                Image(systemName: "circle.grid.2x2").frame(width: 44, height: 44)
-                            }.accessibilityLabel("Outils").accessibilityIdentifier("back-to-spaces")
+                                Image(systemName: "circle.grid.2x2").frame(width: DS.Size.tap, height: DS.Size.tap)
+                            }.accessibilityLabel("Tools").accessibilityIdentifier("back-to-spaces")
                         }
                     }
                 }
