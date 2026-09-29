@@ -231,9 +231,8 @@ struct ChatView: View {
                     .accessibilityIdentifier("chat-composer")
                 HStack(spacing: DS.Space.xxs) {
                     ViewThatFits(in: .horizontal) {
-                        composerShortcuts(showToolTitle: true, compactProfile: false)
-                        composerShortcuts(showToolTitle: false, compactProfile: false)
-                        composerShortcuts(showToolTitle: false, compactProfile: true)
+                        composerShortcuts(showToolTitle: true)
+                        composerShortcuts(showToolTitle: false)
                     }
                     Spacer(minLength: 0)
                     Button { present(.voice) } label: {
@@ -263,20 +262,9 @@ struct ChatView: View {
         }.disabled(model.sending || model.importingAttachments || model.attachments.count >= 4).accessibilityLabel("Add an attachment").accessibilityIdentifier("message-actions")
     }
 
-    private func composerShortcuts(showToolTitle: Bool, compactProfile: Bool) -> some View {
+    private func composerShortcuts(showToolTitle: Bool) -> some View {
         HStack(spacing: DS.Space.hairline) {
             messageActions
-            Button { present(.profiles) } label: {
-                HStack(spacing: DS.Space.xxs + 2) {
-                    AgentAvatar(name: model.agent?.name ?? "default", size: 20)
-                    if !compactProfile {
-                        Text(model.agent?.title ?? "Hermes").lineLimit(1).frame(maxWidth: 85)
-                        Image(systemName: "chevron.down").icon(.xs, weight: .semibold).foregroundStyle(DS.Palette.textTertiary)
-                    }
-                }.padding(.horizontal, DS.Space.xs).frame(minWidth: DS.Size.tap, minHeight: DS.Size.tap)
-                    .background(DS.Palette.sunken, in: Capsule())
-            }.accessibilityLabel("Switch profile: \(model.agent?.title ?? "Hermes")")
-                .accessibilityIdentifier("switch-profile")
             Button { present(.history) } label: {
                 Image(systemName: "bubble.left.and.bubble.right").icon(.m)
                     .frame(width: DS.Size.tap, height: DS.Size.tap)

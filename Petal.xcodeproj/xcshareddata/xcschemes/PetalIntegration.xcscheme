@@ -16,9 +16,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CDBCE2E3BABBD3FF1069603C"
-               BuildableName = "HermesIOS.app"
-               BlueprintName = "HermesIOS"
-               ReferencedContainer = "container:HermesIOS.xcodeproj">
+               BuildableName = "Petal.app"
+               BlueprintName = "Petal"
+               ReferencedContainer = "container:Petal.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A408AB7B73A825E284FBCEBF"
+               BuildableName = "PetalUITests.xctest"
+               BlueprintName = "PetalUITests"
+               ReferencedContainer = "container:Petal.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -27,15 +41,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldUseLaunchSchemeArgsEnv = "NO"
       onlyGenerateCoverageForSpecifiedTargets = "NO">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDBCE2E3BABBD3FF1069603C"
-            BuildableName = "HermesIOS.app"
-            BlueprintName = "HermesIOS"
-            ReferencedContainer = "container:HermesIOS.xcodeproj">
+            BuildableName = "Petal.app"
+            BlueprintName = "Petal"
+            ReferencedContainer = "container:Petal.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -45,14 +59,21 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A408AB7B73A825E284FBCEBF"
-               BuildableName = "HermesIOSUITests.xctest"
-               BlueprintName = "HermesIOSUITests"
-               ReferencedContainer = "container:HermesIOS.xcodeproj">
+               BuildableName = "PetalUITests.xctest"
+               BlueprintName = "PetalUITests"
+               ReferencedContainer = "container:Petal.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <CommandLineArguments>
       </CommandLineArguments>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "HERMES_IOS_INTEGRATION"
+            value = "1"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -69,13 +90,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDBCE2E3BABBD3FF1069603C"
-            BuildableName = "HermesIOS.app"
-            BlueprintName = "HermesIOS"
-            ReferencedContainer = "container:HermesIOS.xcodeproj">
+            BuildableName = "Petal.app"
+            BlueprintName = "Petal"
+            ReferencedContainer = "container:Petal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -88,13 +107,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CDBCE2E3BABBD3FF1069603C"
-            BuildableName = "HermesIOS.app"
-            BlueprintName = "HermesIOS"
-            ReferencedContainer = "container:HermesIOS.xcodeproj">
+            BuildableName = "Petal.app"
+            BlueprintName = "Petal"
+            ReferencedContainer = "container:Petal.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-      </CommandLineArguments>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

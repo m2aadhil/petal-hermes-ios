@@ -13,9 +13,18 @@ struct OnboardingView: View {
     @State private var password = ""
     @State private var token = ""
     @State private var mode = "basic"
+    @State private var staySignedIn = true
     @State private var busy = false
     @State private var error: String?
     @State private var showGuide = false
+    /// A signed-in connection waiting for the user to pick an agent (step 2).
+    @State private var pending: PendingConnection?
+    @State private var chosenProfile: String?
+
+    private struct PendingConnection {
+        let connection: SavedConnection
+        let profiles: [AgentProfile]
+    }
 
     var body: some View {
         NavigationStack {
@@ -25,7 +34,7 @@ struct OnboardingView: View {
                         HStack {
                             Wordmark()
                             Spacer()
-                            Text(step == 0 ? "WELCOME" : "CONNECT").textStyle(.overline).foregroundStyle(DS.Palette.textSecondary)
+                            Text(step == 0 ? "WELCOME" : step == 1 ? "CONNECT" : "YOUR AGENT").textStyle(.overline).foregroundStyle(DS.Palette.textSecondary)
                         }.padding(.top, DS.Space.s)
                         if step == 0 && !adding {
                             Spacer(minLength: DS.Space.l)
@@ -48,6 +57,8 @@ struct OnboardingView: View {
                                 Button("Explore the interface") { model.loadDemo() }
                                     .buttonStyle(HermesButtonStyle(kind: .quiet)).padding(.bottom, DS.Space.xs)
                             }
+                        } else if step == 2, let pending {
+                            profileChooser(pending)
                         } else {
                             ScreenHeader(Text("Let’s connect."), subtitle: Text("Open Tailscale on your iPhone, then enter your Hermes server’s address."))
                                 .padding(.top, DS.Space.l)
@@ -62,6 +73,12 @@ struct OnboardingView: View {
                                     field("Username", text: $username, placeholder: "admin")
                                     FormField(label: "Password") {
                                         SecureField("Hermes password", text: $password).textContentType(.password)
+                                    }
+                                    VStack(alignment: .leading, spacing: DS.Space.xxs) {
+                                        Toggle("Stay signed in", isOn: $staySignedIn).textStyle(.label)
+                                            .accessibilityIdentifier("stay-signed-in")
+                                        Text("Saves your password in this iPhone’s Keychain so Petal can sign in again when the session expires.")
+                                            .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                                     }
                                 } else {
                                     FormField(label: "Server session token") {
@@ -85,10 +102,15 @@ struct OnboardingView: View {
                 }.scrollDismissesKeyboard(.interactively).background(DS.Palette.background)
             }
             .toolbar {
-                if adding { ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } } }
-                else if step > 0 { ToolbarItem(placement: .topBarLeading) { Button { step = 0 } label: { Image(systemName: "arrow.left") } } }
+                if adding { ToolbarItem(placement: .cancellationAction) { Button("Close") { abandonPending(); dismiss() } } }
+                if step == 2 || (step == 1 && !adding) {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button { goBack() } label: { Image(systemName: "arrow.left") }.accessibilityLabel("Back")
+                    }
+                }
             }
             .sheet(isPresented: $showGuide) { ConnectionGuide() }
+            .onDisappear { abandonPending() }
             .onAppear {
                 if adding { step = 1 }
                 if let existing { name = existing.name; address = existing.endpoint.baseURL.absoluteString; mode = existing.mode }
@@ -117,17 +139,98 @@ struct OnboardingView: View {
         }
     }
 
+    private func profileChooser(_ pending: PendingConnection) -> some View {
+        let chosenTitle = pending.profiles.first { $0.name == chosenProfile }?.title ?? "Hermes"
+        return VStack(alignment: .leading, spacing: DS.Space.l) {
+            ScreenHeader(Text("Who would you like to talk to?"),
+                         subtitle: Text("Choose the agent to start with. You can switch any time from the chat."))
+                .padding(.top, DS.Space.l)
+            Label(pending.connection.name, systemImage: "server.rack")
+                .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+            VStack(spacing: DS.Space.xs) {
+                ForEach(pending.profiles) { agent in
+                    let chosen = chosenProfile == agent.name
+                    Button { chosenProfile = agent.name } label: {
+                        HStack(spacing: DS.Space.s) {
+                            AgentAvatar(name: agent.name, size: 44)
+                            VStack(alignment: .leading, spacing: DS.Space.xxs) {
+                                Text(agent.title).textStyle(.bodyEmphasis).foregroundStyle(DS.Palette.textPrimary)
+                                Text(agent.detail.isEmpty ? (agent.model.isEmpty ? "@\(agent.name)" : agent.model) : agent.detail)
+                                    .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
+                                    .lineLimit(2).multilineTextAlignment(.leading)
+                            }
+                            Spacer(minLength: 0)
+                            Image(systemName: chosen ? "checkmark.circle.fill" : "circle")
+                                .icon(.l).foregroundStyle(chosen ? DS.Palette.accent : DS.Palette.textTertiary)
+                                .accessibilityHidden(true)
+                        }.padding(DS.Space.m).tile(selected: chosen)
+                    }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityIdentifier("choose-profile-\(agent.name)")
+                    .accessibilityAddTraits(chosen ? .isSelected : [])
+                }
+            }
+            if let error { InlineMessage(error) }
+            PrimaryButton(title: "Start with \(chosenTitle)", busy: busy) { finish() }
+                .disabled(chosenProfile == nil)
+                .accessibilityIdentifier("start-with-agent")
+            Spacer(minLength: DS.Space.s)
+        }
+    }
+
     private func connect() {
         busy = true; error = nil
         Task {
             do {
                 let endpoint = try Endpoint(address)
                 let connection = SavedConnection(id: existing?.id ?? UUID(), name: name.isEmpty ? "Hermes" : name, endpoint: endpoint, mode: mode)
-                try await model.addConnection(connection, username: username, password: password, token: token)
-                password = ""; token = ""; dismiss()
+                let found = try await model.verifyConnection(connection, username: username, password: password, token: token, remember: mode == "basic" && staySignedIn)
+                password = ""; token = ""
+                if found.count > 1 {
+                    pending = PendingConnection(connection: connection, profiles: found)
+                    chosenProfile = initialChoice(in: found)
+                    withAnimation(DS.Motion.adaptive(DS.Motion.standard, reduceMotion: reduceMotion)) { step = 2 }
+                } else {
+                    try await model.finishConnection(connection, profiles: found, startWith: found.first?.name)
+                    dismiss()
+                }
             } catch { self.error = error.localizedDescription }
             busy = false
         }
+    }
+
+    /// Reconnecting keeps the agent that was active; a new server starts on its default profile.
+    private func initialChoice(in found: [AgentProfile]) -> String? {
+        if let existing, model.activeConnection?.id == existing.id, found.contains(where: { $0.name == model.profile }) {
+            return model.profile
+        }
+        return found.first(where: { $0.name == "default" })?.name ?? found.first?.name
+    }
+
+    private func finish() {
+        guard let pending else { return }
+        busy = true; error = nil
+        Task {
+            do {
+                try await model.finishConnection(pending.connection, profiles: pending.profiles, startWith: chosenProfile)
+                self.pending = nil
+                dismiss()
+            } catch { self.error = error.localizedDescription }
+            busy = false
+        }
+    }
+
+    private func goBack() {
+        withAnimation(DS.Motion.adaptive(DS.Motion.standard, reduceMotion: reduceMotion)) {
+            if step == 2 { abandonPending(); step = 1 } else { step = 0 }
+        }
+    }
+
+    /// Forget credentials from a sign-in the user didn't finish.
+    private func abandonPending() {
+        guard let pending else { return }
+        model.discardPendingConnection(pending.connection)
+        self.pending = nil; chosenProfile = nil; error = nil
     }
 }
 
@@ -142,13 +245,13 @@ struct ConnectionGuide: View {
                     instruction("2", "Hermes’ native access", "On your server, set the Hermes dashboard credentials in its .env file, along with a stable signing secret.")
                     Text(verbatim: "HERMES_DASHBOARD_BASIC_AUTH_USERNAME\nHERMES_DASHBOARD_BASIC_AUTH_PASSWORD\nHERMES_DASHBOARD_BASIC_AUTH_SECRET")
                         .textStyle(.codeSmall).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).card(padding: DS.Space.m)
-                    instruction("3", "Start the server", "Run the official server on its private Tailscale address. Hermès iOS talks to its API directly.")
+                    instruction("3", "Start the server", "Run the official server on its private Tailscale address. Petal talks to its API directly.")
                     Text(verbatim: "hermes serve --host <Tailscale-IP> --port 9119")
                         .textStyle(.codeSmall).textSelection(.enabled).frame(maxWidth: .infinity, alignment: .leading).card(padding: DS.Space.m)
-                    Text("In Hermès iOS, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.")
+                    Text("In Petal, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.")
                         .textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
                     Link("Open the official documentation", destination: URL(string: "https://hermes-agent.nousresearch.com/docs/user-guide/desktop#connecting-to-a-remote-backend")!)
-                    Text("Password authentication is meant for your private network. Hermès iOS doesn’t configure your server for you.")
+                    Text("Password authentication is meant for your private network. Petal doesn’t configure your server for you.")
                         .textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                 }.padding(DS.Space.xl).readableWidth(DS.Size.formWidth)
             }.background(DS.Palette.background).navigationTitle("Connection").navigationBarTitleDisplayMode(.inline)

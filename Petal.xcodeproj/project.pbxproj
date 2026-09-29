@@ -20,8 +20,10 @@
 		6BFB8C889762F2E5B4F1571F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3CF3A3E8B03FC0663B7C6FA0 /* Assets.xcassets */; };
 		83C379CC804844BE37694A45 /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399BB0F5CE1F8FF278DE6053 /* GroupsView.swift */; };
 		87CF654D7D7185292175380D /* Transcript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133611339BB4310770DF600 /* Transcript.swift */; };
-		8C9C5143998CC7920E16F040 /* HermesIOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C508AA7C9E85121414A024E /* HermesIOSApp.swift */; };
+		8C9C5143998CC7920E16F040 /* PetalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C508AA7C9E85121414A024E /* PetalApp.swift */; };
 		9772E0457C80C9E24FB69D1B /* VoiceActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1ABEA9AE1C021FC85A2204 /* VoiceActivity.swift */; };
+		A10C0000000000000000A002 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A10C0000000000000000A001 /* Localizable.xcstrings */; };
+		A10C0000000000000000A004 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A10C0000000000000000A003 /* InfoPlist.xcstrings */; };
 		A126D118743D5F3FB318EC9F /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4FC914201C38D1A165638D /* ChatView.swift */; };
 		A95A1A969026C220303DA621 /* DraftAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B083DF2BEBD828CF266749E2 /* DraftAttachment.swift */; };
 		B3E754254F266AC7A3A72788 /* LocalCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69DD335D5BB61C6A77C2EC6 /* LocalCache.swift */; };
@@ -32,8 +34,13 @@
 		C0F97796889C0EF73909DE34 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6736CBC0AB49572EDDC3502 /* AppModel.swift */; };
 		C4E5F98CEC41BFB069485A78 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185269B34B53A2F564E2CD38 /* Keychain.swift */; };
 		C64A73C0EABAD25C4AB4E961 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A462CE3A3E115F981A5C76 /* Models.swift */; };
+		D5000000000000000000C000 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B000 /* Tokens.swift */; };
+		D5000000000000000000C001 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B001 /* Typography.swift */; };
+		D5000000000000000000C002 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B002 /* Components.swift */; };
+		D5000000000000000000C003 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B003 /* Brand.swift */; };
+		D5000000000000000000C004 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B004 /* Gallery.swift */; };
 		D673AF44E66D90BFC2648926 /* HermesSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A87F904778F7AD694B573F1 /* HermesSocket.swift */; };
-		D681AB6A78A919CC947068D4 /* HermesIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603ABD353FD2203064ED4D6 /* HermesIOSUITests.swift */; };
+		D681AB6A78A919CC947068D4 /* PetalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E603ABD353FD2203064ED4D6 /* PetalUITests.swift */; };
 		E3BDA5080F70B105FDDA04F3 /* MarkdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C2642D7ADE3DDF465C6E89 /* MarkdownText.swift */; };
 		E4687AFCE99263487AB19A15 /* AgentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4E2583813D830A3E900B68 /* AgentsView.swift */; };
 		EB76A6E45F00A3052ABE4188 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36DE38AF4ABDF2227F4C599 /* RootView.swift */; };
@@ -42,13 +49,6 @@
 		F78C38E621878F2516DBF4C8 /* StoredCookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13C6E169393755487F106D2 /* StoredCookie.swift */; };
 		F843B14A351EDA859765A6D3 /* KanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B9D9CC524C6E12BC3360D4 /* KanbanView.swift */; };
 		FC50ED3C6CBD0ED6853464C3 /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1B07CAFC53C700A7E55E59 /* VoiceView.swift */; };
-		A10C0000000000000000A002 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A10C0000000000000000A001 /* Localizable.xcstrings */; };
-		A10C0000000000000000A004 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A10C0000000000000000A003 /* InfoPlist.xcstrings */; };
-		D5000000000000000000C000 /* Tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B000 /* Tokens.swift */; };
-		D5000000000000000000C001 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B001 /* Typography.swift */; };
-		D5000000000000000000C002 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B002 /* Components.swift */; };
-		D5000000000000000000C003 /* Brand.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B003 /* Brand.swift */; };
-		D5000000000000000000C004 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5000000000000000000B004 /* Gallery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 			containerPortal = AF054738A80FFFF2F67365FA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CDBCE2E3BABBD3FF1069603C;
-			remoteInfo = HermesIOS;
+			remoteInfo = Petal;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -65,11 +65,11 @@
 		0133611339BB4310770DF600 /* Transcript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcript.swift; sourceTree = "<group>"; };
 		02A462CE3A3E115F981A5C76 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		03771C2DF46F958CA751A93C /* JSONValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.swift; sourceTree = "<group>"; };
-		08FCED906E5D5607C188EFFC /* HermesIOSUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = HermesIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08FCED906E5D5607C188EFFC /* PetalUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = PetalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B1ABEA9AE1C021FC85A2204 /* VoiceActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceActivity.swift; sourceTree = "<group>"; };
 		185269B34B53A2F564E2CD38 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		19B9D9CC524C6E12BC3360D4 /* KanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanView.swift; sourceTree = "<group>"; };
-		1C508AA7C9E85121414A024E /* HermesIOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesIOSApp.swift; sourceTree = "<group>"; };
+		1C508AA7C9E85121414A024E /* PetalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalApp.swift; sourceTree = "<group>"; };
 		26620A4D5A548695453ABAF6 /* SpacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacesView.swift; sourceTree = "<group>"; };
 		2BFBAC9B6E331893F7ADA152 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2C4EE51D78FA0482C1CE5323 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -84,6 +84,8 @@
 		7C4FC914201C38D1A165638D /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		7F6FE9D7F1FBAB1A65EDA562 /* HermesHTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesHTTP.swift; sourceTree = "<group>"; };
 		851E43F4DDB4C85BF0F4C3EB /* NativeToolSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeToolSession.swift; sourceTree = "<group>"; };
+		A10C0000000000000000A001 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		A10C0000000000000000A003 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		B015E03D9D8F60B51C9F3C89 /* RoutinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
 		B083DF2BEBD828CF266749E2 /* DraftAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftAttachment.swift; sourceTree = "<group>"; };
 		B104A4361ECD7B91A321759C /* NativeVoiceAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeVoiceAPI.swift; sourceTree = "<group>"; };
@@ -92,29 +94,27 @@
 		C910078020A4AF8014712019 /* HistoryRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRequests.swift; sourceTree = "<group>"; };
 		CEEDE2B035F0E274D1A677E0 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
 		D13C6E169393755487F106D2 /* StoredCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredCookie.swift; sourceTree = "<group>"; };
-		D69DD335D5BB61C6A77C2EC6 /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
-		D8C2642D7ADE3DDF465C6E89 /* MarkdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
-		E36DE38AF4ABDF2227F4C599 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		E603ABD353FD2203064ED4D6 /* HermesIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HermesIOSUITests.swift; sourceTree = "<group>"; };
-		E6736CBC0AB49572EDDC3502 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		EA19D67E64E6BC861BA6083F /* BackgroundLease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLease.swift; sourceTree = "<group>"; };
-		EA403258EBDBCDA2BBA568D1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		F9CE976027FBF5395EF1C01C /* HermesIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HermesIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A10C0000000000000000A001 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		A10C0000000000000000A003 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		D5000000000000000000B000 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		D5000000000000000000B001 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		D5000000000000000000B002 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		D5000000000000000000B003 /* Brand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brand.swift; sourceTree = "<group>"; };
 		D5000000000000000000B004 /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
+		D69DD335D5BB61C6A77C2EC6 /* LocalCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCache.swift; sourceTree = "<group>"; };
+		D8C2642D7ADE3DDF465C6E89 /* MarkdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
+		E36DE38AF4ABDF2227F4C599 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		E603ABD353FD2203064ED4D6 /* PetalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalUITests.swift; sourceTree = "<group>"; };
+		E6736CBC0AB49572EDDC3502 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		EA19D67E64E6BC861BA6083F /* BackgroundLease.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundLease.swift; sourceTree = "<group>"; };
+		EA403258EBDBCDA2BBA568D1 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		F9CE976027FBF5395EF1C01C /* Petal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		2C4698CB1DEC47FA6D2F2728 = {
 			isa = PBXGroup;
 			children = (
-				E57268F9856D1223A18BAA74 /* HermesIOS */,
-				87DB305296DB0BA407D4834A /* HermesIOSUITests */,
+				E57268F9856D1223A18BAA74 /* Petal */,
+				87DB305296DB0BA407D4834A /* PetalUITests */,
 				53D3F01D3EBC6A92635B9684 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -146,18 +146,18 @@
 		53D3F01D3EBC6A92635B9684 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F9CE976027FBF5395EF1C01C /* HermesIOS.app */,
-				08FCED906E5D5607C188EFFC /* HermesIOSUITests.xctest */,
+				F9CE976027FBF5395EF1C01C /* Petal.app */,
+				08FCED906E5D5607C188EFFC /* PetalUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		87DB305296DB0BA407D4834A /* HermesIOSUITests */ = {
+		87DB305296DB0BA407D4834A /* PetalUITests */ = {
 			isa = PBXGroup;
 			children = (
-				E603ABD353FD2203064ED4D6 /* HermesIOSUITests.swift */,
+				E603ABD353FD2203064ED4D6 /* PetalUITests.swift */,
 			);
-			path = HermesIOSUITests;
+			path = PetalUITests;
 			sourceTree = "<group>";
 		};
 		AA536AEDC870E5C6BF73E0CA /* Features */ = {
@@ -200,19 +200,6 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		E57268F9856D1223A18BAA74 /* HermesIOS */ = {
-			isa = PBXGroup;
-			children = (
-				1C508AA7C9E85121414A024E /* HermesIOSApp.swift */,
-				D0CFD82F4F8493D2EDBCA6C1 /* Core */,
-				D5000000000000000000A001 /* DesignSystem */,
-				AA536AEDC870E5C6BF73E0CA /* Features */,
-				51B7412825D43DF353A324F5 /* Networking */,
-				2F70FF112480D3C6FE42D631 /* Resources */,
-			);
-			path = HermesIOS;
-			sourceTree = "<group>";
-		};
 		D5000000000000000000A001 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,12 +212,25 @@
 			path = DesignSystem;
 			sourceTree = "<group>";
 		};
+		E57268F9856D1223A18BAA74 /* Petal */ = {
+			isa = PBXGroup;
+			children = (
+				1C508AA7C9E85121414A024E /* PetalApp.swift */,
+				D0CFD82F4F8493D2EDBCA6C1 /* Core */,
+				D5000000000000000000A001 /* DesignSystem */,
+				AA536AEDC870E5C6BF73E0CA /* Features */,
+				51B7412825D43DF353A324F5 /* Networking */,
+				2F70FF112480D3C6FE42D631 /* Resources */,
+			);
+			path = Petal;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A408AB7B73A825E284FBCEBF /* HermesIOSUITests */ = {
+		A408AB7B73A825E284FBCEBF /* PetalUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A393FEEDC4E3B72D9486D1B6 /* Build configuration list for PBXNativeTarget "HermesIOSUITests" */;
+			buildConfigurationList = A393FEEDC4E3B72D9486D1B6 /* Build configuration list for PBXNativeTarget "PetalUITests" */;
 			buildPhases = (
 				C85692CF23898F853BCD5090 /* Sources */,
 			);
@@ -239,16 +239,16 @@
 			dependencies = (
 				F6C5B34F874CE8B8FE1C9D68 /* PBXTargetDependency */,
 			);
-			name = HermesIOSUITests;
+			name = PetalUITests;
 			packageProductDependencies = (
 			);
-			productName = HermesIOSUITests;
-			productReference = 08FCED906E5D5607C188EFFC /* HermesIOSUITests.xctest */;
+			productName = PetalUITests;
+			productReference = 08FCED906E5D5607C188EFFC /* PetalUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		CDBCE2E3BABBD3FF1069603C /* HermesIOS */ = {
+		CDBCE2E3BABBD3FF1069603C /* Petal */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AAFA8A2CC3F995E6F685DBCE /* Build configuration list for PBXNativeTarget "HermesIOS" */;
+			buildConfigurationList = AAFA8A2CC3F995E6F685DBCE /* Build configuration list for PBXNativeTarget "Petal" */;
 			buildPhases = (
 				5D75984B8A2F343907CA7929 /* Sources */,
 				01FC28C8A42CA56E55563F42 /* Resources */,
@@ -257,11 +257,11 @@
 			);
 			dependencies = (
 			);
-			name = HermesIOS;
+			name = Petal;
 			packageProductDependencies = (
 			);
-			productName = HermesIOS;
-			productReference = F9CE976027FBF5395EF1C01C /* HermesIOS.app */;
+			productName = Petal;
+			productReference = F9CE976027FBF5395EF1C01C /* Petal.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -279,12 +279,11 @@
 						TestTargetID = CDBCE2E3BABBD3FF1069603C;
 					};
 					CDBCE2E3BABBD3FF1069603C = {
-						DevelopmentTeam = "";
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 89EE59B0ECCFC5D808CFE938 /* Build configuration list for PBXProject "HermesIOS" */;
+			buildConfigurationList = 89EE59B0ECCFC5D808CFE938 /* Build configuration list for PBXProject "Petal" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -299,8 +298,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDBCE2E3BABBD3FF1069603C /* HermesIOS */,
-				A408AB7B73A825E284FBCEBF /* HermesIOSUITests */,
+				CDBCE2E3BABBD3FF1069603C /* Petal */,
+				A408AB7B73A825E284FBCEBF /* PetalUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -340,7 +339,7 @@
 				59454233EF00BAB95B5995BC /* Endpoint.swift in Sources */,
 				83C379CC804844BE37694A45 /* GroupsView.swift in Sources */,
 				5361803BAD431458B37A663B /* HermesHTTP.swift in Sources */,
-				8C9C5143998CC7920E16F040 /* HermesIOSApp.swift in Sources */,
+				8C9C5143998CC7920E16F040 /* PetalApp.swift in Sources */,
 				D673AF44E66D90BFC2648926 /* HermesSocket.swift in Sources */,
 				4F12D4CF4D888EA890A98BF3 /* HistoryRequests.swift in Sources */,
 				5BBB627A0B67FE2F04FBD140 /* JSONValue.swift in Sources */,
@@ -368,7 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D681AB6A78A919CC947068D4 /* HermesIOSUITests.swift in Sources */,
+				D681AB6A78A919CC947068D4 /* PetalUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +376,7 @@
 /* Begin PBXTargetDependency section */
 		F6C5B34F874CE8B8FE1C9D68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CDBCE2E3BABBD3FF1069603C /* HermesIOS */;
+			target = CDBCE2E3BABBD3FF1069603C /* Petal */;
 			targetProxy = 459F1E4FCA9535173E9FF6AF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -434,16 +433,16 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 0.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
@@ -453,12 +452,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = HermesIOS/Resources/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Petal/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = org.m2aadhil.Petal;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -469,12 +469,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = HermesIOS/Resources/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Petal/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = org.m2aadhil.Petal;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -493,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOSUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HermesIOS;
+				TEST_TARGET_NAME = Petal;
 			};
 			name = Debug;
 		};
@@ -554,6 +555,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 0.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -561,10 +563,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
-				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
@@ -582,14 +583,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOSUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = HermesIOS;
+				TEST_TARGET_NAME = Petal;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		89EE59B0ECCFC5D808CFE938 /* Build configuration list for PBXProject "HermesIOS" */ = {
+		89EE59B0ECCFC5D808CFE938 /* Build configuration list for PBXProject "Petal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8B6E27703A76CC709BE0689 /* Debug */,
@@ -598,7 +599,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		A393FEEDC4E3B72D9486D1B6 /* Build configuration list for PBXNativeTarget "HermesIOSUITests" */ = {
+		A393FEEDC4E3B72D9486D1B6 /* Build configuration list for PBXNativeTarget "PetalUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8FEAE744C8F887406F9F2C0E /* Debug */,
@@ -607,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		AAFA8A2CC3F995E6F685DBCE /* Build configuration list for PBXNativeTarget "HermesIOS" */ = {
+		AAFA8A2CC3F995E6F685DBCE /* Build configuration list for PBXNativeTarget "Petal" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6D02EDC0D1C85843C4FAE4B3 /* Debug */,

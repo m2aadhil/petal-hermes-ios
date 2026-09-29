@@ -465,6 +465,16 @@
         }
       }
     },
+    "Back": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour"
+          }
+        }
+      }
+    },
     "Back to board": {
       "localizations": {
         "fr": {
@@ -592,6 +602,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Choisir son modèle"
+          }
+        }
+      }
+    },
+    "Choose the agent to start with. You can switch any time from the chat.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez l’agent avec lequel commencer. Vous pourrez en changer à tout moment depuis le chat."
           }
         }
       }
@@ -1616,12 +1636,12 @@
         }
       }
     },
-    "Hermès iOS is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server.": {
+    "Petal is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hermès iOS est un client communautaire indépendant pour Hermes Agent de Nous Research. Les conversations sont mises en cache sur cet appareil. Retirer une connexion efface son cache local, sans toucher au serveur."
+            "value": "Petal est un client communautaire indépendant pour Hermes Agent de Nous Research. Les conversations sont mises en cache sur cet appareil. Retirer une connexion efface son cache local, sans toucher au serveur."
           }
         }
       }
@@ -1666,12 +1686,12 @@
         }
       }
     },
-    "In Hermès iOS, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.": {
+    "In Petal, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dans Hermès iOS, entrez http://<IP-Tailscale>:9119. Si vous utilisez Tailscale Serve avec HTTPS, entrez plutôt son adresse https://…ts.net."
+            "value": "Dans Petal, entrez http://<IP-Tailscale>:9119. Si vous utilisez Tailscale Serve avec HTTPS, entrez plutôt son adresse https://…ts.net."
           }
         }
       }
@@ -2102,12 +2122,12 @@
         }
       }
     },
-    "No Hermès iOS account, no telemetry": {
+    "No Petal account, no telemetry": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucun compte Hermès iOS, aucune télémétrie"
+            "value": "Aucun compte Petal, aucune télémétrie"
           }
         }
       }
@@ -2292,12 +2312,12 @@
         }
       }
     },
-    "Password authentication is meant for your private network. Hermès iOS doesn’t configure your server for you.": {
+    "Password authentication is meant for your private network. Petal doesn’t configure your server for you.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’authentification par mot de passe est prévue pour votre réseau privé. Hermès iOS ne configure pas votre serveur à votre place."
+            "value": "L’authentification par mot de passe est prévue pour votre réseau privé. Petal ne configure pas votre serveur à votre place."
           }
         }
       }
@@ -2657,22 +2677,22 @@
         }
       }
     },
-    "Routines for %@ keep running on your server, even when Hermès iOS is closed.": {
+    "Routines for %@ keep running on your server, even when Petal is closed.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les routines de %@ continuent sur votre serveur, même quand Hermès iOS est fermé."
+            "value": "Les routines de %@ continuent sur votre serveur, même quand Petal est fermé."
           }
         }
       }
     },
-    "Run the official server on its private Tailscale address. Hermès iOS talks to its API directly.": {
+    "Run the official server on its private Tailscale address. Petal talks to its API directly.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lancez le serveur officiel avec son adresse privée Tailscale. Hermès iOS utilise son API directement."
+            "value": "Lancez le serveur officiel avec son adresse privée Tailscale. Petal utilise son API directement."
           }
         }
       }
@@ -2683,6 +2703,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enregistrer"
+          }
+        }
+      }
+    },
+    "Saves your password in this iPhone’s Keychain so Petal can sign in again when the session expires.": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistre votre mot de passe dans le trousseau de cet iPhone pour que Petal puisse se reconnecter quand la session expire."
           }
         }
       }
@@ -2958,12 +2988,32 @@
         }
       }
     },
+    "Start with %@": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer avec %@"
+          }
+        }
+      }
+    },
     "Starting point": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Point de départ"
+          }
+        }
+      }
+    },
+    "Stay signed in": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rester connecté"
           }
         }
       }
@@ -3004,16 +3054,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Changer d’agent"
-          }
-        }
-      }
-    },
-    "Switch profile: %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Changer de profil : %@"
           }
         }
       }
@@ -3250,13 +3290,13 @@
         }
       }
     },
-    "This is a preview of Hermès iOS. Connect your Hermes agent to see your conversations, profiles and tools.": {
+    "This is a preview of Petal. Connect your Hermes agent to see your conversations, profiles and tools.": {
       "comment": "Demo data",
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ceci est un aperçu d’Hermès iOS. Connectez votre agent Hermes pour retrouver vos conversations, vos profils et vos outils."
+            "value": "Ceci est un aperçu de Petal. Connectez votre agent Hermes pour retrouver vos conversations, vos profils et vos outils."
           }
         }
       }
@@ -3444,12 +3484,12 @@
         }
       }
     },
-    "Turn on Hermes’ native authentication, then connect Hermès iOS. See the connection guide.": {
+    "Turn on Hermes’ native authentication, then connect Petal. See the connection guide.": {
       "localizations": {
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Activez l’authentification native de Hermes, puis connectez Hermès iOS. Consultez le guide de connexion."
+            "value": "Activez l’authentification native de Hermes, puis connectez Petal. Consultez le guide de connexion."
           }
         }
       }
@@ -3667,6 +3707,16 @@
         }
       }
     },
+    "Who would you like to talk to?": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec qui voulez-vous parler ?"
+          }
+        }
+      }
+    },
     "Work": {
       "localizations": {
         "fr": {
@@ -3704,6 +3754,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les workspaces créés dans Hermes apparaîtront ici."
+          }
+        }
+      }
+    },
+    "YOUR AGENT": {
+      "localizations": {
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VOTRE AGENT"
           }
         }
       }

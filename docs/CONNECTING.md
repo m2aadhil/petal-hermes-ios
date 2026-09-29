@@ -1,6 +1,6 @@
-# Connect Hermès iOS to Hermes over Tailscale
+# Connect Petal to Hermes over Tailscale
 
-Hermès iOS needs the official **`hermes serve`** process. The messaging gateway used by Telegram, Discord and other channels is a separate process. Hermes should already be configured and able to answer a CLI chat.
+Petal needs the official **`hermes serve`** process. The messaging gateway used by Telegram, Discord and other channels is a separate process. Hermes should already be configured and able to answer a CLI chat.
 
 ## 1. Join the private network
 
@@ -29,9 +29,9 @@ tailscale ip -4
 hermes serve --host <the-Tailscale-IP-above> --port 9119
 ```
 
-Keep that process running using your normal service/process manager. Hermès iOS does not install another server, copy your Hermes data or start an SSH tunnel.
+Keep that process running using your normal service/process manager. Petal does not install another server, copy your Hermes data or start an SSH tunnel.
 
-In Hermès iOS, enter `http://<the-Tailscale-IP>:9119` and the native Hermes username/password. A short MagicDNS name also works if the iPhone resolves it. Hermès iOS tests both HTTP and the authenticated WebSocket before saving the connection.
+In Petal, enter `http://<the-Tailscale-IP>:9119` and the native Hermes username/password. A short MagicDNS name also works if the iPhone resolves it. Petal tests both HTTP and the authenticated WebSocket before saving the connection.
 
 ## Optional: HTTPS with Tailscale Serve
 
@@ -50,7 +50,7 @@ hermes serve --host 127.0.0.1 --port 9119
 tailscale serve --bg http://127.0.0.1:9119
 ```
 
-Enter the resulting HTTPS URL in Hermès iOS. Tailscale Serve remains private to your tailnet; Funnel is not needed. [Official Tailscale Serve reference](https://tailscale.com/docs/reference/tailscale-cli/serve).
+Enter the resulting HTTPS URL in Petal. Tailscale Serve remains private to your tailnet; Funnel is not needed. [Official Tailscale Serve reference](https://tailscale.com/docs/reference/tailscale-cli/serve).
 
 ## If it doesn't connect
 
@@ -58,10 +58,23 @@ Enter the resulting HTTPS URL in Hermès iOS. Tailscale Serve remains private to
 | --- | --- |
 | Timeout | Tailscale is connected on both devices, the backend process is running, the bind IP/port and tailnet grants are correct. |
 | HTTP works but chat fails | The proxy must forward WebSocket upgrades and the `/api/ws` path. A ticket is single-use and minted just before connecting. |
-| Sign-in fails | Check native dashboard credentials and that `/api/status` advertises `basic`. A model provider API key is not an Hermès iOS login. |
+| Sign-in fails | Check native dashboard credentials and that `/api/status` advertises `basic`. A model provider API key is not a Petal login. |
 | Login expires on every server restart | Set a stable `HERMES_DASHBOARD_BASIC_AUTH_SECRET`. |
 | Keychain error in Simulator | Leave code signing enabled for the simulator test/run. No paid team is needed for simulator signing. |
-| Profile or bot unavailable | Update Hermes and use its current `hermes serve` backend. Hermès iOS doesn't replace a missing canonical chat after a failed lookup. |
+| Profile or bot unavailable | Update Hermes and use its current `hermes serve` backend. Petal doesn't replace a missing canonical chat after a failed lookup. |
 | OAuth-only server | This initial release doesn't implement the browser-based Nous/OIDC sign-in. Use the native private-network password provider, or an existing supported legacy session token on a backend configured for that mode. |
 
-Removing a connection in Hermès iOS erases its cached chats and credentials on that iPhone. It does not delete any server-side conversation or profile.
+Removing a connection in Petal erases its cached chats and credentials on that iPhone. It does not delete any server-side conversation or profile.
+
+## Staying signed in
+
+Hermes' password sign-in lasts 12 hours by default and issues no refresh token. Two server settings affect how often you're asked to sign in again:
+
+```sh
+# Required for sessions to survive a server restart (otherwise a random key is generated on every start):
+HERMES_DASHBOARD_BASIC_AUTH_SECRET=$(openssl rand -hex 32)
+# Optional: longer sessions (seconds). 2592000 = 30 days.
+HERMES_DASHBOARD_BASIC_AUTH_TTL_SECONDS=2592000
+```
+
+With **Stay signed in** turned on in the app (the default), Petal keeps your username and password in this iPhone's Keychain (this device only, never synced) and signs in again silently when the session expires. If the server rejects the saved password, the app deletes it and shows the sign-in form. To stop saving it, reconnect from Settings with the switch turned off. Removing the connection deletes everything stored for it.

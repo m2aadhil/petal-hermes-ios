@@ -1,8 +1,8 @@
 # Design system
 
-Hermès iOS aims to be calm, warm and native: paper-toned backgrounds, one terracotta accent, serif headlines and SF body text. The design system turns that look into tokens and components so every screen stays consistent and works with Dynamic Type, dark mode and VoiceOver.
+Petal aims to be calm, warm and native: paper-toned backgrounds, one terracotta accent, serif headlines and SF body text. The design system turns that look into tokens and components so every screen stays consistent and works with Dynamic Type, dark mode and VoiceOver.
 
-Code lives in `HermesIOS/DesignSystem/`:
+Code lives in `Petal/DesignSystem/`:
 
 | File | What's in it |
 | --- | --- |
@@ -46,7 +46,7 @@ Open `Gallery.swift` in Xcode's canvas whenever you change a token.
 | `hero` | serif 40 | Onboarding and empty-chat headline |
 | `display` | serif 32 | Screen titles |
 | `title` | serif 26 | Sheet titles |
-| `wordmark` | rounded semibold 26 | "Hermès iOS" logotype |
+| `wordmark` | rounded semibold 26 | "Petal" logotype |
 | `overline` | 11 semibold uppercase | Eyebrow text |
 | Everything else | SF system text styles | `headline`, `body`, `label`, `caption`, … |
 

@@ -7,6 +7,14 @@ struct SavedConnection: Codable, Identifiable, Equatable, Sendable {
     var mode: String = "basic"
 }
 
+/// Username and password kept (Keychain only, this device only) when the user chooses
+/// "Stay signed in", so an expired password session can be renewed silently.
+/// Hermes' basic auth provider issues no refresh token, so this is the only way to renew.
+struct SavedCredentials: Codable, Sendable {
+    var username: String
+    var password: String
+}
+
 /// Do not forward login bodies or cookies to a redirect target.
 private final class NoRedirects: NSObject, URLSessionTaskDelegate, Sendable {
     func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse,
@@ -22,6 +30,9 @@ final class HermesHTTP {
     let socketSession: URLSession
     private let redirects = NoRedirects()
     private var token: String?
+    /// In-flight silent sign-in; concurrent 401s share one attempt.
+    private var reauthTask: Task<Bool, Error>?
+    private static let loginPath = "/auth/password-login"
 
     init(_ connection: SavedConnection) {
         self.connection = connection
@@ -43,6 +54,15 @@ final class HermesHTTP {
     }
 
     func request(_ path: String, method: String = "GET", body: JSONValue? = nil, query: [URLQueryItem] = []) async throws -> JSONValue {
+        do { return try await send(path, method: method, body: body, query: query) }
+        catch let failure as RPCFailure where failure.code == 401 && path != Self.loginPath && connection.mode != "token" {
+            // The session expired. If the user chose "Stay signed in", renew it and retry once.
+            guard try await reauthenticate() else { throw failure }
+            return try await send(path, method: method, body: body, query: query)
+        }
+    }
+
+    private func send(_ path: String, method: String = "GET", body: JSONValue? = nil, query: [URLQueryItem] = []) async throws -> JSONValue {
         var request = URLRequest(url: connection.endpoint.url(path, query: query))
         request.httpMethod = method
         request.timeoutInterval = path.hasPrefix("/api/audio/") ? 180 : 20
@@ -55,7 +75,7 @@ final class HermesHTTP {
         let (data, response) = try await session.data(for: request)
         guard let response = response as? HTTPURLResponse else { throw RPCFailure(String(localized: "Invalid response from Hermes.")) }
         if response.statusCode == 401 || response.statusCode == 403 {
-            throw RPCFailure(path == "/auth/password-login" ? String(localized: "Incorrect Hermes credentials.") : String(localized: "Your Hermes session expired. Sign in again in Settings."), code: 401)
+            throw RPCFailure(path == Self.loginPath ? String(localized: "Incorrect Hermes credentials.") : String(localized: "Your Hermes session expired. Sign in again in Settings."), code: 401)
         }
         guard (200...299).contains(response.statusCode) else {
             let failure = try? JSONValue.decode(data)
@@ -67,8 +87,33 @@ final class HermesHTTP {
         return data.isEmpty ? .object([:]) : try JSONValue.decode(data)
     }
 
-    func signIn(username: String, password: String) async throws {
-        _ = try await request("/auth/password-login", method: "POST", body: ["provider": "basic", "username": .string(username), "password": .string(password)])
+    /// Password sign-in. With `remember`, the credentials are saved to the Keychain for silent renewal;
+    /// without it, any previously saved credentials are removed.
+    func signIn(username: String, password: String, remember: Bool = false) async throws {
+        _ = try await send(Self.loginPath, method: "POST", body: ["provider": "basic", "username": .string(username), "password": .string(password)])
+        let key = Keychain.credentialsKey(connection.id)
+        if remember { try Keychain.save(JSONEncoder().encode(SavedCredentials(username: username, password: password)), key: key) }
+        else { Keychain.delete(key) }
+    }
+
+    /// Signs in again with saved credentials. Returns false when none are saved or they were rejected.
+    private func reauthenticate() async throws -> Bool {
+        if let reauthTask { return try await reauthTask.value }
+        let key = Keychain.credentialsKey(connection.id)
+        guard let data = Keychain.read(key), let saved = try? JSONDecoder().decode(SavedCredentials.self, from: data) else { return false }
+        let task = Task { () async throws -> Bool in
+            do {
+                _ = try await self.send(Self.loginPath, method: "POST", body: ["provider": "basic", "username": .string(saved.username), "password": .string(saved.password)])
+                return true
+            } catch let failure as RPCFailure where failure.code == 401 {
+                // Password changed or account revoked: forget it so we never retry with it.
+                Keychain.delete(key)
+                return false
+            }
+        }
+        reauthTask = task
+        defer { reauthTask = nil }
+        return try await task.value
     }
 
     func useToken(_ value: String) throws {

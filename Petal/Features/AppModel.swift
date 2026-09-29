@@ -72,34 +72,52 @@ final class AppModel {
         if let first = connections.first { await activate(first) }
     }
 
-    func addConnection(_ connection: SavedConnection, username: String, password: String, token: String) async throws {
+    /// Signs in and probes the server without saving or activating the connection,
+    /// so onboarding can let the user choose which agent to start with.
+    /// Returns the server's Hermes profiles (never empty).
+    func verifyConnection(_ connection: SavedConnection, username: String, password: String, token: String, remember: Bool = false) async throws -> [AgentProfile] {
         let client = HermesHTTP(connection)
         do {
             let status = try await client.request("/api/status")
             if connection.mode == "token" { try client.useToken(token) }
             else {
                 if status["auth_providers"].array.isEmpty && !status["auth_required"].bool {
-                    throw RPCFailure(String(localized: "Turn on Hermes’ native authentication, then connect Hermès iOS. See the connection guide."))
+                    throw RPCFailure(String(localized: "Turn on Hermes’ native authentication, then connect Petal. See the connection guide."))
                 }
-                try await client.signIn(username: username, password: password)
+                try await client.signIn(username: username, password: password, remember: remember)
             }
             let probe = HermesSocket()
             try await probe.open(http: client)
             let result = try await probe.call("profiles.list")
             guard !result["profiles"].array.isEmpty else { probe.close(); throw RPCFailure(String(localized: "This server returned no Hermes profiles.")) }
             probe.close(); client.invalidate()
-            connections.removeAll { $0.id == connection.id }
-            connections.insert(connection, at: 0)
-            try await cache.save(connections, key: "connections")
-            await activate(connection)
+            return result["profiles"].array.map(AgentProfile.init)
         } catch {
             client.invalidate()
-            if !connections.contains(where: { $0.id == connection.id }) { Keychain.delete(connection.id.uuidString) }
+            discardPendingConnection(connection)
             throw error
         }
     }
 
-    func activate(_ connection: SavedConnection) async {
+    /// Saves a verified connection and opens it on the chosen agent profile.
+    func finishConnection(_ connection: SavedConnection, profiles found: [AgentProfile], startWith profileName: String?) async throws {
+        connections.removeAll { $0.id == connection.id }
+        connections.insert(connection, at: 0)
+        try await cache.save(connections, key: "connections")
+        await activate(connection, preferredProfile: profileName, knownProfiles: found)
+    }
+
+    /// Drops credentials stored by `verifyConnection` when the user abandons setup.
+    func discardPendingConnection(_ connection: SavedConnection) {
+        if !connections.contains(where: { $0.id == connection.id }) { Keychain.deleteAll(for: connection.id) }
+    }
+
+    func addConnection(_ connection: SavedConnection, username: String, password: String, token: String) async throws {
+        let found = try await verifyConnection(connection, username: username, password: password, token: token)
+        try await finishConnection(connection, profiles: found, startWith: nil)
+    }
+
+    func activate(_ connection: SavedConnection, preferredProfile: String? = nil, knownProfiles: [AgentProfile] = []) async {
         saveTask?.cancel(); saveTask = nil
         await persistNow()
         reconnectTask?.cancel(); reconnectTask = nil
@@ -118,10 +136,12 @@ final class AppModel {
         workspace = restored
         attachmentDrafts = restored.attachments ?? [:]
         imageCleanup = restored.imageCleanup ?? [:]
-        profiles = workspace.profiles
+        profiles = workspace.profiles.isEmpty ? knownProfiles : workspace.profiles
         historyIndex = workspace.historyIndex ?? ConversationIndex(legacy: workspace.sessions)
         selected = workspace.selected.flatMap { workspace.chats[$0] }
-        profile = selected?.profile ?? profiles.first?.name ?? "default"
+        // An explicit choice at sign-in wins over the restored chat of another profile.
+        if let preferredProfile, selected?.profile != preferredProfile { selected = nil }
+        profile = preferredProfile ?? selected?.profile ?? profiles.first?.name ?? "default"
         sessions = historyIndex[profile]
         transcript = Transcript(messages: selected?.messages ?? [], lastSequence: selected?.lastSequence ?? 0)
         draft = workspace.drafts[draftKey] ?? ""
@@ -722,7 +742,7 @@ final class AppModel {
             activeConnection = nil; selected = nil; profiles = []; sessions = []; draft = ""
             transcript = Transcript(); workspace = CachedWorkspace(); historyIndex = ConversationIndex(); attachmentDrafts = [:]; state = .offline
         }
-        Keychain.delete(connection.id.uuidString)
+        Keychain.deleteAll(for: connection.id)
         connections.removeAll { $0.id == connection.id }
         do { try await cache.remove(connection.id.uuidString); try await cache.remove(connection.id.uuidString + "-groups"); try await cache.save(connections, key: "connections") }
         catch { notice = error.localizedDescription }
@@ -774,7 +794,7 @@ final class AppModel {
         let text = draft; draft = ""
         transcript.messages.append(.init(role: "user", text: text))
         transcript.running = true
-        for word in String(localized: "This is a preview of Hermès iOS. Connect your Hermes agent to see your conversations, profiles and tools.", comment: "Demo data").split(separator: " ") {
+        for word in String(localized: "This is a preview of Petal. Connect your Hermes agent to see your conversations, profiles and tools.", comment: "Demo data").split(separator: " ") {
             try? await Task.sleep(for: .milliseconds(60))
             transcript.apply(["type": "message.delta", "payload": ["text": .string(String(word) + " ")]])
         }

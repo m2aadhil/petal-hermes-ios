@@ -35,13 +35,13 @@ struct AgentAvatar: View {
     }
 }
 
-/// Mark + "Hermès iOS" logotype.
+/// Mark + "Petal" logotype.
 struct Wordmark: View {
     var markSize: CGFloat = 28
     var body: some View {
         HStack(spacing: DS.Space.xs + 2) {
             AgentMark(size: markSize)
-            Text(verbatim: "Hermès iOS").textStyle(.wordmark)
+            Text(verbatim: "Petal").textStyle(.wordmark)
         }
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isHeader)

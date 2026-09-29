@@ -9,7 +9,7 @@ enum TextStyle {
     case display
     /// Sheet and section titles.
     case title
-    /// The "Hermès iOS" wordmark.
+    /// The "Petal" wordmark.
     case wordmark
     case headline
     case body

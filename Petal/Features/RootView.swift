@@ -11,7 +11,7 @@ struct RootView: View {
             }
         }
         .background(DS.Palette.background)
-        .alert(Text(verbatim: "Hermès iOS"), isPresented: Binding(get: { model.notice != nil }, set: { if !$0 { model.notice = nil } })) {
+        .alert(Text(verbatim: "Petal"), isPresented: Binding(get: { model.notice != nil }, set: { if !$0 { model.notice = nil } })) {
             Button("Got it", role: .cancel) { model.notice = nil }
         } message: { Text(model.notice ?? "") }
     }

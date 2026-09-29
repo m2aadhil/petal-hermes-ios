@@ -8,7 +8,7 @@ struct RoutinesView: View {
         NavigationStack {
             List { Group {
                 Section {
-                    Text("Routines for \(model.agent?.title ?? "Hermes") keep running on your server, even when Hermès iOS is closed.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
+                    Text("Routines for \(model.agent?.title ?? "Hermes") keep running on your server, even when Petal is closed.").textStyle(.subheadline).foregroundStyle(DS.Palette.textSecondary)
                 }
                 if model.routines.isEmpty {
                     ContentUnavailableView("A rhythm to invent", systemImage: "sun.max", description: Text("A morning briefing, a watchlist, a weekly review. Hand a habit to your agent."))

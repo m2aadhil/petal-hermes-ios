@@ -4,7 +4,7 @@ import XCTest
 private let englishLocale = ["-AppleLanguages", "(en)", "-AppleLocale", "en_US"]
 
 @MainActor
-final class HermesIOSUITests: XCTestCase {
+final class PetalUITests: XCTestCase {
     override func setUp() { continueAfterFailure = false }
     func testChatAndAgents() throws {
         let app = XCUIApplication()
@@ -14,7 +14,7 @@ final class HermesIOSUITests: XCTestCase {
         XCTAssertFalse(app.tabBars.firstMatch.exists)
         XCTAssertGreaterThan(app.buttons["app-navigation"].frame.minY, app.windows.firstMatch.frame.maxY - 130)
         XCTAssertLessThan(app.windows.firstMatch.frame.maxY - app.textFields["chat-composer"].frame.maxY, 130)
-        XCTAssertGreaterThan(app.buttons["switch-profile"].frame.minY, app.textFields["chat-composer"].frame.maxY)
+        XCTAssertGreaterThan(app.buttons["quick-agents"].frame.minY, app.textFields["chat-composer"].frame.maxY)
         assertControlsInsideComposer(in: app)
         capture("01-chat")
         openNavigation("Agents", in: app)
@@ -99,7 +99,14 @@ final class HermesIOSUITests: XCTestCase {
             password.tap(); password.typeText("hermes-ios-local-fixture")
             app.swipeUp()
             app.buttons["connect-agent"].tap()
-            XCTAssertTrue(app.textFields["chat-composer"].waitForExistence(timeout: 40))
+            // Servers with several profiles ask which agent to start with.
+            let startWithAgent = app.buttons["start-with-agent"]
+            let composer = app.textFields["chat-composer"]
+            for _ in 0..<40 where !composer.exists {
+                if startWithAgent.exists { startWithAgent.tap(); break }
+                sleep(1)
+            }
+            XCTAssertTrue(composer.waitForExistence(timeout: 40))
             // Verify persisted authentication immediately. Relaunch also dismisses iOS'
             // optional password-manager sheet without saving disposable fixture credentials.
             app.terminate(); app.launch()
@@ -171,7 +178,7 @@ final class HermesIOSUITests: XCTestCase {
         let newChat = try XCTUnwrap(app.buttons.matching(identifier: "New conversation").allElementsBoundByIndex.first(where: { $0.isHittable }))
         newChat.tap()
         let composer = app.textFields["chat-composer"]
-        composer.tap(); composer.typeText("Bonjour depuis HermesIOS sur iPhone")
+        composer.tap(); composer.typeText("Bonjour depuis Petal sur iPhone")
         app.buttons["send-message"].tap()
         let answer = app.descendants(matching: .any).matching(identifier: "assistant-message").matching(NSPredicate(format: "label CONTAINS %@", "Bonjour depuis Hermes"))
         XCTAssertTrue(answer.firstMatch.waitForExistence(timeout: 45))
@@ -188,7 +195,7 @@ final class HermesIOSUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["Connected to Hermes"].waitForExistence(timeout: 30))
 
         // check_tools_contract.py seeds only the disposable research profile.
-        app.buttons["switch-profile"].tap()
+        app.buttons["quick-agents"].tap()
         XCTAssertTrue(app.buttons["quick-profile-research"].waitForExistence(timeout: 5))
         app.buttons["quick-profile-research"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 10))
@@ -272,7 +279,7 @@ final class HermesIOSUITests: XCTestCase {
 
     private func openNavigation(_ destination: String, in app: XCUIApplication) {
         if destination == "Agents" {
-            app.buttons["switch-profile"].tap()
+            app.buttons["quick-agents"].tap()
             XCTAssertTrue(app.buttons["manage-agents"].waitForExistence(timeout: 3))
             app.buttons["manage-agents"].tap(); return
         }
@@ -298,22 +305,22 @@ final class HermesIOSUITests: XCTestCase {
         let composer = app.textFields["chat-composer"]
         XCTAssertTrue(composer.waitForExistence(timeout: 10))
         composer.tap(); composer.typeText("Une idee pour Hermes")
-        app.buttons["switch-profile"].tap()
+        app.buttons["quick-agents"].tap()
         XCTAssertTrue(app.buttons["quick-profile-default"].waitForExistence(timeout: 3))
         capture("12-profiles")
         // Selecting the active profile must leave the current chat untouched.
         app.buttons["quick-profile-default"].tap()
         XCTAssertEqual(composer.value as? String, "Une idee pour Hermes")
-        app.buttons["switch-profile"].tap()
+        app.buttons["quick-agents"].tap()
         app.buttons["quick-profile-research"].tap()
         XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS %@", "Hello, I’m Atlas")).firstMatch.waitForExistence(timeout: 3))
         XCTAssertEqual(composer.value as? String, "Message…")
         composer.tap(); composer.typeText("Une recherche pour Atlas")
-        app.buttons["switch-profile"].tap()
+        app.buttons["quick-agents"].tap()
         app.buttons["quick-profile-default"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 3))
         XCTAssertEqual(composer.value as? String, "Une idee pour Hermes")
-        app.buttons["switch-profile"].tap()
+        app.buttons["quick-agents"].tap()
         app.buttons["quick-profile-research"].tap()
         XCTAssertTrue(composer.waitForExistence(timeout: 3))
         XCTAssertEqual(composer.value as? String, "Une recherche pour Atlas")
@@ -339,7 +346,7 @@ final class HermesIOSUITests: XCTestCase {
     private func assertControlsInsideComposer(in app: XCUIApplication) {
         let surface = app.otherElements["composer-surface"]
         XCTAssertTrue(surface.exists)
-        for identifier in ["message-actions", "switch-profile", "quick-history", "app-navigation", "voice-mode", "send-message"] {
+        for identifier in ["message-actions", "quick-history", "app-navigation", "voice-mode", "send-message"] {
             let control = app.buttons[identifier]
             XCTAssertTrue(control.exists)
             XCTAssertTrue(surface.frame.contains(control.frame), "\(identifier) belongs inside the composer bubble")

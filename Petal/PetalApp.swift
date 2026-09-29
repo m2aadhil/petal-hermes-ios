@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct HermesIOSApp: App {
+struct PetalApp: App {
     @State private var model = AppModel()
     @Environment(\.scenePhase) private var phase
 

@@ -1,5 +1,5 @@
 import XCTest
-@testable import HermesIOSCore
+@testable import PetalCore
 
 final class ProtocolTests: XCTestCase {
     func testMarkdownBlocksAndNestedLists() {

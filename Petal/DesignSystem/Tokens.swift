@@ -1,7 +1,7 @@
 import SwiftUI
 import UIKit
 
-/// Hermès iOS design tokens.
+/// Petal design tokens.
 ///
 /// Every colour, spacing step, radius, size and animation used by the app is
 /// defined here. Views should reference these tokens instead of literals so

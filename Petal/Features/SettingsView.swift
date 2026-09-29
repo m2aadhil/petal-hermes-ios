@@ -14,7 +14,7 @@ struct SettingsView: View {
                     HStack(spacing: DS.Space.m) {
                         AgentMark(size: 48)
                         VStack(alignment: .leading, spacing: DS.Space.xxs) {
-                            Text(verbatim: "Hermès iOS").textStyle(.wordmark).accessibilityAddTraits(.isHeader)
+                            Text(verbatim: "Petal").textStyle(.wordmark).accessibilityAddTraits(.isHeader)
                             Text("Less noise. More conversation.").textStyle(.caption).foregroundStyle(DS.Palette.textSecondary)
                         }
                     }.padding(.vertical, DS.Space.s)
@@ -58,7 +58,7 @@ struct SettingsView: View {
                 Section("Simple by nature") {
                     Label("Native SwiftUI interface", systemImage: "iphone")
                     Label("Direct connection to your server", systemImage: "point.3.connected.trianglepath.dotted")
-                    Label("No Hermès iOS account, no telemetry", systemImage: "hand.raised")
+                    Label("No Petal account, no telemetry", systemImage: "hand.raised")
                 }.textStyle(.subheadline)
                 Section {
                     Button { guide = true } label: { Label("Tailscale & Hermes guide", systemImage: "book") }
@@ -66,7 +66,7 @@ struct SettingsView: View {
                     Link(destination: URL(string: "https://hermes-agent.nousresearch.com/docs/")!) { Label("Hermes documentation", systemImage: "arrow.up.right.square") }
                     HStack { Text("Version"); Spacer(); Text(verbatim: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "").foregroundStyle(DS.Palette.textSecondary) }
                 } footer: {
-                    Text("Hermès iOS is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server.")
+                    Text("Petal is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server.")
                 }
                 if model.demo {
                     Section { Button("Exit preview") { model.demo = false; model.selected = nil; model.profiles = []; model.transcript = Transcript() } }

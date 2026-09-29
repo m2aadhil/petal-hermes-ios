@@ -7,13 +7,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hermès iOS"
+            "value" : "Petal"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hermès iOS"
+            "value" : "Petal"
           }
         }
       }
@@ -25,7 +25,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "HermesIOS"
+            "value" : "Petal"
           }
         }
       }
@@ -36,13 +36,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hermès iOS connects to your Hermes agent on your private network or Tailscale."
+            "value" : "Petal connects to your Hermes agent on your private network or Tailscale."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hermès iOS se connecte à votre agent Hermes sur votre réseau privé ou Tailscale."
+            "value" : "Petal se connecte à votre agent Hermes sur votre réseau privé ou Tailscale."
           }
         }
       }

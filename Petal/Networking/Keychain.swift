@@ -26,6 +26,15 @@ enum Keychain {
         return result as? Data
     }
 
+    /// Account holding the username/password saved by "Stay signed in".
+    static func credentialsKey(_ id: UUID) -> String { id.uuidString + ".credentials" }
+
+    /// Removes everything stored for a connection: session cookies or token, and saved credentials.
+    static func deleteAll(for id: UUID) {
+        delete(id.uuidString)
+        delete(credentialsKey(id))
+    }
+
     static func delete(_ key: String) {
         SecItemDelete([kSecClass as String: kSecClassGenericPassword,
                        kSecAttrService as String: "org.hermesios.credentials", kSecAttrAccount as String: key] as CFDictionary)
