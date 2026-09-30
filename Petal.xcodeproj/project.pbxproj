@@ -491,7 +491,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOSUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.m2aadhil.PetalUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Petal;
@@ -580,7 +580,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.hermesios.HermesIOSUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = org.m2aadhil.PetalUITests;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Petal;
