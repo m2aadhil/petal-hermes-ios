@@ -275,15 +275,29 @@ final class AppModel {
         let generation = connectionGeneration
         let owner = profile
         let scope = "\(ObjectIdentifier(socket))|\(owner)"
+        async let activity = lastActivity(profile: owner)
         let result = try await historyRequests.load(scope: scope) {
             try await socket.call("session.list", ["profile": .string(owner), "limit": 100])
         }
+        let lastActive = await activity
         try Task.checkCancellation()
         guard generation == connectionGeneration, self.socket === socket, state == .connected else { throw CancellationError() }
         guard case .array = result["sessions"] else { throw RPCFailure(String(localized: "Hermes returned an invalid conversation list.")) }
-        historyIndex.update(result["sessions"].array.map { Conversation($0, profile: owner) }, profile: owner)
+        historyIndex.update(ConversationIndex.rows(from: result["sessions"].array, profile: owner, lastActive: lastActive,
+                                                   known: historyIndex[owner]), profile: owner)
         if profile == owner { sessions = historyIndex[owner]; historyRevision += 1 }
         scheduleSave()
+    }
+
+    /// `session.list` is ordered by last activity but its rows only include `started_at`.
+    /// The dashboard listing includes `last_active`, so read it for correct dates and grouping.
+    /// Best effort: on failure Hermes' order still applies through `Conversation.rank`.
+    private func lastActivity(profile: String) async -> [String: Date] {
+        guard let http else { return [:] }
+        let query = [URLQueryItem(name: "order", value: "recent"), URLQueryItem(name: "limit", value: "100"),
+                     URLQueryItem(name: "profile", value: profile)]
+        guard let result = try? await http.request("/api/sessions", query: query) else { return [:] }
+        return ConversationIndex.lastActivity(from: result)
     }
 
     func changeProfile(_ name: String) async {
@@ -525,6 +539,10 @@ final class AppModel {
             imageCleanup[runtime] = nil
             try validate()
             if let i = transcript.messages.firstIndex(where: { $0.id == optimistic.id }) { transcript.messages[i].delivery = .confirmed }
+            if let chat = selected, !chat.storedID.isEmpty {
+                historyIndex.touch(chat.storedID, profile: chat.profile)
+                if profile == chat.profile { sessions = historyIndex[chat.profile] }
+            }
         } catch {
             guard generation == selectionGeneration, connection == connectionGeneration, self.socket === socket else { throw CancellationError() }
             let rejected = ((error as? RPCFailure)?.code ?? -1) > 0

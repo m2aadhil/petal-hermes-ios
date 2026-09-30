@@ -144,7 +144,7 @@ struct SessionsView: View {
     @Environment(\.toolNavigation) private var navigation
 
     private var conversations: [Conversation] {
-        model.sessions.filter { $0.profile == model.profile }.sorted { $0.updated > $1.updated }
+        ConversationIndex.ordered(model.sessions.filter { $0.profile == model.profile })
     }
     private var filtered: [Conversation] {
         let query = search.trimmingCharacters(in: .whitespacesAndNewlines)

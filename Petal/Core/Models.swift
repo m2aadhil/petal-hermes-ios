@@ -33,7 +33,12 @@ public struct Conversation: Identifiable, Codable, Equatable, Sendable {
     public var profile: String
     public var title: String
     public var preview: String
+    /// Last activity. `session.list` rows only carry `started_at`, so `AppModel` fills this in from
+    /// the dashboard listing (which has `last_active`) and bumps it locally when you send.
     public var updated: Date
+    /// Position in Hermes' `session.list`, which is ordered by last activity. This decides the order;
+    /// a negative value means "just used here", ahead of the server's list.
+    public var rank: Int?
     public init(_ v: JSONValue, profile: String) {
         id = v["resolved_id"].string.isEmpty ? v["id"].string : v["resolved_id"].string
         self.profile = profile
