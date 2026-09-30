@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @AppStorage(ThinkingPreference.showKey) private var showThinking = true
     @Bindable var model: AppModel
     @Environment(\.dismiss) private var dismiss
     @State private var adding = false
@@ -54,7 +55,11 @@ struct SettingsView: View {
                                 .foregroundStyle(DS.Palette.textSecondary)
                         }
                     }.foregroundStyle(DS.Palette.textPrimary).accessibilityIdentifier("language-settings")
-                } header: { Text("Preferences") } footer: { Text("Opens iOS Settings, where you can choose the app’s language.") }
+                    Toggle(isOn: $showThinking) { Label("Show thinking", systemImage: "sparkle") }
+                        .tint(DS.Palette.accent).accessibilityIdentifier("show-thinking")
+                } header: { Text("Preferences") } footer: {
+                    Text("Language opens iOS Settings. Show thinking displays the model’s reasoning above replies when your model shares it; it only affects this iPhone.")
+                }
                 Section("Simple by nature") {
                     Label("Native SwiftUI interface", systemImage: "iphone")
                     Label("Direct connection to your server", systemImage: "point.3.connected.trianglepath.dotted")

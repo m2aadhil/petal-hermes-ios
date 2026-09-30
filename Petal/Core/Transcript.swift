@@ -11,6 +11,8 @@ public struct Transcript: Sendable {
     public var credential: JSONValue?
     public var failure: String?
     public var lastActivityAt = Date()
+    /// Start of the reasoning phase currently streaming, used to show "Thought for 12 s".
+    public var reasoningStartedAt: Date?
 
     public func isWaitingForResponse(at date: Date) -> Bool {
         running && approval == nil && clarification == nil && credential == nil
@@ -32,10 +34,12 @@ public struct Transcript: Sendable {
         let p = event["payload"]
         switch event["type"].string {
         case "message.start":
+            reasoningStartedAt = nil
             running = true; failure = nil; activity = String(localized: "Thinking…", comment: "Agent activity status")
         case "message.delta":
             guard !p["text"].string.isEmpty else { return }
             running = true; activity = nil
+            finishThinking()
             appendDelta(p["text"].string)
         case "message.interim":
             let text = p["text"].string
@@ -44,19 +48,24 @@ public struct Transcript: Sendable {
                 messages[index].streaming = false
             } else if !text.isEmpty { messages.append(.init(role: "assistant", text: text)) }
         case "message.complete":
+            finishThinking()
             let text = p["text"].string
             if let index = messages.lastIndex(where: { $0.streaming }) {
                 let interrupted = ["error", "interrupted", "cancelled"].contains(p["status"].string)
                 if !text.isEmpty || !interrupted { messages[index].text = text }
                 messages[index].streaming = false
-                if messages[index].text.isEmpty { messages.remove(at: index) }
+                if messages[index].text.isEmpty && (messages[index].reasoning ?? "").isEmpty { messages.remove(at: index) }
             } else if !text.isEmpty, messages.last?.text != text || messages.last?.role != "assistant" {
                 messages.append(.init(role: "assistant", text: text))
             }
             running = false; activity = nil; approval = nil; clarification = nil
             if p["status"].string == "error" { failure = p["error"].string }
             for i in messages.indices where messages[i].delivery == .sending { messages[i].delivery = .confirmed }
-        case "thinking.delta", "reasoning.delta":
+        case "reasoning.delta", "reasoning.available":
+            running = true; activity = String(localized: "Thinking…", comment: "Agent activity status")
+            appendReasoning(p["text"].string, complete: event["type"].string == "reasoning.available")
+        case "thinking.delta":
+            // Spinner and wait notices, not model reasoning.
             running = true; activity = String(localized: "Thinking…", comment: "Agent activity status")
         case "tool.start", "tool.progress", "tool.generating":
             activity = p["name"].string.isEmpty ? String(localized: "Using a tool…", comment: "Agent activity status") : p["name"].string
@@ -79,6 +88,29 @@ public struct Transcript: Sendable {
         }
     }
 
+    private mutating func appendReasoning(_ text: String, complete: Bool) {
+        guard !text.isEmpty else { return }
+        guard let i = messages.lastIndex(where: { $0.streaming }) else {
+            reasoningStartedAt = Date()
+            messages.append(.init(role: "assistant", text: "", streaming: true, reasoning: text)); return
+        }
+        var reasoning = messages[i].reasoning ?? ""
+        if complete && reasoning.contains(text) { return } // Already streamed as deltas.
+        // A new reasoning pass (e.g. after a tool call) starts a new paragraph.
+        let newPass = reasoningStartedAt == nil
+        if newPass { reasoningStartedAt = Date() }
+        if !reasoning.isEmpty && (newPass || complete) { reasoning += "\n\n" }
+        messages[i].reasoning = reasoning + text
+    }
+
+    private mutating func finishThinking() {
+        guard let start = reasoningStartedAt else { return }
+        reasoningStartedAt = nil
+        if let i = messages.lastIndex(where: { $0.streaming }) {
+            messages[i].thinkingSeconds = (messages[i].thinkingSeconds ?? 0) + Date().timeIntervalSince(start)
+        }
+    }
+
     private mutating func appendDelta(_ text: String) {
         guard !text.isEmpty else { return }
         if let i = messages.lastIndex(where: { $0.streaming }) { messages[i].text += text }
@@ -91,16 +123,26 @@ public struct Transcript: Sendable {
         let old = messages
         var used = Set<String>()
         var projected: [ChatMessage] = []
+        // Reasoning from tool-call steps (assistant rows without text) belongs to the reply that follows.
+        var pendingReasoning = ""
         for row in payload["messages"].array {
             let role = row["role"].string
             guard ["user", "assistant"].contains(role), row["display_kind"].string != "hidden" else { continue }
             let text = row["text"].string
+            if role == "user" { pendingReasoning = "" }
+            if role == "assistant" { pendingReasoning = Self.joinReasoning(pendingReasoning, Self.historyReasoning(row)) }
             guard !text.isEmpty else { continue }
             let stable = row["row_id"].isNull ? nil : "row-\(row["row_id"].int)"
             let match = old.first { !used.contains($0.id) && $0.role == role && ($0.text == text || (stable != nil && $0.id == stable)) }
             let id = match?.id ?? stable ?? UUID().uuidString
             used.insert(id)
-            projected.append(.init(id: id, role: role, text: text))
+            var message = ChatMessage(id: id, role: role, text: text)
+            if role == "assistant" {
+                message.reasoning = pendingReasoning.isEmpty ? match?.reasoning : pendingReasoning
+                message.thinkingSeconds = match?.thinkingSeconds
+                pendingReasoning = ""
+            }
+            projected.append(message)
         }
         let inflight = payload["inflight"]
         running = payload["running"].bool
@@ -115,7 +157,8 @@ public struct Transcript: Sendable {
             let assistant = inflight["assistant"].string
             if !assistant.isEmpty, running {
                 let previous = old.last { $0.streaming }
-                projected.append(.init(id: previous?.id ?? UUID().uuidString, role: "assistant", text: assistant, streaming: true))
+                projected.append(.init(id: previous?.id ?? UUID().uuidString, role: "assistant", text: assistant, streaming: true,
+                                       reasoning: previous?.reasoning, thinkingSeconds: previous?.thinkingSeconds))
             }
         }
         // Never silently discard a send whose acknowledgement was lost.
@@ -153,6 +196,19 @@ public struct Transcript: Sendable {
             for event in ordered where ["message.complete", "approval.request", "clarify.request", "error"].contains(event["type"].string) { apply(event) }
         }
         lastSequence = max(lastSequence, latestSequence)
+    }
+
+    /// History rows carry reasoning as `reasoning` or `reasoning_content`, depending on the provider.
+    static func historyReasoning(_ row: JSONValue) -> String {
+        for key in ["reasoning", "reasoning_content"] {
+            let value = row[key].string.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !value.isEmpty { return value }
+        }
+        return ""
+    }
+
+    static func joinReasoning(_ first: String, _ second: String) -> String {
+        first.isEmpty ? second : second.isEmpty ? first : first + "\n\n" + second
     }
 
     public static func mergeStream(snapshot: String, replay: String) -> String {

@@ -52,8 +52,14 @@ public struct ChatMessage: Identifiable, Codable, Equatable, Sendable {
     public var text: String
     public var delivery: Delivery
     public var streaming: Bool
-    public init(id: String = UUID().uuidString, role: String, text: String, delivery: Delivery = .confirmed, streaming: Bool = false) {
+    /// The model's reasoning for this reply, when the provider exposes it. Display only; never sent back.
+    public var reasoning: String?
+    /// How long the model reasoned before answering. Unknown for replies loaded from history.
+    public var thinkingSeconds: Double?
+    public init(id: String = UUID().uuidString, role: String, text: String, delivery: Delivery = .confirmed, streaming: Bool = false,
+                reasoning: String? = nil, thinkingSeconds: Double? = nil) {
         self.id = id; self.role = role; self.text = text; self.delivery = delivery; self.streaming = streaming
+        self.reasoning = reasoning; self.thinkingSeconds = thinkingSeconds
     }
 }
 

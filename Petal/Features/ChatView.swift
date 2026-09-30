@@ -1,5 +1,6 @@
 import SwiftUI
 import PhotosUI
+import QuickLook
 import UniformTypeIdentifiers
 
 struct ChatView: View {
@@ -12,10 +13,12 @@ struct ChatView: View {
     @State private var pinnedToBottom = true
     @State private var draggingHistory = false
     @State private var bottomVisible = true
+    @State private var downloads = FileDownloads()
     @FocusState private var focused: Bool
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
+        @Bindable var files = downloads
         NavigationStack {
             VStack(spacing: 0) {
                 header
@@ -25,6 +28,9 @@ struct ChatView: View {
             .background(DS.Palette.background)
             .safeAreaInset(edge: .bottom, spacing: 0) { composer }
             .toolbar(.hidden, for: .navigationBar)
+            .environment(downloads)
+            .quickLookPreview($files.preview)
+            .onAppear { downloads.model = model }
             .sheet(item: $destination) { page in
                 SpacesView(model: model, initial: page == .spaces ? nil : page)
                     .presentationDragIndicator(.visible)
@@ -41,9 +47,26 @@ struct ChatView: View {
                             let access = url.startAccessingSecurityScopedResource()
                             defer { if access { url.stopAccessingSecurityScopedResource() } }
                             let size = try url.resourceValues(forKeys: [.fileSizeKey]).fileSize ?? 0
-                            guard size <= DraftAttachment.maximumBytes else { throw RPCFailure(String(localized: "Choose a file of 10 MB or less.")) }
+                            let type = UTType(filenameExtension: url.pathExtension)
+                            let isImage = ImagePreparer.handles(type)
+                            if isImage {
+                                guard size <= ImagePreparer.maximumSourceBytes else { throw RPCFailure(String(localized: "Choose an image of 50 MB or less.")) }
+                            } else {
+                                guard size <= DraftAttachment.maximumBytes else { throw RPCFailure(String(localized: "Choose a file of 10 MB or less.")) }
+                            }
                             let data = try await Task.detached { try Data(contentsOf: url) }.value
-                            try await model.addAttachment(data: data, name: url.lastPathComponent, mimeType: UTType(filenameExtension: url.pathExtension)?.preferredMIMEType ?? "application/octet-stream", context: context)
+                            // Images are resized like photos; anything we can't decode goes up as the original file.
+                            var prepared: PreparedImage?
+                            if isImage {
+                                do { prepared = try await Task.detached { try ImagePreparer.prepare(data) }.value }
+                                catch { if data.count > DraftAttachment.maximumBytes { throw error } }
+                            }
+                            if let prepared {
+                                let name = url.deletingPathExtension().lastPathComponent + "." + prepared.fileExtension
+                                try await model.addAttachment(data: prepared.data, name: name, mimeType: prepared.mimeType, context: context)
+                            } else {
+                                try await model.addAttachment(data: data, name: url.lastPathComponent, mimeType: type?.preferredMIMEType ?? "application/octet-stream", context: context)
+                            }
                         }
                     } catch is CancellationError { }
                     catch { model.notice = error.localizedDescription }
@@ -58,16 +81,37 @@ struct ChatView: View {
                     do {
                         for item in items {
                             guard let data = try await item.loadTransferable(type: Data.self) else { throw RPCFailure(String(localized: "This photo isn’t available.")) }
-                            let jpeg = try await Task.detached { try PhotoAttachment.jpeg(data) }.value
-                            try await model.addAttachment(data: jpeg, name: "Photo-\(UUID().uuidString.prefix(8)).jpg", mimeType: "image/jpeg", context: context)
+                            let image = try await Task.detached { try ImagePreparer.prepare(data) }.value
+                            try await model.addAttachment(data: image.data, name: "Photo-\(UUID().uuidString.prefix(8)).\(image.fileExtension)", mimeType: image.mimeType, context: context)
                         }
                     } catch is CancellationError { }
                     catch { model.notice = error.localizedDescription }
                 }
             }
             .onChange(of: model.draft) { _, _ in model.draftChanged() }
-            .onChange(of: model.selected?.storedID) { _, _ in pinnedToBottom = true }
+            .onChange(of: model.selected?.storedID) { _, _ in pinnedToBottom = true; model.resetThinkingLevel() }
+            .task(id: model.selected?.runtimeID) { await model.syncThinkingLevel() }
         }
+    }
+
+    /// Reasoning effort for this chat only. Hermes keeps it per session, never in the global config.
+    private var thinkingMenu: some View {
+        Menu {
+            Picker(selection: Binding(get: { model.thinkingLevel ?? "" }, set: { level in Task { await model.setThinkingLevel(level) } })) {
+                ForEach(ThinkingLevel.allCases) { level in
+                    Label(level.title, systemImage: level.symbol).tag(level.rawValue)
+                }
+            } label: { EmptyView() }
+            .pickerStyle(.inline)
+        } label: {
+            Image(systemName: ThinkingLevel(rawValue: model.thinkingLevel ?? "")?.symbol ?? "brain")
+                .icon(.m).foregroundStyle(DS.Palette.textSecondary)
+                .frame(width: DS.Size.tap, height: DS.Size.tap).contentShape(Rectangle())
+        }
+        .menuOrder(.fixed)
+        .accessibilityLabel(Text("Thinking level"))
+        .accessibilityValue(Text(ThinkingLevel(rawValue: model.thinkingLevel ?? "")?.title ?? String(localized: "Default")))
+        .accessibilityIdentifier("thinking-level")
     }
 
     private var header: some View {
@@ -85,6 +129,7 @@ struct ChatView: View {
                 }
             }.buttonStyle(PressableStyle()).accessibilityLabel("Choose an agent").accessibilityIdentifier("quick-agents")
             Spacer()
+            thinkingMenu
             IconButton("square.and.pencil", label: "New conversation") { model.newChat(); focused = true }
         }.padding(.horizontal, DS.Space.screen).padding(.top, DS.Space.xs).padding(.bottom, DS.Space.m)
     }
@@ -339,7 +384,16 @@ struct MessageView: View, Equatable {
                 }
                 Group {
                     if user { Text(verbatim: message.text).textStyle(.body) }
-                    else { MarkdownText(text: message.text) }
+                    else {
+                        VStack(alignment: .leading, spacing: DS.Space.s) {
+                            if let reasoning = message.reasoning {
+                                ThinkingDisclosure(reasoning: reasoning, seconds: message.thinkingSeconds, live: message.streaming && message.text.isEmpty)
+                            }
+                            if !message.text.isEmpty { MarkdownText(text: FileReferences.stripMediaDirectives(message.text)) }
+                            // Paths are only offered once the reply has finished streaming.
+                            if !message.streaming { FileChips(references: FileReferences.extract(from: message.text)) }
+                        }
+                    }
                 }
                     .textSelection(.enabled)
                     .padding(user ? DS.Space.m : 0)

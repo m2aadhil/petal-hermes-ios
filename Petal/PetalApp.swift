@@ -5,6 +5,8 @@ struct PetalApp: App {
     @State private var model = AppModel()
     @Environment(\.scenePhase) private var phase
 
+    init() { HermesHTTP.clearDownloads() }
+
     var body: some Scene {
         WindowGroup {
             RootView(model: model)

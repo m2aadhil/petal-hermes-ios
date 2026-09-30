@@ -8,7 +8,8 @@ struct DraftAttachment: Codable, Identifiable, Sendable {
     var remotePath: String?
     var remoteReference: String?
     var runtimeID: String?
-    var isImage: Bool { mimeType.hasPrefix("image/") && ["png", "jpg", "jpeg", "webp", "gif"].contains((name as NSString).pathExtension.lowercased()) }
+    /// Sent to the model as an image (not a file reference). `ImagePreparer` always produces one of these types.
+    var isImage: Bool { ["image/png", "image/jpeg", "image/webp", "image/gif"].contains(mimeType.lowercased()) }
     static let maximumBytes = 10 * 1024 * 1024
     static let maximumCount = 4
 }

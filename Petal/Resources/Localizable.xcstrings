@@ -1,39 +1,39 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "%lld agents": {
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld agent"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld agents" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld agent"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld agents"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld agents"
                 }
               }
             }
           }
         },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld agent"
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld agent"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld agents"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld agents"
                 }
               }
             }
@@ -41,79 +41,39 @@
         }
       }
     },
-    "%lld conversations": {
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld conversation"
+    "%lld conversations" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld conversation"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld conversations"
-                }
-              }
-            }
-          }
-        },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld conversation"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld conversations"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "%lld tasks": {
-      "localizations": {
-        "en": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld task"
-                }
-              },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld tasks"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld conversations"
                 }
               }
             }
           }
         },
-        "fr": {
-          "variations": {
-            "plural": {
-              "one": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld tâche"
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld conversation"
                 }
               },
-              "other": {
-                "stringUnit": {
-                  "state": "translated",
-                  "value": "%lld tâches"
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld conversations"
                 }
               }
             }
@@ -121,3847 +81,4103 @@
         }
       }
     },
-    "100% native": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "100 % natif"
+    "%lld tasks" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld task"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tasks"
+                }
+              }
+            }
           }
+        },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tâche"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld tâches"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "2 to 6 agents" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De 2 à 6 agents"
+          }
+        }
+      }
+    },
+    "100% native" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100 % natif"
+          }
+        }
+      }
+    },
+    "A bit of curiosity" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un peu de curiosité"
+          }
+        }
+      }
+    },
+    "A calm place to talk with Hermes.\nYour ideas, your agents, your pace." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un endroit calme pour parler à Hermes.\nVos idées, vos agents, votre rythme."
+          }
+        }
+      }
+    },
+    "A clear rundown of what matters today." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un point clair sur ce qui compte aujourd’hui."
+          }
+        }
+      }
+    },
+    "A few details…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quelques détails…"
+          }
+        }
+      }
+    },
+    "A lighter day" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une journée plus légère"
+          }
+        }
+      }
+    },
+    "A little room\nfor your ideas." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un peu de place\npour vos idées."
+          }
+        }
+      }
+    },
+    "A morning briefing, a watchlist, a weekly review. Hand a habit to your agent." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un briefing du matin, une veille, un bilan. Confiez une habitude à votre agent."
+          }
+        }
+      }
+    },
+    "A new agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un nouvel agent"
+          }
+        }
+      }
+    },
+    "A question, a wish, a project.\nHermes picks up the thread with you." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une question, une envie, un projet.\nHermes reprend le fil avec vous."
+          }
+        }
+      }
+    },
+    "A rhythm to invent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un rythme à inventer"
+          }
+        }
+      }
+    },
+    "A small habit" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une petite habitude"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter"
+          }
+        }
+      }
+    },
+    "Add a file" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un fichier"
+          }
+        }
+      }
+    },
+    "Add a photo" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une photo"
+          }
+        }
+      }
+    },
+    "Add a task to find it on your Hermes board." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez une tâche pour la retrouver dans votre tableau Hermes."
+          }
+        }
+      }
+    },
+    "Add an attachment" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter une pièce jointe"
+          }
+        }
+      }
+    },
+    "Add to board" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter au tableau"
+          }
+        }
+      }
+    },
+    "Added to Triage. Hermes still handles orchestrating this idea." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutée dans À préciser. L’orchestration de cette idée reste gérée par Hermes."
+          }
+        }
+      }
+    },
+    "Adding…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajout…"
+          }
+        }
+      }
+    },
+    "admin" : {
+      "comment" : "Placeholder; not translated",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "admin"
+          }
         }
       }
     },
-    "2 to 6 agents": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "De 2 à 6 agents"
+    "Administrator access requested" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accès administrateur demandé"
           }
         }
       }
     },
-    "A bit of curiosity": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un peu de curiosité"
+    "Agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agent"
           }
         }
       }
     },
-    "A calm place to talk with Hermes.\nYour ideas, your agents, your pace.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un endroit calme pour parler à Hermes.\nVos idées, vos agents, votre rythme."
+    "Agent model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle de l’agent"
           }
         }
       }
     },
-    "A clear rundown of what matters today.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un point clair sur ce qui compte aujourd’hui."
+    "Agents" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agents"
           }
         }
       }
     },
-    "A few details…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quelques détails…"
+    "All" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout"
           }
         }
       }
     },
-    "A lighter day": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une journée plus légère"
+    "All of your Hermes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout votre Hermes"
           }
         }
       }
     },
-    "A little room\nfor your ideas.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un peu de place\npour vos idées."
+    "Allow microphone access in iOS Settings to talk with Hermes." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorisez le microphone dans les réglages iOS pour parler avec Hermes."
           }
         }
       }
     },
-    "A morning briefing, a watchlist, a weekly review. Hand a habit to your agent.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un briefing du matin, une veille, un bilan. Confiez une habitude à votre agent."
+    "Allow once" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autoriser une fois"
           }
         }
       }
     },
-    "A new agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un nouvel agent"
+    "An idea to organize?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une idée à organiser ?"
           }
         }
       }
     },
-    "A question, a wish, a project.\nHermes picks up the thread with you.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une question, une envie, un projet.\nHermes reprend le fil avec vous."
+    "An idea to share…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Une idée à partager…"
           }
         }
       }
     },
-    "A rhythm to invent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un rythme à inventer"
+    "Archived" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Archivé"
           }
         }
       }
     },
-    "A small habit": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une petite habitude"
+    "Authentication" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentification"
           }
         }
       }
     },
-    "Add": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter"
+    "Available to the agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disponible pour l’agent"
           }
         }
       }
     },
-    "Add a file": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter un fichier"
+    "Back" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retour"
           }
         }
       }
     },
-    "Add a photo": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une photo"
+    "Back to board" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenir au tableau"
           }
         }
       }
     },
-    "Add a task to find it on your Hermes board.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutez une tâche pour la retrouver dans votre tableau Hermes."
+    "Back to chat" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenir au chat"
           }
         }
       }
     },
-    "Add an attachment": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter une pièce jointe"
+    "Blocked" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bloqué"
           }
         }
       }
     },
-    "Add to board": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter au tableau"
+    "Boards" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableaux"
           }
         }
       }
     },
-    "Added to Triage. Hermes still handles orchestrating this idea.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutée dans À préciser. L’orchestration de cette idée reste gérée par Hermes."
+    "Bot Mode · The same agent, everywhere." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bot Mode · Le même agent, partout."
           }
         }
       }
     },
-    "Adding…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajout…"
+    "Cancel" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
           }
         }
       }
     },
-    "Administrator access requested": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Accès administrateur demandé"
+    "Chat" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chat"
           }
         }
       }
     },
-    "Agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agent"
+    "Choose a board" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir un tableau"
           }
         }
       }
     },
-    "Agent model": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modèle de l’agent"
+    "Choose a file of 10 MB or less." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un fichier de 10 Mo maximum."
           }
         }
       }
     },
-    "Agents": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Agents"
+    "Choose a non-empty file of 10 MB or less." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez un fichier de 10 Mo maximum, non vide."
           }
         }
       }
     },
-    "All": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout"
+    "Choose an agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir un agent"
           }
         }
       }
     },
-    "All of your Hermes": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout votre Hermes"
+    "Choose an image of 50 MB or less." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez une image de 50 Mo maximum."
           }
         }
       }
     },
-    "Allow microphone access in iOS Settings to talk with Hermes.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Autorisez le microphone dans les réglages iOS pour parler avec Hermes."
+    "Choose its model" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir son modèle"
           }
         }
       }
     },
-    "Allow once": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Autoriser une fois"
+    "Choose the agent to start with. You can switch any time from the chat." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisissez l’agent avec lequel commencer. Vous pourrez en changer à tout moment depuis le chat."
           }
         }
       }
     },
-    "An idea to organize?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une idée à organiser ?"
+    "Choosing what matters and leaving a little room for the rest." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choisir l’essentiel et laisser un peu de place au reste."
           }
         }
       }
     },
-    "An idea to share…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une idée à partager…"
+    "Clear search" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Effacer la recherche"
           }
         }
       }
     },
-    "Archived": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Archivé"
+    "Clone %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier %@"
           }
         }
       }
     },
-    "Authentication": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Authentification"
+    "Close" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
           }
         }
       }
     },
-    "Available to the agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Disponible pour l’agent"
+    "Close conversations" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer les conversations"
           }
         }
       }
     },
-    "Back": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retour"
+    "Code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code"
           }
         }
       }
     },
-    "Back to board": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenir au tableau"
+    "Collapsed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replié"
           }
         }
       }
     },
-    "Back to chat": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenir au chat"
+    "Comments" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commentaires"
           }
         }
       }
     },
-    "Blocked": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloqué"
+    "Completed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
           }
         }
       }
     },
-    "Boards": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tableaux"
+    "Configuration" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuration"
           }
         }
       }
     },
-    "Bot Mode · The same agent, everywhere.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bot Mode · Le même agent, partout."
+    "Confirm" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmer"
           }
         }
       }
     },
-    "CONNECT": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CONNEXION"
+    "CONNECT" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CONNEXION"
           }
         }
       }
     },
-    "Cancel": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Annuler"
+    "Connect a Hermes server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecter un Hermes"
           }
         }
       }
     },
-    "Chat": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chat"
+    "Connect Hermes to create a routine." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez Hermes pour créer une routine."
           }
         }
       }
     },
-    "Choose a board": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisir un tableau"
+    "Connect Hermes to create an agent." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez Hermes pour créer un agent."
           }
         }
       }
     },
-    "Choose a file of 10 MB or less.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisissez un fichier de 10 Mo maximum."
+    "Connect Hermes to edit this profile." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez Hermes pour modifier ce profil."
           }
         }
       }
     },
-    "Choose a non-empty file of 10 MB or less.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisissez un fichier de 10 Mo maximum, non vide."
+    "Connect my agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecter mon agent"
           }
         }
       }
     },
-    "Choose an agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisir un agent"
+    "Connect your Hermes to do this." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez votre Hermes pour effectuer cette action."
           }
         }
       }
     },
-    "Choose its model": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisir son modèle"
+    "Connect your Hermes to open files." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez votre Hermes pour ouvrir les fichiers."
           }
         }
       }
     },
-    "Choose the agent to start with. You can switch any time from the chat.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisissez l’agent avec lequel commencer. Vous pourrez en changer à tout moment depuis le chat."
+    "Connect your Hermes to see your groups." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez votre Hermes pour retrouver vos groupes."
           }
         }
       }
     },
-    "Choosing what matters and leaving a little room for the rest.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisir l’essentiel et laisser un peu de place au reste."
+    "Connect your Hermes to start a voice conversation." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez votre Hermes pour démarrer une conversation vocale."
           }
         }
       }
     },
-    "Clear search": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Effacer la recherche"
+    "Connect your server and your iPhone to the same Tailscale account. Keep Tailscale on while using the iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connectez votre serveur et votre iPhone au même compte Tailscale. Gardez Tailscale activé sur l’iPhone."
           }
         }
       }
     },
-    "Clone %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copier %@"
+    "Connected to Hermes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connecté à Hermes"
           }
         }
       }
     },
-    "Close": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fermer"
+    "Connecting to Hermes…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion à Hermes en cours…"
           }
         }
       }
     },
-    "Close conversations": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fermer les conversations"
+    "Connection" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion"
           }
         }
       }
     },
-    "Code": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Code"
+    "Connection name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom de la connexion"
           }
         }
       }
     },
-    "Comments": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commentaires"
+    "Connections and preferences" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexions et préférences"
           }
         }
       }
     },
-    "Completed": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terminé"
+    "Conversations" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversations"
           }
         }
       }
     },
-    "Configuration": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Configuration"
+    "Conversations for the active profile" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversations du profil actif"
           }
         }
       }
     },
-    "Confirm": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Confirmer"
+    "Copied" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copié"
           }
         }
       }
     },
-    "Connect Hermes to create a routine.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez Hermes pour créer une routine."
+    "Copy" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier"
           }
         }
       }
     },
-    "Connect Hermes to create an agent.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez Hermes pour créer un agent."
+    "Copy code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copier le code"
           }
         }
       }
     },
-    "Connect Hermes to edit this profile.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez Hermes pour modifier ce profil."
+    "Couldn’t play this audio." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de lire cet audio."
           }
         }
       }
     },
-    "Connect a Hermes server": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connecter un Hermes"
+    "Couldn’t prepare the photo." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de préparer la photo."
           }
         }
       }
     },
-    "Connect my agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connecter mon agent"
+    "Create" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer"
           }
         }
       }
     },
-    "Connect your Hermes to do this.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez votre Hermes pour effectuer cette action."
+    "Create an agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Créer un agent"
           }
         }
       }
     },
-    "Connect your Hermes to see your groups.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez votre Hermes pour retrouver vos groupes."
+    "Creating…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Création…"
           }
         }
       }
     },
-    "Connect your Hermes to start a voice conversation.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez votre Hermes pour démarrer une conversation vocale."
+    "Cross-pollinate ideas" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Croiser les idées"
           }
         }
       }
     },
-    "Connect your server and your iPhone to the same Tailscale account. Keep Tailscale on while using the iPhone.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connectez votre serveur et votre iPhone au même compte Tailscale. Gardez Tailscale activé sur l’iPhone."
+    "Curious about everything. Precise about what matters." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Curieux de tout. Précis sur l’essentiel."
           }
         }
       }
     },
-    "Connected to Hermes": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connecté à Hermes"
+    "Current" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours"
           }
         }
       }
     },
-    "Connecting to Hermes…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion à Hermes en cours…"
+    "Default" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Par défaut"
           }
         }
       }
     },
-    "Connection": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion"
+    "Delivery unconfirmed: %@ The message won’t be resent automatically." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoi à vérifier : %@ Le message ne sera pas renvoyé automatiquement."
           }
         }
       }
     },
-    "Connection name": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom de la connexion"
+    "Delivery unconfirmed. Check the history" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réception à vérifier dans l’historique"
           }
         }
       }
     },
-    "Connections and preferences": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexions et préférences"
+    "Deny" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refuser"
           }
         }
       }
     },
-    "Conversations": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conversations"
+    "Direct connection to Hermes. Your credentials stay in this iPhone’s Keychain." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion directe à Hermes. Vos identifiants restent dans le trousseau de cet iPhone."
           }
         }
       }
     },
-    "Conversations for the active profile": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conversations du profil actif"
+    "Direct connection to your server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion directe à votre serveur"
           }
         }
       }
     },
-    "Copied": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copié"
+    "Done" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminé"
           }
         }
       }
     },
-    "Copy": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copier"
+    "Downloading…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Téléchargement…"
           }
         }
       }
     },
-    "Copy code": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copier le code"
+    "Downloads the file from Hermes and opens a preview." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télécharge le fichier depuis Hermes et ouvre un aperçu."
           }
         }
       }
     },
-    "Couldn’t play this audio.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impossible de lire cet audio."
+    "Earlier" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus tôt"
           }
         }
       }
     },
-    "Couldn’t prepare the photo.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impossible de préparer la photo."
+    "Edit %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier %@"
           }
         }
       }
     },
-    "Create": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Créer"
+    "End and return to chat" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminer et revenir au chat"
           }
         }
       }
     },
-    "Create an agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Créer un agent"
+    "Enter a full address, for example https://hermes.your-tailnet.ts.net." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez une adresse complète, par exemple https://hermes.votre-tailnet.ts.net."
           }
         }
       }
     },
-    "Creating…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Création…"
+    "Enter the Hermes session token." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entrez le jeton de session Hermes."
           }
         }
       }
     },
-    "Cross-pollinate ideas": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Croiser les idées"
+    "Every hour" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes les heures"
           }
         }
       }
     },
-    "Curious about everything. Precise about what matters.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Curieux de tout. Précis sur l’essentiel."
+    "Every morning at 8 AM" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chaque matin à 8 h"
           }
         }
       }
     },
-    "Current": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours"
+    "Existing token" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton existant"
           }
         }
       }
     },
-    "Delivery unconfirmed. Check the history": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réception à vérifier dans l’historique"
+    "Exit preview" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quitter l’aperçu"
           }
         }
       }
     },
-    "Delivery unconfirmed: %@ The message won’t be resent automatically.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envoi à vérifier : %@ Le message ne sera pas renvoyé automatiquement."
+    "Expanded" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Déplié"
           }
         }
       }
     },
-    "Deny": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Refuser"
+    "Explore an idea" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorer une idée"
           }
         }
       }
     },
-    "Direct connection to Hermes. Your credentials stay in this iPhone’s Keychain.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion directe à Hermes. Vos identifiants restent dans le trousseau de cet iPhone."
+    "Explore the interface" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Découvrir l’interface"
           }
         }
       }
     },
-    "Direct connection to your server": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion directe à votre serveur"
+    "Explore the possibilities" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorer les possibilités"
           }
         }
       }
     },
-    "Done": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terminé"
+    "Explore, cross-check and cite reliable sources." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorer, recouper et citer des sources fiables."
           }
         }
       }
     },
-    "Earlier": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plus tôt"
+    "Failed" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En échec"
           }
         }
       }
     },
-    "Edit %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier %@"
+    "File: %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fichier : %@"
           }
         }
       }
     },
-    "End and return to chat": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terminer et revenir au chat"
+    "Filter tasks" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtrer les tâches"
           }
         }
       }
     },
-    "Enter a full address, for example https://hermes.your-tailnet.ts.net.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrez une adresse complète, par exemple https://hermes.votre-tailnet.ts.net."
+    "Find a project" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouver un projet"
           }
         }
       }
     },
-    "Enter the Hermes session token.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrez le jeton de session Hermes."
+    "Find an agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouver un agent"
           }
         }
       }
     },
-    "Every hour": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toutes les heures"
+    "Find the right tone and polish your writing." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trouver le ton juste et affiner vos textes."
           }
         }
       }
     },
-    "Every morning at 8 AM": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chaque matin à 8 h"
+    "Find what matters today" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouver ce qui compte aujourd’hui"
           }
         }
       }
     },
-    "Existing token": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeton existant"
+    "First steps to turn a hunch into a project." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les premières pistes pour transformer une intuition en projet."
           }
         }
       }
     },
-    "Exit preview": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quitter l’aperçu"
+    "For %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pour %@"
           }
         }
       }
     },
-    "Explore an idea": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Explorer une idée"
+    "Fridays at 5 PM" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le vendredi à 17 h"
           }
         }
       }
     },
-    "Explore the interface": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Découvrir l’interface"
+    "From ideas to things that exist." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Des idées aux choses qui existent."
           }
         }
       }
     },
-    "Explore the possibilities": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Explorer les possibilités"
+    "Go back to the selected conversation before adding this file." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revenez à la conversation choisie avant d’ajouter ce fichier."
           }
         }
       }
     },
-    "Explore, cross-check and cite reliable sources.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Explorer, recouper et citer des sources fiables."
+    "Got it" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compris"
           }
         }
       }
     },
-    "Failed": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En échec"
+    "Group name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom du groupe"
           }
         }
       }
     },
-    "Filter tasks": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Filtrer les tâches"
+    "Groups" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Groupes"
           }
         }
       }
     },
-    "Find a project": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouver un projet"
+    "Hello, I’m %@. %@\n\nWhat shall we explore together?" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bonjour, je suis %1$@. %2$@\n\nQu’est-ce qu’on explore ensemble ?"
           }
         }
       }
     },
-    "Find an agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouver un agent"
+    "Help me take stock and choose my priorities for today." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide-moi à faire le point et à choisir mes priorités pour aujourd’hui."
           }
         }
       }
     },
-    "Find the right tone and polish your writing.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trouver le ton juste et affiner vos textes."
+    "Help me turn my project into a concrete first step." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aide-moi à transformer mon projet en un premier pas concret."
           }
         }
       }
     },
-    "Find what matters today": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouver ce qui compte aujourd’hui"
+    "Hermes address" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse Hermes"
           }
         }
       }
     },
-    "First steps to turn a hunch into a project.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les premières pistes pour transformer une intuition en projet."
+    "Hermes confirmation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmation de Hermes"
           }
         }
       }
     },
-    "For %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pour %@"
+    "Hermes couldn’t complete this action." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas pu effectuer cette action."
           }
         }
       }
     },
-    "Fridays at 5 PM": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le vendredi à 17 h"
+    "Hermes credentials" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identifiants Hermes"
           }
         }
       }
     },
-    "From ideas to things that exist.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des idées aux choses qui existent."
+    "Hermes didn’t accept the file." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas accepté le fichier."
           }
         }
       }
     },
-    "Go back to the selected conversation before adding this file.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenez à la conversation choisie avant d’ajouter ce fichier."
+    "Hermes didn’t confirm all the profile changes." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas confirmé toutes les modifications du profil."
           }
         }
       }
     },
-    "Got it": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compris"
+    "Hermes didn’t confirm the model change." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas confirmé le changement de modèle."
           }
         }
       }
     },
-    "Group name": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom du groupe"
+    "Hermes didn’t confirm the task was created. Check the board before trying again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas confirmé la création. Vérifiez le tableau avant de réessayer."
           }
         }
       }
     },
-    "Groups": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Groupes"
+    "Hermes didn’t provide a WebSocket ticket." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas fourni de ticket WebSocket."
           }
         }
       }
     },
-    "Hello, I’m %@. %@\n\nWhat shall we explore together?": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bonjour, je suis %1$@. %2$@\n\nQu’est-ce qu’on explore ensemble ?"
+    "Hermes didn’t return a reference for this file." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas renvoyé de référence pour ce fichier."
           }
         }
       }
     },
-    "Help me take stock and choose my priorities for today.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aide-moi à faire le point et à choisir mes priorités pour aujourd’hui."
+    "Hermes didn’t return a reply to read aloud." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas renvoyé de réponse à lire."
           }
         }
       }
     },
-    "Help me turn my project into a concrete first step.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aide-moi à transformer mon projet en un premier pas concret."
+    "Hermes didn’t return an active session." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas retourné de session active."
           }
         }
       }
     },
-    "Hermes address": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adresse Hermes"
+    "Hermes didn’t return playable audio." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’a pas renvoyé d’audio lisible."
           }
         }
       }
     },
-    "Hermes confirmation": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Confirmation de Hermes"
+    "Hermes documentation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documentation Hermes"
           }
         }
       }
     },
-    "Hermes couldn’t complete this action.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas pu effectuer cette action."
+    "Hermes doesn’t allow downloading this file." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes n’autorise pas le téléchargement de ce fichier."
           }
         }
       }
     },
-    "Hermes credentials": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Identifiants Hermes"
+    "Hermes is answering." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes vous répond."
           }
         }
       }
     },
-    "Hermes didn’t accept the file.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas accepté le fichier."
+    "Hermes is asking for a secret" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes demande un secret"
           }
         }
       }
     },
-    "Hermes didn’t confirm all the profile changes.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas confirmé toutes les modifications du profil."
+    "Hermes is asking for your approval" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes vous demande l’accord"
           }
         }
       }
     },
-    "Hermes didn’t confirm the model change.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas confirmé le changement de modèle."
+    "Hermes is disconnected." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes est déconnecté."
           }
         }
       }
     },
-    "Hermes didn’t confirm the task was created. Check the board before trying again.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas confirmé la création. Vérifiez le tableau avant de réessayer."
+    "Hermes is still working. You’ll find its reply in the chat." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes travaille encore. Retrouvez sa réponse dans le chat."
           }
         }
       }
     },
-    "Hermes didn’t provide a WebSocket ticket.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas fourni de ticket WebSocket."
+    "Hermes is taking too long to respond." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes met trop de temps à répondre."
           }
         }
       }
     },
-    "Hermes didn’t return a reference for this file.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas renvoyé de référence pour ce fichier."
+    "Hermes is thinking." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes réfléchit."
           }
         }
       }
     },
-    "Hermes didn’t return a reply to read aloud.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas renvoyé de réponse à lire."
+    "Hermes is waiting for your answer in the chat." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes attend votre réponse dans le chat."
           }
         }
       }
     },
-    "Hermes didn’t return an active session.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas retourné de session active."
+    "Hermes password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe Hermes"
           }
         }
       }
     },
-    "Hermes didn’t return playable audio.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes n’a pas renvoyé d’audio lisible."
+    "Hermes responded with HTTP %lld." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes a répondu HTTP %lld."
           }
         }
       }
     },
-    "Hermes documentation": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Documentation Hermes"
+    "Hermes returned an invalid conversation list." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes a renvoyé une liste de conversations invalide."
           }
         }
       }
     },
-    "Hermes is answering.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes vous répond."
+    "Hermes returned an invalid profile list." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hermes a renvoyé une liste de profils invalide."
           }
         }
       }
     },
-    "Hermes is asking for a secret": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes demande un secret"
+    "Hermes server time. The result arrives in this agent’s Bot Chat." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Heure du serveur Hermes. Le résultat arrive dans le Bot Chat de cet agent."
           }
         }
       }
     },
-    "Hermes is asking for your approval": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes vous demande l’accord"
+    "Hermes’ native access" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’accès natif de Hermes"
           }
         }
       }
     },
-    "Hermes is disconnected.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes est déconnecté."
+    "High" : {
+      "comment" : "Thinking level",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Élevé"
           }
         }
       }
     },
-    "Hermes is still working. You’ll find its reply in the chat.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes travaille encore. Retrouvez sa réponse dans le chat."
+    "How it thinks, its tone and its standing instructions." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sa façon de penser, son ton et ses instructions permanentes."
           }
         }
       }
     },
-    "Hermes is taking too long to respond.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes met trop de temps à répondre."
+    "https://hermes.tailnet.ts.net" : {
+      "comment" : "Placeholder; not translated",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "https://hermes.tailnet.ts.net"
           }
         }
       }
     },
-    "Hermes is thinking.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes réfléchit."
+    "I have an idea to explore. Help me sharpen it." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’ai une idée à explorer. Aide-moi à la préciser."
           }
         }
       }
     },
-    "Hermes is waiting for your answer in the chat.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes attend votre réponse dans le chat."
+    "I heard you." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je vous ai entendu."
           }
         }
       }
     },
-    "Hermes password": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mot de passe Hermes"
+    "I’d like a slightly lighter day." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J’aimerais une journée un peu plus légère."
           }
         }
       }
     },
-    "Hermes responded with HTTP %lld.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes a répondu HTTP %lld."
+    "I’m listening." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je vous écoute."
           }
         }
       }
     },
-    "Hermes returned an invalid conversation list.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes a renvoyé une liste de conversations invalide."
+    "Identity" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identité"
           }
         }
       }
     },
-    "Hermes returned an invalid profile list.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hermes a renvoyé une liste de profils invalide."
+    "In Petal, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dans Petal, entrez http://<IP-Tailscale>:9119. Si vous utilisez Tailscale Serve avec HTTPS, entrez plutôt son adresse https://…ts.net."
           }
         }
       }
     },
-    "Hermes server time. The result arrives in this agent’s Bot Chat.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heure du serveur Hermes. Le résultat arrive dans le Bot Chat de cet agent."
+    "In progress" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours"
           }
         }
       }
     },
-    "Hermes’ native access": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’accès natif de Hermes"
+    "In review" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À valider"
           }
         }
       }
     },
-    "Petal is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Petal est un client communautaire indépendant pour Hermes Agent de Nous Research. Les conversations sont mises en cache sur cet appareil. Retirer une connexion efface son cache local, sans toucher au serveur."
+    "Incorrect Hermes credentials." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identifiants Hermes incorrects."
           }
         }
       }
     },
-    "How it thinks, its tone and its standing instructions.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sa façon de penser, son ton et ses instructions permanentes."
+    "Instructions" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instructions"
           }
         }
       }
     },
-    "I have an idea to explore. Help me sharpen it.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J’ai une idée à explorer. Aide-moi à la préciser."
+    "Interactive preview" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aperçu interactif"
           }
         }
       }
     },
-    "I heard you.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Je vous ai entendu."
+    "Interrupt and speak" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interrompre et parler"
           }
         }
       }
     },
-    "Identity": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Identité"
+    "Invalid address." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adresse invalide."
           }
         }
       }
     },
-    "In Petal, enter http://<Tailscale-IP>:9119. If you use Tailscale Serve with HTTPS, enter its https://…ts.net address instead.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dans Petal, entrez http://<IP-Tailscale>:9119. Si vous utilisez Tailscale Serve avec HTTPS, entrez plutôt son adresse https://…ts.net."
+    "Invalid response from Hermes." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réponse Hermes invalide."
           }
         }
       }
     },
-    "In progress": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours"
+    "Invite two to six agents from this server into a group." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invitez de deux à six agents de ce serveur dans un groupe."
           }
         }
       }
     },
-    "In review": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À valider"
+    "It all starts here" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout commence ici"
           }
         }
       }
     },
-    "Incorrect Hermes credentials.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Identifiants Hermes incorrects."
+    "Its role, in a few words" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Son rôle, en quelques mots"
           }
         }
       }
     },
-    "Instructions": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instructions"
+    "Its skills" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses compétences"
           }
         }
       }
     },
-    "Interactive preview": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aperçu interactif"
+    "Just one first step" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un premier pas, tout simplement"
           }
         }
       }
     },
-    "Interrupt and speak": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Interrompre et parler"
+    "Kanban" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kanban"
           }
         }
       }
     },
-    "Invalid address.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adresse invalide."
+    "Language" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue"
           }
         }
       }
     },
-    "Invalid response from Hermes.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réponse Hermes invalide."
+    "Language opens iOS Settings. Show thinking displays the model’s reasoning above replies when your model shares it; it only affects this iPhone." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Langue ouvre les Réglages d’iOS. Afficher la réflexion montre le raisonnement du modèle au-dessus des réponses lorsque votre modèle le partage ; cela ne concerne que cet iPhone."
           }
         }
       }
     },
-    "Invite two to six agents from this server into a group.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invitez de deux à six agents de ce serveur dans un groupe."
+    "Latest message" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dernier message"
           }
         }
       }
     },
-    "It all starts here": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout commence ici"
+    "Less noise. More conversation." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moins de bruit. Plus de conversation."
           }
         }
       }
     },
-    "Its role, in a few words": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Son rôle, en quelques mots"
+    "Let curiosity lead the way" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laisser la curiosité faire son chemin"
           }
         }
       }
     },
-    "Its skills": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ses compétences"
+    "Let’s connect." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faisons le lien."
           }
         }
       }
     },
-    "I’d like a slightly lighter day.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J’aimerais une journée un peu plus légère."
+    "Let’s just talk." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parlons simplement."
           }
         }
       }
     },
-    "I’m listening.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Je vous écoute."
+    "Let’s make some room.\n\nPick **just one thing** that would make your day feel worthwhile. The rest can wait.\n\nWhat matters most to you today?" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On fait de la place.\n\nChoisis **une seule chose** qui rendrait ta journée satisfaisante. Le reste peut attendre.\n\nQu’est-ce qui compte le plus pour toi aujourd’hui ?"
           }
         }
       }
     },
-    "Just one first step": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un premier pas, tout simplement"
+    "Linked board" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableau associé"
           }
         }
       }
     },
-    "Kanban": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kanban"
+    "Listening is paused. Tap the mic to resume." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’écoute est en pause. Touchez le micro pour reprendre."
           }
         }
       }
     },
-    "Language": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Langue"
+    "Loading conversations…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chargement des conversations…"
           }
         }
       }
     },
-    "Latest message": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dernier message"
+    "Low" : {
+      "comment" : "Thinking level",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faible"
           }
         }
       }
     },
-    "Less noise. More conversation.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moins de bruit. Plus de conversation."
+    "Main folder" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossier principal"
           }
         }
       }
     },
-    "Let curiosity lead the way": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Laisser la curiosité faire son chemin"
+    "Manage agents" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gérer les agents"
           }
         }
       }
     },
-    "Let’s connect.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faisons le lien."
+    "Many perspectives, one conversation. Hermes orchestrates the agents on your server." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plusieurs regards, une seule conversation. Hermes orchestre les agents sur votre serveur."
           }
         }
       }
     },
-    "Let’s just talk.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parlons simplement."
+    "Medium" : {
+      "comment" : "Thinking level",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moyen"
           }
         }
       }
     },
-    "Let’s make some room.\n\nPick **just one thing** that would make your day feel worthwhile. The rest can wait.\n\nWhat matters most to you today?": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On fait de la place.\n\nChoisis **une seule chose** qui rendrait ta journée satisfaisante. Le reste peut attendre.\n\nQu’est-ce qui compte le plus pour toi aujourd’hui ?"
+    "Meet my Hermes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rencontrer mon Hermes"
           }
         }
       }
     },
-    "Linked board": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tableau associé"
+    "Message…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Message…"
           }
         }
       }
     },
-    "Listening is paused. Tap the mic to resume.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’écoute est en pause. Touchez le micro pour reprendre."
+    "Model saved" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèle enregistré"
           }
         }
       }
     },
-    "Loading conversations…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chargement des conversations…"
+    "Models" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modèles"
           }
         }
       }
     },
-    "Main folder": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dossier principal"
+    "My Hermes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon Hermes"
           }
         }
       }
     },
-    "Manage agents": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gérer les agents"
+    "My projects" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes projets"
           }
         }
       }
     },
-    "Many perspectives, one conversation. Hermes orchestrates the agents on your server.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plusieurs regards, une seule conversation. Hermes orchestre les agents sur votre serveur."
+    "My workspace" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon espace de travail"
           }
         }
       }
     },
-    "Meet my Hermes": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rencontrer mon Hermes"
+    "Native SwiftUI interface" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface native SwiftUI"
           }
         }
       }
     },
-    "Message…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Message…"
+    "New conversation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle conversation"
           }
         }
       }
     },
-    "Model saved": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modèle enregistré"
+    "New group" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau groupe"
           }
         }
       }
     },
-    "Models": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modèles"
+    "New profile" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouveau profil"
           }
         }
       }
     },
-    "My Hermes": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mon Hermes"
+    "New routine" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle routine"
           }
         }
       }
     },
-    "My projects": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mes projets"
+    "New task" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nouvelle tâche"
           }
         }
       }
     },
-    "My workspace": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mon espace de travail"
+    "No instructions available." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune instruction disponible."
           }
         }
       }
     },
-    "Native SwiftUI interface": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Interface native SwiftUI"
+    "No Petal account, no telemetry" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun compte Petal, aucune télémétrie"
           }
         }
       }
     },
-    "New conversation": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouvelle conversation"
+    "No providers configured" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun fournisseur configuré"
           }
         }
       }
     },
-    "New group": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouveau groupe"
+    "No recording available." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun enregistrement disponible."
           }
         }
       }
     },
-    "New profile": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouveau profil"
+    "No skills" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun skill"
           }
         }
       }
     },
-    "New routine": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouvelle routine"
+    "No speech detected." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune parole détectée."
           }
         }
       }
     },
-    "New task": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nouvelle tâche"
+    "No speech detected. Tap the mic to try again." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucune parole détectée. Touchez le micro pour réessayer."
           }
         }
       }
     },
-    "No Petal account, no telemetry": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun compte Petal, aucune télémétrie"
+    "Not completed" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À faire"
           }
         }
       }
     },
-    "No instructions available.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune instruction disponible."
+    "Not sent · copy to try again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non envoyé · copiez pour réessayer"
           }
         }
       }
     },
-    "No providers configured": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun fournisseur configuré"
+    "Off" : {
+      "comment" : "Thinking level",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactivé"
           }
         }
       }
     },
-    "No recording available.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun enregistrement disponible."
+    "Offline · draft saved" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hors ligne · brouillon conservé"
           }
         }
       }
     },
-    "No skills": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun skill"
+    "On" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activé"
           }
         }
       }
     },
-    "No speech detected.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune parole détectée."
+    "On your server, set the Hermes dashboard credentials in its .env file, along with a stable signing secret." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sur votre serveur, configurez les identifiants du tableau de bord Hermes dans son fichier .env, avec un secret de signature stable."
           }
         }
       }
     },
-    "No speech detected. Tap the mic to try again.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune parole détectée. Touchez le micro pour réessayer."
+    "One talent. One ongoing thread." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Un talent. Un fil qui continue."
           }
         }
       }
     },
-    "Not completed": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À faire"
+    "Open Tailscale on your iPhone, then enter your Hermes server’s address." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrez Tailscale sur votre iPhone, puis entrez l’adresse de votre serveur Hermes."
           }
         }
       }
     },
-    "Not sent · copy to try again": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non envoyé · copiez pour réessayer"
+    "Open the official documentation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir la documentation officielle"
           }
         }
       }
     },
-    "Off": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Désactivé"
+    "Opening…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouverture…"
           }
         }
       }
     },
-    "Offline · draft saved": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hors ligne · brouillon conservé"
+    "Password" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot de passe"
           }
         }
       }
     },
-    "On": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activé"
+    "Password authentication is meant for your private network. Petal doesn’t configure your server for you." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "L’authentification par mot de passe est prévue pour votre réseau privé. Petal ne configure pas votre serveur à votre place."
           }
         }
       }
     },
-    "On your server, set the Hermes dashboard credentials in its .env file, along with a stable signing secret.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sur votre serveur, configurez les identifiants du tableau de bord Hermes dans son fichier .env, avec un secret de signature stable."
+    "Pause" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre en pause"
           }
         }
       }
     },
-    "One talent. One ongoing thread.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un talent. Un fil qui continue."
+    "Pause listening" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettre l’écoute en pause"
           }
         }
       }
     },
-    "Open Tailscale on your iPhone, then enter your Hermes server’s address.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvrez Tailscale sur votre iPhone, puis entrez l’adresse de votre serveur Hermes."
+    "Paused" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En pause"
           }
         }
       }
     },
-    "Open the official documentation": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvrir la documentation officielle"
+    "Personality · SOUL.md" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personnalité · SOUL.md"
           }
         }
       }
     },
-    "Opening…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouverture…"
+    "Petal is an independent community client for Hermes Agent by Nous Research. Conversations are cached on this device. Removing a connection clears its local cache without touching the server." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Petal est un client communautaire indépendant pour Hermes Agent de Nous Research. Les conversations sont mises en cache sur cet appareil. Retirer une connexion efface son cache local, sans toucher au serveur."
           }
         }
       }
     },
-    "Opens iOS Settings, where you can choose the app’s language.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvre les Réglages iOS, où vous pouvez choisir la langue de l’app."
+    "Pick up the thread" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouver le fil"
           }
         }
       }
     },
-    "Password": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mot de passe"
+    "Pick up the thread with each agent." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouvez le fil de chaque agent."
           }
         }
       }
     },
-    "Password authentication is meant for your private network. Petal doesn’t configure your server for you.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’authentification par mot de passe est prévue pour votre réseau privé. Petal ne configure pas votre serveur à votre place."
+    "Pick up the thread." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retrouver le fil."
           }
         }
       }
     },
-    "Pause": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre en pause"
+    "Plan the week" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préparer la semaine"
           }
         }
       }
     },
-    "Pause listening": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre l’écoute en pause"
+    "Preferences" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préférences"
           }
         }
       }
     },
-    "Paused": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En pause"
+    "Prepare the next idea" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Préparer la prochaine idée"
           }
         }
       }
     },
-    "Personality · SOUL.md": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personnalité · SOUL.md"
+    "Previous 7 days" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les 7 derniers jours"
           }
         }
       }
     },
-    "Pick up the thread": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouver le fil"
+    "Profile name (e.g. researcher)" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom du profil (ex. chercheur)"
           }
         }
       }
     },
-    "Pick up the thread with each agent.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouvez le fil de chaque agent."
+    "Profiles" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profils"
           }
         }
       }
     },
-    "Pick up the thread.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retrouver le fil."
+    "Profiles and Bot Mode" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profils et Bot Mode"
           }
         }
       }
     },
-    "Plan the week": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Préparer la semaine"
+    "Project folders" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dossiers du projet"
           }
         }
       }
     },
-    "Preferences": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Préférences"
+    "Projects" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projets"
           }
         }
       }
     },
-    "Prepare the next idea": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Préparer la prochaine idée"
+    "Projects and folders" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Projets et dossiers"
           }
         }
       }
     },
-    "Previous 7 days": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les 7 derniers jours"
+    "Projects and folders for %@, on your Hermes server." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les projets et dossiers de %@, sur votre serveur Hermes."
           }
         }
       }
     },
-    "Profile name (e.g. researcher)": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom du profil (ex. chercheur)"
+    "Reading, inspiration and things to explore." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lectures, inspirations et choses à explorer."
           }
         }
       }
     },
-    "Profiles": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Profils"
+    "Ready" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prêt"
           }
         }
       }
     },
-    "Profiles and Bot Mode": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Profils et Bot Mode"
+    "Reconnect" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se reconnecter"
           }
         }
       }
     },
-    "Project folders": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dossiers du projet"
+    "Reconnect this agent to access its tools." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnectez cet agent pour accéder à ses outils."
           }
         }
       }
     },
-    "Projects": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Projets"
+    "Reconnect this group’s server." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnectez le serveur de ce groupe."
           }
         }
       }
     },
-    "Projects and folders": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Projets et dossiers"
+    "Reconnect to Hermes to switch agents." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnectez Hermes pour changer d’agent."
           }
         }
       }
     },
-    "Projects and folders for %@, on your Hermes server.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les projets et dossiers de %@, sur votre serveur Hermes."
+    "Reconnecting…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reconnexion…"
           }
         }
       }
     },
-    "Reading, inspiration and things to explore.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lectures, inspirations et choses à explorer."
+    "Remove" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer"
           }
         }
       }
     },
-    "Ready": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prêt"
+    "Remove %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer %@"
           }
         }
       }
     },
-    "Reconnect": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se reconnecter"
+    "Remove from this iPhone" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer de cet iPhone"
           }
         }
       }
     },
-    "Reconnect this agent to access its tools.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reconnectez cet agent pour accéder à ses outils."
+    "Remove this connection and its cache from this iPhone?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer cette connexion et son cache de cet iPhone ?"
           }
         }
       }
     },
-    "Reconnect this group’s server.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reconnectez le serveur de ce groupe."
+    "Reopen this conversation to send a message." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rouvrez cette conversation pour envoyer un message."
           }
         }
       }
     },
-    "Reconnect to Hermes to switch agents.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reconnectez Hermes pour changer d’agent."
+    "Result" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultat"
           }
         }
       }
     },
-    "Reconnecting…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reconnexion…"
+    "Resume" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reprendre"
           }
         }
       }
     },
-    "Remove": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer"
+    "Resume listening" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reprendre l’écoute"
           }
         }
       }
     },
-    "Remove %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer %@"
+    "Routine name" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom de la routine"
           }
         }
       }
     },
-    "Remove from this iPhone": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer de cet iPhone"
+    "Routines" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les routines"
           }
         }
       }
     },
-    "Remove this connection and its cache from this iPhone?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer cette connexion et son cache de cet iPhone ?"
+    "Routines for %@ keep running on your server, even when Petal is closed." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les routines de %@ continuent sur votre serveur, même quand Petal est fermé."
           }
         }
       }
     },
-    "Reopen this conversation to send a message.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rouvrez cette conversation pour envoyer un message."
+    "Run the official server on its private Tailscale address. Petal talks to its API directly." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lancez le serveur officiel avec son adresse privée Tailscale. Petal utilise son API directement."
           }
         }
       }
     },
-    "Result": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Résultat"
+    "Save" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistrer"
           }
         }
       }
     },
-    "Resume": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reprendre"
+    "Saves your password in this iPhone’s Keychain so Petal can sign in again when the session expires." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistre votre mot de passe dans le trousseau de cet iPhone pour que Petal puisse se reconnecter quand la session expire."
           }
         }
       }
     },
-    "Resume listening": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reprendre l’écoute"
+    "Saving…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours…"
           }
         }
       }
     },
-    "Routine name": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom de la routine"
+    "Schedule" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rythme"
           }
         }
       }
     },
-    "Routines": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les routines"
+    "Schedule · cron jobs" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planifier · cron jobs"
           }
         }
       }
     },
-    "Routines for %@ keep running on your server, even when Petal is closed.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les routines de %@ continuent sur votre serveur, même quand Petal est fermé."
+    "Search" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher"
           }
         }
       }
     },
-    "Run the official server on its private Tailscale address. Petal talks to its API directly.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lancez le serveur officiel avec son adresse privée Tailscale. Petal utilise son API directement."
+    "Search conversations" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher une conversation"
           }
         }
       }
     },
-    "Save": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistrer"
+    "Search models" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher un modèle"
           }
         }
       }
     },
-    "Saves your password in this iPhone’s Keychain so Petal can sign in again when the session expires.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistre votre mot de passe dans le trousseau de cet iPhone pour que Petal puisse se reconnecter quand la session expire."
+    "Search skills" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rechercher un skill"
           }
         }
       }
     },
-    "Saving…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours…"
+    "Search tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chercher un outil"
           }
         }
       }
     },
-    "Schedule": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rythme"
+    "Self-hosted" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chez vous"
           }
         }
       }
     },
-    "Schedule · cron jobs": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Planifier · cron jobs"
+    "Send" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer"
           }
         }
       }
     },
-    "Search": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher"
+    "Send pending. Retrying reuses the same ID and won’t create a duplicate. %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoi en attente. Réessayer utilise le même identifiant et ne crée pas de doublon. %@"
           }
         }
       }
     },
-    "Search conversations": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher une conversation"
+    "Send what I said" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer ma parole"
           }
         }
       }
     },
-    "Search models": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher un modèle"
+    "Sending to Hermes…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transmission à Hermès…"
           }
         }
       }
     },
-    "Search skills": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rechercher un skill"
+    "Sending…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoi…"
           }
         }
       }
     },
-    "Search tools": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chercher un outil"
+    "Server session token" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeton de session du serveur"
           }
         }
       }
     },
-    "Self-hosted": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chez vous"
+    "Session expired" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connexion expirée"
           }
         }
       }
     },
-    "Send": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envoyer"
+    "Set up a provider in Hermes to see its models here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurez un fournisseur dans Hermes pour retrouver ses modèles ici."
           }
         }
       }
     },
-    "Send pending. Retrying reuses the same ID and won’t create a duplicate. %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envoi en attente. Réessayer utilise le même identifiant et ne crée pas de doublon. %@"
+    "Settings" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réglages"
           }
         }
       }
     },
-    "Send what I said": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envoyer ma parole"
+    "Shall we continue?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On reprend ?"
           }
         }
       }
     },
-    "Sending to Hermes…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transmission à Hermès…"
+    "Share" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager"
           }
         }
       }
     },
-    "Sending…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Envoi…"
+    "Show all" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout voir"
           }
         }
       }
     },
-    "Server session token": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeton de session du serveur"
+    "Show thinking" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher la réflexion"
           }
         }
       }
     },
-    "Session expired": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Connexion expirée"
+    "Shows how the model reasoned before answering." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Montre comment le modèle a raisonné avant de répondre."
           }
         }
       }
     },
-    "Set up a provider in Hermes to see its models here.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Configurez un fournisseur dans Hermes pour retrouver ses modèles ici."
+    "Simple by nature" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simple, par nature"
           }
         }
       }
     },
-    "Settings": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglages"
+    "Sketch the first leads and pick a direction." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poser les premières pistes et choisir une direction."
           }
         }
       }
     },
-    "Shall we continue?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On reprend ?"
+    "Skills" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skills"
           }
         }
       }
     },
-    "Share": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partager"
+    "Skills for %@. Turn on the ones your agent needs." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les compétences de %@. Activez celles dont votre agent a besoin."
           }
         }
       }
     },
-    "Show all": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout voir"
+    "Source code" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Code source"
           }
         }
       }
     },
-    "Simple by nature": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Simple, par nature"
+    "Start the server" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Démarrer le serveur"
           }
         }
       }
     },
-    "Sketch the first leads and pick a direction.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Poser les premières pistes et choisir une direction."
+    "Start with %@" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commencer avec %@"
           }
         }
       }
     },
-    "Skills": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills"
+    "Starting point" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Point de départ"
           }
         }
       }
     },
-    "Skills for %@. Turn on the ones your agent needs.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les compétences de %@. Activez celles dont votre agent a besoin."
+    "Stay signed in" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rester connecté"
           }
         }
       }
     },
-    "Source code": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Code source"
+    "Stop the agents" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter les agents"
           }
         }
       }
     },
-    "Start the server": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Démarrer le serveur"
+    "Stop the response" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arrêter la réponse"
           }
         }
       }
     },
-    "Start with %@": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commencer avec %@"
+    "Submit" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transmettre"
           }
         }
       }
     },
-    "Starting point": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Point de départ"
+    "Switch agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changer d’agent"
           }
         }
       }
     },
-    "Stay signed in": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rester connecté"
+    "Tailscale & Hermes guide" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guide Tailscale & Hermes"
           }
         }
       }
     },
-    "Stop the agents": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrêter les agents"
+    "Take a look at these files." : {
+      "comment" : "Default prompt sent to the agent when only files are attached",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Examine ces fichiers."
           }
         }
       }
     },
-    "Stop the response": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrêter la réponse"
+    "Take action" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passer à l’action"
           }
         }
       }
     },
-    "Submit": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transmettre"
+    "Take stock" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faire le point"
           }
         }
       }
     },
-    "Switch agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Changer d’agent"
+    "Talk with your agent" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parler avec votre agent"
           }
         }
       }
     },
-    "Tailscale & Hermes guide": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guide Tailscale & Hermes"
+    "Task" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La tâche"
           }
         }
       }
     },
-    "Take a look at these files.": {
-      "comment": "Default prompt sent to the agent when only files are attached",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Examine ces fichiers."
+    "Task title" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Titre de la tâche"
           }
         }
       }
     },
-    "Take action": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passer à l’action"
+    "Team up" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faire équipe"
           }
         }
       }
     },
-    "Take stock": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faire le point"
+    "The Bot Chat is temporarily unavailable. Try again in a moment." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le Bot Chat est temporairement indisponible. Réessayez dans un instant."
           }
         }
       }
     },
-    "Talk with your agent": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parler avec votre agent"
+    "The connection was interrupted." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La connexion a été interrompue."
           }
         }
       }
     },
-    "Task": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tâche"
+    "The conversation changed. You’ll find the reply in the chat." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La conversation a changé. Retrouvez la réponse dans le chat."
           }
         }
       }
     },
-    "Task title": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Titre de la tâche"
+    "The group cache couldn’t be saved." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le cache du groupe n’a pas pu être enregistré."
           }
         }
       }
     },
-    "Team up": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faire équipe"
+    "The Hermes session token, not a model provider key." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le jeton de session Hermes, pas une clé de fournisseur de modèle."
           }
         }
       }
     },
-    "The Bot Chat is temporarily unavailable. Try again in a moment.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le Bot Chat est temporairement indisponible. Réessayez dans un instant."
+    "The iOS Keychain couldn’t save the connection." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le trousseau iOS n’a pas pu enregistrer la connexion."
           }
         }
       }
     },
-    "The Hermes session token, not a model provider key.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le jeton de session Hermes, pas une clé de fournisseur de modèle."
+    "The iOS Keychain isn’t accessible." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le trousseau iOS n’est pas accessible."
           }
         }
       }
     },
-    "The connection was interrupted.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La connexion a été interrompue."
+    "The local cache couldn’t be saved. Your history is still safe on Hermes." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le cache local n’a pas pu être enregistré. Votre historique reste chez Hermes."
           }
         }
       }
     },
-    "The conversation changed. You’ll find the reply in the chat.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La conversation a changé. Retrouvez la réponse dans le chat."
+    "The microphone couldn’t start." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le microphone n’a pas pu démarrer."
           }
         }
       }
     },
-    "The group cache couldn’t be saved.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le cache du groupe n’a pas pu être enregistré."
+    "The same private network" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le même réseau privé"
           }
         }
       }
     },
-    "The iOS Keychain couldn’t save the connection.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le trousseau iOS n’a pas pu enregistrer la connexion."
+    "The skill wasn’t changed." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le skill n’a pas été modifié."
           }
         }
       }
     },
-    "The iOS Keychain isn’t accessible.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le trousseau iOS n’est pas accessible."
+    "Thinking level" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Niveau de réflexion"
           }
         }
       }
     },
-    "The local cache couldn’t be saved. Your history is still safe on Hermes.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le cache local n’a pas pu être enregistré. Votre historique reste chez Hermes."
+    "Thinking…" : {
+      "comment" : "Agent activity status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réfléchit…"
           }
         }
       }
     },
-    "The microphone couldn’t start.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le microphone n’a pas pu démarrer."
+    "This applies to new sessions for %@. The current conversation keeps its model." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce choix s’applique aux nouvelles sessions de %@. La conversation en cours conserve son modèle."
           }
         }
       }
     },
-    "The same private network": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le même réseau privé"
+    "This file is too large to download." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier est trop volumineux pour être téléchargé."
           }
         }
       }
     },
-    "The skill wasn’t changed.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le skill n’a pas été modifié."
+    "This file no longer exists on your Hermes server." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce fichier n’existe plus sur votre serveur Hermes."
           }
         }
       }
     },
-    "Thinking…": {
-      "comment": "Agent activity status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réfléchit…"
+    "This file path isn’t valid." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce chemin de fichier n’est pas valide."
           }
         }
       }
     },
-    "This Hermes server doesn’t offer spoken playback on iPhone. The reply stays in the chat. Update Hermes or check access to its audio API.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce serveur Hermes ne propose pas la lecture vocale sur l’iPhone. La réponse reste dans le chat. Mettez Hermes à jour ou vérifiez l’accès à son API audio."
+    "This Hermes server doesn’t offer spoken playback on iPhone. The reply stays in the chat. Update Hermes or check access to its audio API." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce serveur Hermes ne propose pas la lecture vocale sur l’iPhone. La réponse reste dans le chat. Mettez Hermes à jour ou vérifiez l’accès à son API audio."
           }
         }
       }
     },
-    "This Hermes server doesn’t offer transcription from iPhone. Update Hermes or check that its audio API is reachable at this address.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce serveur Hermes ne propose pas la transcription depuis l’iPhone. Mettez Hermes à jour ou vérifiez que son API audio est accessible à cette adresse."
+    "This Hermes server doesn’t offer transcription from iPhone. Update Hermes or check that its audio API is reachable at this address." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce serveur Hermes ne propose pas la transcription depuis l’iPhone. Mettez Hermes à jour ou vérifiez que son API audio est accessible à cette adresse."
           }
         }
       }
     },
-    "This applies to new sessions for %@. The current conversation keeps its model.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce choix s’applique aux nouvelles sessions de %@. La conversation en cours conserve son modèle."
+    "This image is too large to send, even after resizing." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette image est trop lourde pour être envoyée, même après redimensionnement."
           }
         }
       }
     },
-    "This is a preview of Petal. Connect your Hermes agent to see your conversations, profiles and tools.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ceci est un aperçu de Petal. Connectez votre agent Hermes pour retrouver vos conversations, vos profils et vos outils."
+    "This is a preview of Petal. Connect your Hermes agent to see your conversations, profiles and tools." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ceci est un aperçu de Petal. Connectez votre agent Hermes pour retrouver vos conversations, vos profils et vos outils."
           }
         }
       }
     },
-    "This photo couldn’t be opened.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette photo n’a pas pu être ouverte."
+    "This photo couldn’t be opened." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette photo n’a pas pu être ouverte."
           }
         }
       }
     },
-    "This photo isn’t available.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette photo n’est pas disponible."
+    "This photo isn’t available." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette photo n’est pas disponible."
           }
         }
       }
     },
-    "This profile uses GPT-Live, which isn’t available on iOS yet. You can use standard voice conversation for this call.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce profil utilise GPT-Live, qui n’est pas encore disponible sur iOS. Vous pouvez utiliser la conversation vocale standard pour cet appel."
+    "This profile uses GPT-Live, which isn’t available on iOS yet. You can use standard voice conversation for this call." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce profil utilise GPT-Live, qui n’est pas encore disponible sur iOS. Vous pouvez utiliser la conversation vocale standard pour cet appel."
           }
         }
       }
     },
-    "This profile will be available in all your Hermes interfaces.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce profil sera disponible dans toutes vos interfaces Hermes."
+    "This profile will be available in all your Hermes interfaces." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce profil sera disponible dans toutes vos interfaces Hermes."
           }
         }
       }
     },
-    "This request is no longer active. The conversation will refresh.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette demande n’est plus active. La conversation va se mettre à jour."
+    "This request is no longer active. The conversation will refresh." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette demande n’est plus active. La conversation va se mettre à jour."
           }
         }
       }
     },
-    "This server doesn’t expose native groups yet. Update Hermes and restart hermes serve.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce serveur n’expose pas encore les groupes natifs. Mettez Hermes à jour et relancez hermes serve."
+    "This server doesn’t expose native groups yet. Update Hermes and restart hermes serve." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce serveur n’expose pas encore les groupes natifs. Mettez Hermes à jour et relancez hermes serve."
           }
         }
       }
     },
-    "This server returned no Hermes profiles.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce serveur ne renvoie aucun profil Hermes."
+    "This server returned no Hermes profiles." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ce serveur ne renvoie aucun profil Hermes."
           }
         }
       }
     },
-    "This tool isn’t available on this Hermes server. Check its version and, for Kanban, that the plugin is enabled.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cet outil n’est pas disponible sur ce serveur Hermes. Vérifiez sa version et, pour Kanban, l’activation du plugin."
+    "This tool isn’t available on this Hermes server. Check its version and, for Kanban, that the plugin is enabled." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cet outil n’est pas disponible sur ce serveur Hermes. Vérifiez sa version et, pour Kanban, l’activation du plugin."
           }
         }
       }
     },
-    "This value won’t be kept in the local history.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette valeur ne sera pas conservée dans l’historique local."
+    "This value won’t be kept in the local history." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cette valeur ne sera pas conservée dans l’historique local."
           }
         }
       }
     },
-    "Three priorities, a few appointments and some time for yourself.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trois priorités, quelques rendez-vous et du temps pour soi."
+    "Thought for %@" : {
+      "comment" : "Collapsed reasoning, e.g. Thought for 12 s",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A réfléchi pendant %@"
           }
         }
       }
     },
-    "To do": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À faire"
+    "Thoughts" : {
+      "comment" : "Collapsed reasoning with unknown duration",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réflexion"
           }
         }
       }
     },
-    "Today": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aujourd’hui"
+    "Three priorities, a few appointments and some time for yourself." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trois priorités, quelques rendez-vous et du temps pour soi."
           }
         }
       }
     },
-    "Together": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ensemble"
+    "To do" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À faire"
           }
         }
       }
     },
-    "Too many attempts. Try again in a moment.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trop de tentatives. Réessayez dans un instant."
+    "Today" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aujourd’hui"
           }
         }
       }
     },
-    "Tools": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Outils"
+    "Together" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ensemble"
           }
         }
       }
     },
-    "Track tasks": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suivre les tâches"
+    "Too many attempts. Try again in a moment." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trop de tentatives. Réessayez dans un instant."
           }
         }
       }
     },
-    "Triage": {
-      "comment": "Kanban status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À préciser"
+    "Tools" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outils"
           }
         }
       }
     },
-    "Try again": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réessayer"
+    "Track tasks" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suivre les tâches"
           }
         }
       }
     },
-    "Turn on Hermes’ native authentication, then connect Petal. See the connection guide.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activez l’authentification native de Hermes, puis connectez Petal. Consultez le guide de connexion."
+    "Triage" : {
+      "comment" : "Kanban status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À préciser"
           }
         }
       }
     },
-    "Update Hermes to manage this profile’s routines.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettez Hermes à jour pour gérer les routines de ce profil."
+    "Try again" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réessayer"
           }
         }
       }
     },
-    "Update Hermes to use native Bot Mode.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettez Hermes à jour pour utiliser le Bot Mode natif."
+    "Turn on Hermes’ native authentication, then connect Petal. See the connection guide." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activez l’authentification native de Hermes, puis connectez Petal. Consultez le guide de connexion."
           }
         }
       }
     },
-    "Use HTTPS for a public address, or your agent’s private Tailscale address.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utilisez HTTPS pour une adresse publique, ou l’adresse privée Tailscale de votre agent."
+    "Update Hermes to manage this profile’s routines." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettez Hermes à jour pour gérer les routines de ce profil."
           }
         }
       }
     },
-    "Use standard voice": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utiliser la voix standard"
+    "Update Hermes to use native Bot Mode." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mettez Hermes à jour pour utiliser le Bot Mode natif."
           }
         }
       }
     },
-    "Use this model for new sessions?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utiliser ce modèle pour les nouvelles sessions ?"
+    "Use HTTPS for a public address, or your agent’s private Tailscale address." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisez HTTPS pour une adresse publique, ou l’adresse privée Tailscale de votre agent."
           }
         }
       }
     },
-    "Username": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utilisateur"
+    "Use standard voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser la voix standard"
           }
         }
       }
     },
-    "Using a tool…": {
-      "comment": "Agent activity status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Utilise un outil…"
+    "Use this model for new sessions?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser ce modèle pour les nouvelles sessions ?"
           }
         }
       }
     },
-    "Value sent directly to Hermes": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Valeur envoyée directement à Hermes"
+    "Username" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisateur"
           }
         }
       }
     },
-    "Version": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Version"
+    "Using a tool…" : {
+      "comment" : "Agent activity status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilise un outil…"
           }
         }
       }
     },
-    "Voice": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voix"
+    "Value sent directly to Hermes" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valeur envoyée directement à Hermes"
           }
         }
       }
     },
-    "Voice conversation": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conversation vocale"
+    "Version" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
           }
         }
       }
     },
-    "WELCOME": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BONJOUR"
+    "Voice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voix"
           }
         }
       }
     },
-    "Wait for the reply in the chat to finish.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attendez la fin de la réponse dans le chat."
+    "Voice conversation" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conversation vocale"
           }
         }
       }
     },
-    "Wait until Hermes is ready before speaking or sending a message.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attendez que Hermes soit prêt avant de parler ou d’envoyer un message."
+    "Wait for the reply in the chat to finish." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attendez la fin de la réponse dans le chat."
           }
         }
       }
     },
-    "Waiting for the model’s response…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En attente de la réponse du modèle…"
+    "Wait until Hermes is ready before speaking or sending a message." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attendez que Hermes soit prêt avant de parler ou d’envoyer un message."
           }
         }
       }
     },
-    "Weekdays at 9 AM": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En semaine à 9 h"
+    "Waiting for the model’s response…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En attente de la réponse du modèle…"
           }
         }
       }
     },
-    "What do you see in these images?": {
-      "comment": "Default prompt sent to the agent when only images are attached",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Que vois-tu dans ces images ?"
+    "Weekdays at 9 AM" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En semaine à 9 h"
           }
         }
       }
     },
-    "What if we launched this idea?": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Et si on lançait cette idée ?"
+    "WELCOME" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BONJOUR"
           }
         }
       }
     },
-    "What should your agent do?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Que doit faire votre agent ?"
+    "What do you see in these images?" : {
+      "comment" : "Default prompt sent to the agent when only images are attached",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que vois-tu dans ces images ?"
           }
         }
       }
     },
-    "Where do I find this?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Où trouver ces informations ?"
+    "What if we launched this idea?" : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Et si on lançait cette idée ?"
           }
         }
       }
     },
-    "Who are we talking to?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À qui on parle ?"
+    "What should your agent do?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Que doit faire votre agent ?"
           }
         }
       }
     },
-    "Who would you like to talk to?": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avec qui voulez-vous parler ?"
+    "Where do I find this?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Où trouver ces informations ?"
           }
         }
       }
     },
-    "Work": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Travail"
+    "Who are we talking to?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À qui on parle ?"
           }
         }
       }
     },
-    "Working…": {
-      "comment": "Agent activity status",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours…"
+    "Who would you like to talk to?" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avec qui voulez-vous parler ?"
           }
         }
       }
     },
-    "Workspace": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Workspace"
+    "Work" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Travail"
           }
         }
       }
     },
-    "Workspaces created in Hermes will appear here.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les workspaces créés dans Hermes apparaîtront ici."
+    "Working…" : {
+      "comment" : "Agent activity status",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En cours…"
           }
         }
       }
     },
-    "YOUR AGENT": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "VOTRE AGENT"
+    "Workspace" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Workspace"
           }
         }
       }
     },
-    "Yesterday": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier"
+    "Workspaces created in Hermes will appear here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les workspaces créés dans Hermes apparaîtront ici."
           }
         }
       }
     },
-    "You can add up to four attachments per message.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajoutez jusqu’à quatre pièces jointes par message."
+    "Yesterday" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hier"
           }
         }
       }
     },
-    "Your Hermes session expired. Sign in again in Settings.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre connexion Hermes a expiré. Reconnectez-vous dans les réglages."
+    "you" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "vous"
           }
         }
       }
     },
-    "Your Hermes,\nin your pocket.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre Hermes,\ndans votre poche."
+    "You can add up to four attachments per message." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoutez jusqu’à quatre pièces jointes par message."
           }
         }
       }
     },
-    "Your agent, its voice.\nListening resumes after it replies.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre agent, sa voix.\nL’écoute reprend après sa réponse."
+    "YOUR AGENT" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "VOTRE AGENT"
           }
         }
       }
     },
-    "Your agent.\nSimply.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre agent.\nTout simplement."
+    "Your agent, its voice.\nListening resumes after it replies." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre agent, sa voix.\nL’écoute reprend après sa réponse."
           }
         }
       }
     },
-    "Your agents.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos agents."
+    "Your agent.\nSimply." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre agent.\nTout simplement."
           }
         }
       }
     },
-    "Your agent’s projects and folders.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les projets et dossiers de votre agent."
+    "Your agent’s projects and folders." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les projets et dossiers de votre agent."
           }
         }
       }
     },
-    "Your answer…": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre réponse…"
+    "Your agents." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos agents."
           }
         }
       }
     },
-    "Your choice": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À vous de choisir"
+    "Your answer…" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre réponse…"
           }
         }
       }
     },
-    "Your connections": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos connexions"
+    "Your choice" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À vous de choisir"
           }
         }
       }
     },
-    "Your conversations with this agent will appear here. One idea is enough to begin.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos échanges avec cet agent apparaîtront ici. Une idée suffit pour commencer."
+    "Your connections" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos connexions"
           }
         }
       }
     },
-    "Your everyday companion.": {
-      "comment": "Demo data",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre complice au quotidien."
+    "Your conversations with this agent will appear here. One idea is enough to begin." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos échanges avec cet agent apparaîtront ici. Une idée suffit pour commencer."
           }
         }
       }
     },
-    "Your installed skills will appear here.": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos compétences installées apparaîtront ici."
+    "Your everyday companion." : {
+      "comment" : "Demo data",
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre complice au quotidien."
           }
         }
       }
     },
-    "Your next project": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Votre prochain projet"
+    "Your Hermes session expired. Sign in again in Settings." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre connexion Hermes a expiré. Reconnectez-vous dans les réglages."
           }
         }
       }
     },
-    "Your profiles": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos profils"
+    "Your Hermes,\nin your pocket." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre Hermes,\ndans votre poche."
           }
         }
       }
     },
-    "admin": {
-      "comment": "Placeholder; not translated",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "admin"
+    "Your installed skills will appear here." : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos compétences installées apparaîtront ici."
           }
         }
       }
     },
-    "https://hermes.tailnet.ts.net": {
-      "comment": "Placeholder; not translated",
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "https://hermes.tailnet.ts.net"
+    "Your next project" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Votre prochain projet"
           }
         }
       }
     },
-    "you": {
-      "localizations": {
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "vous"
+    "Your profiles" : {
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vos profils"
           }
         }
       }
     }
   },
-  "version": "1.1"
+  "version" : "1.1"
 }

@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D2E71AD109E9AA7466971E0 /* ThinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA92FA0105018B85D357A733 /* ThinkingView.swift */; };
+		F328FF339816DF40633545E2 /* FileChips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72ED4A110DF3289DCF9556A5 /* FileChips.swift */; };
+		781058B7687BD897F4C5B06E /* FileReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38AE83CECAF11101A9DE0B80 /* FileReferences.swift */; };
 		02E9FD6AC902DE453BB27C28 /* ChatMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAAD9CB1B93F3090CFE6326 /* ChatMarkdown.swift */; };
 		0799FACAFF21D17D20153DE2 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4B6516CD29F52E374AAF519F /* PrivacyInfo.xcprivacy */; };
-		0EAAC808AC8CD5F546371AFE /* PhotoAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDE2B035F0E274D1A677E0 /* PhotoAttachment.swift */; };
+		0EAAC808AC8CD5F546371AFE /* ImagePreparer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEDE2B035F0E274D1A677E0 /* ImagePreparer.swift */; };
 		1401D88BADB2CE45AD67B6E1 /* AgentToolsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ACDEB64D082DA4095A0544 /* AgentToolsView.swift */; };
 		1C0F76837800CB263FE2F9FA /* NativeToolSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E43F4DDB4C85BF0F4C3EB /* NativeToolSession.swift */; };
 		2995C37CAC738935C3CB0A6C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476734DA2FC09D7F7E0875DC /* SettingsView.swift */; };
@@ -62,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA92FA0105018B85D357A733 /* ThinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingView.swift; sourceTree = "<group>"; };
+		72ED4A110DF3289DCF9556A5 /* FileChips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileChips.swift; sourceTree = "<group>"; };
+		38AE83CECAF11101A9DE0B80 /* FileReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileReferences.swift; sourceTree = "<group>"; };
 		0133611339BB4310770DF600 /* Transcript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcript.swift; sourceTree = "<group>"; };
 		02A462CE3A3E115F981A5C76 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		03771C2DF46F958CA751A93C /* JSONValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.swift; sourceTree = "<group>"; };
@@ -92,7 +98,7 @@
 		BB4E2583813D830A3E900B68 /* AgentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgentsView.swift; sourceTree = "<group>"; };
 		BBAAD9CB1B93F3090CFE6326 /* ChatMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMarkdown.swift; sourceTree = "<group>"; };
 		C910078020A4AF8014712019 /* HistoryRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRequests.swift; sourceTree = "<group>"; };
-		CEEDE2B035F0E274D1A677E0 /* PhotoAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttachment.swift; sourceTree = "<group>"; };
+		CEEDE2B035F0E274D1A677E0 /* ImagePreparer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreparer.swift; sourceTree = "<group>"; };
 		D13C6E169393755487F106D2 /* StoredCookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredCookie.swift; sourceTree = "<group>"; };
 		D5000000000000000000B000 /* Tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tokens.swift; sourceTree = "<group>"; };
 		D5000000000000000000B001 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -168,15 +174,16 @@
 				E6736CBC0AB49572EDDC3502 /* AppModel.swift */,
 				7C4FC914201C38D1A165638D /* ChatView.swift */,
 				399BB0F5CE1F8FF278DE6053 /* GroupsView.swift */,
+				72ED4A110DF3289DCF9556A5 /* FileChips.swift */,
 				19B9D9CC524C6E12BC3360D4 /* KanbanView.swift */,
 				D8C2642D7ADE3DDF465C6E89 /* MarkdownText.swift */,
 				851E43F4DDB4C85BF0F4C3EB /* NativeToolSession.swift */,
 				2C4EE51D78FA0482C1CE5323 /* OnboardingView.swift */,
-				CEEDE2B035F0E274D1A677E0 /* PhotoAttachment.swift */,
 				E36DE38AF4ABDF2227F4C599 /* RootView.swift */,
 				B015E03D9D8F60B51C9F3C89 /* RoutinesView.swift */,
 				476734DA2FC09D7F7E0875DC /* SettingsView.swift */,
 				26620A4D5A548695453ABAF6 /* SpacesView.swift */,
+				BA92FA0105018B85D357A733 /* ThinkingView.swift */,
 				4B1B07CAFC53C700A7E55E59 /* VoiceView.swift */,
 			);
 			path = Features;
@@ -190,6 +197,8 @@
 				B083DF2BEBD828CF266749E2 /* DraftAttachment.swift */,
 				EA403258EBDBCDA2BBA568D1 /* Endpoint.swift */,
 				C910078020A4AF8014712019 /* HistoryRequests.swift */,
+				38AE83CECAF11101A9DE0B80 /* FileReferences.swift */,
+				CEEDE2B035F0E274D1A677E0 /* ImagePreparer.swift */,
 				03771C2DF46F958CA751A93C /* JSONValue.swift */,
 				02A462CE3A3E115F981A5C76 /* Models.swift */,
 				B104A4361ECD7B91A321759C /* NativeVoiceAPI.swift */,
@@ -351,7 +360,10 @@
 				1C0F76837800CB263FE2F9FA /* NativeToolSession.swift in Sources */,
 				F6F4E6CC72851994C165964E /* NativeVoiceAPI.swift in Sources */,
 				B4F7674BD7E40625FFA1833A /* OnboardingView.swift in Sources */,
-				0EAAC808AC8CD5F546371AFE /* PhotoAttachment.swift in Sources */,
+				0EAAC808AC8CD5F546371AFE /* ImagePreparer.swift in Sources */,
+				8D2E71AD109E9AA7466971E0 /* ThinkingView.swift in Sources */,
+				F328FF339816DF40633545E2 /* FileChips.swift in Sources */,
+				781058B7687BD897F4C5B06E /* FileReferences.swift in Sources */,
 				EB76A6E45F00A3052ABE4188 /* RootView.swift in Sources */,
 				BA651A22F5C0CF5320C4E383 /* RoutinesView.swift in Sources */,
 				2995C37CAC738935C3CB0A6C /* SettingsView.swift in Sources */,

@@ -87,6 +87,51 @@ final class HermesHTTP {
         return data.isEmpty ? .object([:]) : try JSONValue.decode(data)
     }
 
+    /// Downloads a file from the Hermes server (`/api/files/download`) into a private temporary folder.
+    /// Returns the local file URL, named after the server's file.
+    func download(filePath: String) async throws -> URL {
+        do { return try await sendDownload(filePath) }
+        catch let failure as RPCFailure where failure.code == 401 && connection.mode != "token" {
+            guard try await reauthenticate() else { throw failure }
+            return try await sendDownload(filePath)
+        }
+    }
+
+    private func sendDownload(_ filePath: String) async throws -> URL {
+        var components = URLComponents(url: connection.endpoint.url("/api/files/download"), resolvingAgainstBaseURL: false)!
+        components.queryItems = [URLQueryItem(name: "path", value: filePath)]
+        // URLComponents leaves "+" as is, which the server would read as a space.
+        components.percentEncodedQuery = components.percentEncodedQuery?.replacingOccurrences(of: "+", with: "%2B")
+        guard let url = components.url else { throw RPCFailure(String(localized: "This file path isn’t valid.")) }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 60
+        if let token { request.setValue(token, forHTTPHeaderField: "X-Hermes-Session-Token") }
+        let (temporary, response) = try await session.download(for: request)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        guard let response = response as? HTTPURLResponse else { throw RPCFailure(String(localized: "Invalid response from Hermes.")) }
+        switch response.statusCode {
+        case 200...299: break
+        case 401: throw RPCFailure(String(localized: "Your Hermes session expired. Sign in again in Settings."), code: 401)
+        case 403: throw RPCFailure(String(localized: "Hermes doesn’t allow downloading this file."), code: 403)
+        case 404: throw RPCFailure(String(localized: "This file no longer exists on your Hermes server."), code: 404)
+        case 413: throw RPCFailure(String(localized: "This file is too large to download."), code: 413)
+        default:
+            let detail = (try? JSONValue.decode(Data(contentsOf: temporary)))?["detail"].string ?? ""
+            throw RPCFailure(detail.isEmpty ? String(localized: "Hermes responded with HTTP \(response.statusCode).") : String(detail.prefix(600)), code: response.statusCode)
+        }
+        try persistCookies()
+        let name = response.suggestedFilename.flatMap { $0.isEmpty ? nil : $0 } ?? (filePath as NSString).lastPathComponent
+        let folder = Self.downloadsFolder.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        let destination = folder.appendingPathComponent((name as NSString).lastPathComponent)
+        try FileManager.default.moveItem(at: temporary, to: destination)
+        return destination
+    }
+
+    /// Downloaded files are only kept for previewing and sharing; the folder is cleared on launch.
+    nonisolated static let downloadsFolder = FileManager.default.temporaryDirectory.appendingPathComponent("Downloads", isDirectory: true)
+    nonisolated static func clearDownloads() { try? FileManager.default.removeItem(at: downloadsFolder) }
+
     /// Password sign-in. With `remember`, the credentials are saved to the Keychain for silent renewal;
     /// without it, any previously saved credentials are removed.
     func signIn(username: String, password: String, remember: Bool = false) async throws {

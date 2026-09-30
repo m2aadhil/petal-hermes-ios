@@ -35,6 +35,10 @@ final class AppModel {
     var importingAttachments = false
     @ObservationIgnored private var imageCleanup: [String: [String]] = [:]
     var notice: String?
+    /// Reasoning effort for the open chat ("none", "low", "medium", "high"…); nil until known.
+    var thinkingLevel: String?
+    /// Chosen before the chat has a live Hermes session; applied when it gets one.
+    @ObservationIgnored private var pendingThinkingLevel: String?
     var routines: [Routine] = []
     var botMode = true
     var opening = false
@@ -456,7 +460,10 @@ final class AppModel {
             guard generation == selectionGeneration, connection == connectionGeneration, self.socket === socket else { throw CancellationError() }
         }
         if selected == nil {
-            let result = try await socket.call("session.create", ["profile": .string(profile)])
+            var params: [String: JSONValue] = ["profile": .string(profile)]
+            if let level = pendingThinkingLevel { params["reasoning_effort"] = .string(level) }
+            let result = try await socket.call("session.create", .object(params))
+            pendingThinkingLevel = nil
             try validate()
             selected = ChatSnapshot(storedID: result["stored_session_id"].string, runtimeID: result["session_id"].string, profile: profile, title: String(text.prefix(60)), epoch: socket.epoch)
             attachmentDrafts[draftKey] = attachmentDrafts.removeValue(forKey: originalDraftKey)
@@ -539,6 +546,49 @@ final class AppModel {
         guard let selected, let socket else { return }
         do { _ = try await socket.call("session.interrupt", ["session_id": .string(selected.runtimeID)]) }
         catch { notice = error.localizedDescription }
+    }
+
+    // MARK: Thinking level
+    //
+    // Always session-scoped: `config.set reasoning` without a session_id would rewrite the server's
+    // global config.yaml, so it is never called without one.
+
+    func setThinkingLevel(_ level: String) async {
+        let previous = thinkingLevel
+        thinkingLevel = level
+        guard !demo, let socket, let chat = selected, !chat.runtimeID.isEmpty else {
+            pendingThinkingLevel = level // Sent with session.create, or applied once the chat is live.
+            return
+        }
+        do {
+            _ = try await socket.call("config.set", ["session_id": .string(chat.runtimeID), "key": "reasoning", "value": .string(level)])
+        } catch {
+            thinkingLevel = previous
+            notice = error.localizedDescription
+        }
+    }
+
+    /// Called when the open chat or its live session changes.
+    func syncThinkingLevel() async {
+        guard !demo, let socket, let chat = selected, !chat.runtimeID.isEmpty else { return }
+        if let pending = pendingThinkingLevel {
+            pendingThinkingLevel = nil
+            await setThinkingLevel(pending)
+            return
+        }
+        let runtime = chat.runtimeID
+        guard let result = try? await socket.call("config.get", ["session_id": .string(runtime), "key": "reasoning"]),
+              selected?.runtimeID == runtime else { return }
+        thinkingLevel = result["value"].string.isEmpty ? nil : result["value"].string
+    }
+
+    /// A different chat was opened: forget the previous chat's level.
+    func resetThinkingLevel() { thinkingLevel = nil; pendingThinkingLevel = nil }
+
+    /// Downloads a file the agent referenced so it can be previewed or shared.
+    func downloadFile(_ reference: FileReference) async throws -> URL {
+        guard !demo, let http else { throw RPCFailure(String(localized: "Connect your Hermes to open files.")) }
+        return try await http.download(filePath: reference.path)
     }
 
     func answerApproval(_ choice: String) async {
