@@ -131,4 +131,17 @@ enum ChatMarkdown {
             return part.count >= 3 && part.allSatisfy { $0 == "-" }
         }
     }
+
+    /// Plain URLs in text (`https://…`, `www.…`, e-mail addresses), which Markdown alone doesn't link.
+    /// Only http(s) and mailto are returned.
+    static func autolinks(in text: String) -> [(range: Range<String.Index>, url: URL)] {
+        guard !text.isEmpty, let detector = linkDetector else { return [] }
+        return detector.matches(in: text, range: NSRange(text.startIndex..., in: text)).compactMap { match in
+            guard let url = match.url, ["http", "https", "mailto"].contains(url.scheme?.lowercased() ?? ""),
+                  let range = Range(match.range, in: text) else { return nil }
+            return (range, url)
+        }
+    }
+
+    nonisolated(unsafe) private static let linkDetector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
 }

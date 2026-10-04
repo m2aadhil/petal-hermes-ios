@@ -331,6 +331,143 @@ final class PetalUITests: XCTestCase {
         XCTAssertEqual(composer.value as? String, "Une recherche pour Atlas")
     }
 
+    // MARK: Chat scrolling
+    //
+    // `--demo-long-chat` opens a 40-message conversation whose last reply has reasoning.
+    // The demo also runs the in-memory autosave on every keystroke, like a connected app.
+
+    func testTypingKeepsTheLatestReplyOnScreen() throws {
+        let app = launchLongChat()
+        let composer = app.textFields["chat-composer"]
+        let latest = message("assistant-message", containing: "just one thing", in: app)
+        XCTAssertTrue(eventually(5) { self.isOnScreen(latest, in: app) }, "the chat should open on its latest reply")
+
+        composer.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        XCTAssertTrue(eventually { self.isOnScreen(latest, in: app) }, "the keyboard must not hide the latest reply")
+
+        let words = "This draft is long enough to wrap onto several lines while I keep typing "
+        for chunk in 1...6 {
+            composer.typeText(words)
+            pause(0.6) // longer than the autosave interval
+            if !isOnScreen(latest, in: app) { capture("typing-latest-hidden-\(chunk)") }
+            XCTAssertGreaterThan(visibleMessageCount(in: app), 0, "the chat went blank after chunk \(chunk)")
+            XCTAssertTrue(isOnScreen(latest, in: app), "the latest reply scrolled away after chunk \(chunk)")
+        }
+        capture("30-typing-long-draft")
+    }
+
+    func testTypingWhileScrolledUpKeepsThePlace() throws {
+        let app = launchLongChat()
+        let composer = app.textFields["chat-composer"]
+        let scroll = app.scrollViews.firstMatch
+        XCTAssertTrue(scroll.waitForExistence(timeout: 5))
+        scroll.swipeDown(); scroll.swipeDown()
+        pause(1)
+
+        let visible = messages(in: app).filter { isOnScreen($0, in: app) }
+        let reference = try XCTUnwrap(visible.first, "no message on screen after scrolling up")
+        let label = reference.label
+        let pinned = message(withLabel: label, in: app)
+        let before = pinned.frame.minY
+
+        composer.tap()
+        XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 3))
+        for chunk in 1...4 {
+            composer.typeText("Reading older replies while I draft a follow-up question ")
+            pause(0.6)
+            XCTAssertGreaterThan(visibleMessageCount(in: app), 0, "the chat went blank after chunk \(chunk)")
+            XCTAssertTrue(isOnScreen(pinned, in: app), "the message being read disappeared after chunk \(chunk)")
+        }
+        XCTAssertEqual(pinned.frame.minY, before, accuracy: 60, "typing must not scroll the history being read")
+        capture("31-typing-scrolled-up")
+    }
+
+    func testExpandingThinkingOpensInPlace() throws {
+        let app = launchLongChat()
+        let toggle = app.buttons["thinking-toggle"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        XCTAssertTrue(eventually { self.isOnScreen(toggle, in: app) })
+        let before = toggle.frame.minY
+
+        toggle.tap()
+        let thinking = app.descendants(matching: .any)["thinking-text"]
+        XCTAssertTrue(thinking.waitForExistence(timeout: 2))
+        pause(0.8)
+        XCTAssertTrue(isOnScreen(toggle, in: app), "the Thinking toggle scrolled away after expanding")
+        XCTAssertEqual(toggle.frame.minY, before, accuracy: 30, "Thinking should open where it was tapped")
+        XCTAssertTrue(isOnScreen(thinking, in: app))
+        capture("32-thinking-expanded")
+
+        toggle.tap()
+        XCTAssertTrue(eventually { !thinking.exists }, "Thinking should collapse again")
+    }
+
+    func testOpeningAChatLandsOnItsLatestReply() throws {
+        // Cached chat first, then the server's (shorter) copy of the same messages.
+        let app = XCUIApplication()
+        app.launchArguments = ["--demo", "--demo-long-chat", "--demo-delayed-history"] + englishLocale
+        app.launch()
+        XCTAssertTrue(app.textFields["chat-composer"].waitForExistence(timeout: 10))
+        pause(2) // both loads have landed
+        let latest = message("assistant-message", containing: "make some room", in: app)
+        if !isOnScreen(latest, in: app) { capture("33-open-latest-hidden") }
+        XCTAssertGreaterThan(visibleMessageCount(in: app), 0, "the chat opened on an empty screen")
+        XCTAssertTrue(isOnScreen(latest, in: app), "the chat should open on its latest reply")
+    }
+
+    private func launchLongChat() -> XCUIApplication {
+        let app = XCUIApplication()
+        app.launchArguments = ["--demo", "--demo-long-chat"] + englishLocale
+        app.launch()
+        XCTAssertTrue(app.textFields["chat-composer"].waitForExistence(timeout: 10))
+        return app
+    }
+
+    private func messages(in app: XCUIApplication) -> [XCUIElement] {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier IN %@", ["assistant-message", "user-message"]))
+            .allElementsBoundByIndex
+    }
+
+    private func message(_ identifier: String, containing text: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any).matching(identifier: identifier)
+            .matching(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+    }
+
+    private func message(withLabel label: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier IN %@ AND label == %@", ["assistant-message", "user-message"], label)).firstMatch
+    }
+
+    /// The area between the chat header and the composer.
+    private func chatViewport(in app: XCUIApplication) -> CGRect {
+        let top = app.buttons["quick-agents"].frame.maxY
+        let bottom = app.otherElements["composer-surface"].frame.minY
+        return CGRect(x: 0, y: top, width: app.frame.width, height: max(0, bottom - top))
+    }
+
+    /// At least 16 pt of the element is visible in the chat area.
+    private func isOnScreen(_ element: XCUIElement, in app: XCUIApplication) -> Bool {
+        guard element.exists, !element.frame.isEmpty else { return false }
+        return element.frame.intersection(chatViewport(in: app)).height >= 16
+    }
+
+    private func visibleMessageCount(in app: XCUIApplication) -> Int {
+        messages(in: app).filter { isOnScreen($0, in: app) }.count
+    }
+
+    private func eventually(_ timeout: TimeInterval = 3, _ condition: () -> Bool) -> Bool {
+        let end = Date().addingTimeInterval(timeout)
+        repeat {
+            if condition() { return true }
+            pause(0.1)
+        } while Date() < end
+        return condition()
+    }
+
+    private func pause(_ seconds: TimeInterval) { RunLoop.current.run(until: Date().addingTimeInterval(seconds)) }
+
     private func capture(_ name: String) {
         let screenshot = XCUIScreen.main.screenshot()
         // Also keep PNGs in the disposable runner container: beta Xcode can stall

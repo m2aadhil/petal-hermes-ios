@@ -11,6 +11,9 @@ struct ChatView: View {
     @State private var attachmentContext = ""
     @State private var destination: AppDestination?
     @State private var pinnedToBottom = true
+    /// Growth while idle (expanding Thinking, cards appearing) must not drag the view down.
+    /// Following is allowed while a reply streams, and briefly after opening, sending or finishing.
+    @State private var followUntil = Date.distantPast
     @State private var draggingHistory = false
     @State private var bottomVisible = true
     @State private var downloads = FileDownloads()
@@ -89,7 +92,11 @@ struct ChatView: View {
                 }
             }
             .onChange(of: model.draft) { _, _ in model.draftChanged() }
-            .onChange(of: model.selected?.storedID) { _, _ in pinnedToBottom = true; model.resetThinkingLevel() }
+            .onChange(of: model.selected?.storedID) { _, _ in pinnedToBottom = true; settle(); model.resetThinkingLevel() }
+            .onChange(of: model.transcript.running) { _, running in if !running { settle(0.8) } }
+            // History from the server can land after the cached copy is shown.
+            .onChange(of: model.opening) { _, opening in if !opening, pinnedToBottom { settle() } }
+            .onAppear { settle() }
             .task(id: model.selected?.runtimeID) { await model.syncThinkingLevel() }
         }
     }
@@ -217,14 +224,32 @@ struct ChatView: View {
                     .onEnded { _ in draggingHistory = false; if bottomVisible { pinnedToBottom = true } })
                 .onPreferenceChange(BottomPreference.self) { y in
                     bottomVisible = y <= geo.size.height + 55
-                    if !draggingHistory, bottomVisible { pinnedToBottom = true }
-                    if pinnedToBottom, !draggingHistory, y > geo.size.height + 1 { proxy.scrollTo("bottom", anchor: .bottom) }
+                    // Only re-pin when the user is really at the end, not merely near it.
+                    if !draggingHistory, y <= geo.size.height + 12 { pinnedToBottom = true }
+                    let following = model.transcript.running || Date() < followUntil
+                    // Content ending above the bottom edge means the view sits past the end (e.g. the
+                    // server's copy of a chat replaced a taller cached one): snap back to the end.
+                    let pastEnd = y < geo.size.height - 1
+                    if pinnedToBottom, !draggingHistory, pastEnd || (following && y > geo.size.height + 1) {
+                        proxy.scrollTo("bottom", anchor: .bottom)
+                    }
+                }
+                .environment(\.holdChatScroll, { pinnedToBottom = false; followUntil = .distantPast })
+                // The list is created when the first messages arrive; start at their end.
+                .onAppear { pinnedToBottom = true; settle(); proxy.scrollTo("bottom", anchor: .bottom) }
+                .onChange(of: model.state) { _, state in if state == .connected, pinnedToBottom { settle() } }
+                // Keyboard and a growing composer shrink the visible area; keep the latest message in view.
+                .onChange(of: geo.size.height) { _, _ in
+                    if pinnedToBottom, !draggingHistory { proxy.scrollTo("bottom", anchor: .bottom) }
                 }
                 .onChange(of: model.transcript.messages.last?.text) { _, _ in
                     if pinnedToBottom, !draggingHistory { proxy.scrollTo("bottom", anchor: .bottom) }
                 }
                 .onChange(of: model.transcript.messages.count) { _, _ in
-                    if pinnedToBottom { withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) { proxy.scrollTo("bottom", anchor: .bottom) } }
+                    if pinnedToBottom {
+                        settle(0.6)
+                        withAnimation(reduceMotion ? nil : .easeOut(duration: 0.18)) { proxy.scrollTo("bottom", anchor: .bottom) }
+                    }
                 }
                 .overlay(alignment: .bottomTrailing) {
                     if !pinnedToBottom {
@@ -237,6 +262,9 @@ struct ChatView: View {
             }
         }
     }
+
+    /// Keep following the bottom while freshly shown content settles (lazy rows measuring, history hydrating).
+    private func settle(_ seconds: TimeInterval = 1.2) { followUntil = Date().addingTimeInterval(seconds) }
 
     private var composer: some View {
         VStack(spacing: 0) {
@@ -328,7 +356,7 @@ struct ChatView: View {
         Button {
             Task {
                 if model.transcript.running { await model.interrupt() }
-                else { pinnedToBottom = true; focused = false; await model.send() }
+                else { pinnedToBottom = true; settle(); focused = false; await model.send() }
             }
         } label: {
             Image(systemName: model.transcript.running ? "stop.fill" : "arrow.up")
@@ -379,26 +407,7 @@ struct MessageView: View, Equatable {
         HStack(alignment: .top) {
             if user { Spacer(minLength: 42) }
             VStack(alignment: .leading, spacing: DS.Space.s - 2) {
-                if !user {
-                    HStack(spacing: DS.Space.xs) { AgentMark(size: 17); Text(agent).textStyle(.sectionLabel).foregroundStyle(DS.Palette.textSecondary) }
-                }
-                Group {
-                    if user { Text(verbatim: message.text).textStyle(.body) }
-                    else {
-                        VStack(alignment: .leading, spacing: DS.Space.s) {
-                            if let reasoning = message.reasoning {
-                                ThinkingDisclosure(reasoning: reasoning, seconds: message.thinkingSeconds, live: message.streaming && message.text.isEmpty)
-                            }
-                            if !message.text.isEmpty { MarkdownText(text: FileReferences.stripMediaDirectives(message.text)) }
-                            // Paths are only offered once the reply has finished streaming.
-                            if !message.streaming { FileChips(references: FileReferences.extract(from: message.text)) }
-                        }
-                    }
-                }
-                    .textSelection(.enabled)
-                    .padding(user ? DS.Space.m : 0)
-                    .background(user ? DS.Palette.surface : .clear, in: RoundedRectangle(cornerRadius: DS.Radius.l, style: .continuous))
-                    .overlay(RoundedRectangle(cornerRadius: DS.Radius.l, style: .continuous).strokeBorder(user ? DS.Palette.line : .clear))
+                if user { userBubble } else { assistantBody }
                 if message.delivery != .confirmed {
                     Text(message.delivery == .sending ? "Sending…" : message.delivery == .uncertain ? "Delivery unconfirmed. Check the history" : "Not sent · copy to try again")
                         .textStyle(.footnote).foregroundStyle(message.delivery == .sending ? DS.Palette.textSecondary : DS.Palette.critical)
@@ -410,8 +419,34 @@ struct MessageView: View, Equatable {
             Button("Copy", systemImage: "doc.on.doc") { UIPasteboard.general.string = message.text }
             ShareLink(item: message.text) { Label("Share", systemImage: "square.and.arrow.up") }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier(user ? "user-message" : "assistant-message")
+    }
+
+    private var userBubble: some View {
+        Text(verbatim: message.text).textStyle(.body).textSelection(.enabled)
+            .padding(DS.Space.m)
+            .background(DS.Palette.surface, in: RoundedRectangle(cornerRadius: DS.Radius.l, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: DS.Radius.l, style: .continuous).strokeBorder(DS.Palette.line))
+            .accessibilityIdentifier("user-message")
+    }
+
+    /// The reply text is one accessibility element; Thinking and file cards stay separate,
+    /// so VoiceOver (and UI tests) can reach their buttons.
+    @ViewBuilder private var assistantBody: some View {
+        HStack(spacing: DS.Space.xs) { AgentMark(size: 17); Text(agent).textStyle(.sectionLabel).foregroundStyle(DS.Palette.textSecondary) }
+            .accessibilityHidden(true)
+        VStack(alignment: .leading, spacing: DS.Space.s) {
+            if let reasoning = message.reasoning {
+                ThinkingDisclosure(reasoning: reasoning, seconds: message.thinkingSeconds, live: message.streaming && message.text.isEmpty)
+            }
+            if !message.text.isEmpty {
+                MarkdownText(text: FileReferences.stripMediaDirectives(message.text))
+                    .textSelection(.enabled)
+                    .accessibilityElement(children: .combine)
+                    .accessibilityIdentifier("assistant-message")
+            }
+            // Paths are only offered once the reply has finished streaming.
+            if !message.streaming { FileChips(references: FileReferences.extract(from: message.text)) }
+        }
     }
 }
 

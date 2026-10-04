@@ -370,6 +370,13 @@ final class ProtocolTests: XCTestCase {
         XCTAssertTrue(routine.paused)
     }
 
+    func testAutolinksFindPlainURLs() {
+        let text = "Docs at https://example.com/a?b=1, mirror www.example.org and mail me@example.com. Not ftp://x.y"
+        let links = ChatMarkdown.autolinks(in: text).map(\.url.absoluteString)
+        XCTAssertEqual(links, ["https://example.com/a?b=1", "http://www.example.org", "mailto:me@example.com"])
+        XCTAssertTrue(ChatMarkdown.autolinks(in: "no links here").isEmpty)
+    }
+
     private func event(_ seq: Int, _ type: String, text: String = "") -> JSONValue {
         ["session_id": "runtime", "seq": .number(Double(seq)), "type": .string(type), "payload": ["text": .string(text)]]
     }

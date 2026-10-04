@@ -369,7 +369,11 @@ struct ConnectionIndicator: View {
 extension View {
     @ViewBuilder func chatScrollAnchors() -> some View {
         if #available(iOS 18.0, *) {
-            self.defaultScrollAnchor(.bottom).defaultScrollAnchor(.top, for: .alignment)
+            // Open at the bottom, but let size changes (expanding Thinking, keyboard, a growing
+            // composer) keep what's on screen in place. ChatView follows streaming replies itself.
+            self.defaultScrollAnchor(.bottom, for: .initialOffset)
+                .defaultScrollAnchor(.top, for: .sizeChanges)
+                .defaultScrollAnchor(.top, for: .alignment)
         } else {
             self.defaultScrollAnchor(.bottom)
         }

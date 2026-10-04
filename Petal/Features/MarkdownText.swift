@@ -58,10 +58,27 @@ private struct MarkdownBlockView: View, Equatable {
 
     private func inline(_ source: String) -> Text {
         var parsed = (try? AttributedString(markdown: source, options: .init(interpretedSyntax: .inlineOnlyPreservingWhitespace))) ?? AttributedString(source)
+        // Bare URLs (agents rarely use [text](url)), found before any edits so offsets stay valid;
+        // never inside code or an existing link.
+        var detected: [(offset: Int, length: Int, url: URL)] = []
+        for run in parsed.runs where run.link == nil && run.inlinePresentationIntent?.contains(.code) != true {
+            let text = String(parsed[run.range].characters)
+            let runOffset = parsed.characters.distance(from: parsed.startIndex, to: run.range.lowerBound)
+            for link in ChatMarkdown.autolinks(in: text) {
+                detected.append((runOffset + text.distance(from: text.startIndex, to: link.range.lowerBound),
+                                 text.distance(from: link.range.lowerBound, to: link.range.upperBound), link.url))
+            }
+        }
+        for link in detected {
+            let start = parsed.characters.index(parsed.startIndex, offsetBy: link.offset)
+            parsed[start..<parsed.characters.index(start, offsetBy: link.length)].link = link.url
+        }
         // No remote images or executable/custom-scheme links from generated Markdown.
         for run in parsed.runs {
             if let url = run.link, !["https", "http", "mailto"].contains(url.scheme?.lowercased() ?? "") { parsed[run.range].link = nil }
             if run.inlinePresentationIntent?.contains(.code) == true { parsed[run.range].font = .system(.callout, design: .monospaced) }
+            // Underline links so they read as tappable, not just tinted.
+            if parsed[run.range].link != nil { parsed[run.range].underlineStyle = .single }
         }
         return Text(parsed)
     }

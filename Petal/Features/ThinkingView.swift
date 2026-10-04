@@ -1,5 +1,18 @@
 import SwiftUI
 
+/// Lets content the user expands (e.g. Thinking) stop the chat from following the bottom,
+/// so the view stays where they tapped.
+private struct HoldChatScrollKey: EnvironmentKey {
+    static var defaultValue: @MainActor () -> Void { {} }
+}
+
+extension EnvironmentValues {
+    var holdChatScroll: @MainActor () -> Void {
+        get { self[HoldChatScrollKey.self] }
+        set { self[HoldChatScrollKey.self] = newValue }
+    }
+}
+
 enum ThinkingPreference {
     /// App-only switch. It never changes the server's `display.show_reasoning`.
     static let showKey = "showThinking"
@@ -36,11 +49,13 @@ struct ThinkingDisclosure: View {
     @AppStorage(ThinkingPreference.showKey) private var show = true
     @State private var expanded = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.holdChatScroll) private var holdChatScroll
 
     var body: some View {
         if show, !reasoning.isEmpty {
             VStack(alignment: .leading, spacing: DS.Space.xs) {
                 Button {
+                    if !expanded { holdChatScroll() }
                     withAnimation(reduceMotion ? nil : .snappy(duration: 0.25)) { expanded.toggle() }
                 } label: {
                     HStack(spacing: DS.Space.xs) {

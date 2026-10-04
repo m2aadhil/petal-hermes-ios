@@ -765,7 +765,11 @@ final class AppModel {
         if !events.isEmpty { scheduleSave() }
     }
 
-    func draftChanged() { workspace.drafts[draftKey] = draft; scheduleSave() }
+    func draftChanged() {
+        workspace.drafts[draftKey] = draft
+        // The demo has no disk cache, but runs the same in-memory save so UI tests exercise it.
+        if demo { saveCurrent() } else { scheduleSave() }
+    }
 
     private func key(_ profile: String, _ stored: String) -> String { "\(profile):\(stored)" }
 
@@ -778,7 +782,9 @@ final class AppModel {
             chat.messages = Array(transcript.messages.suffix(500))
             chat.lastSequence = transcript.lastSequence
             workspace.chats[key(chat.profile, chat.storedID)] = chat
-            selected = chat
+            // Autosave runs while typing: only touch the observed selection when it really changed,
+            // otherwise every save re-renders the whole chat mid-keystroke.
+            if selected?.lastSequence != chat.lastSequence || selected?.messages != chat.messages { selected = chat }
         }
         workspace.selected = selected.flatMap { $0.storedID.isEmpty ? nil : key($0.profile, $0.storedID) }
     }
@@ -828,6 +834,34 @@ final class AppModel {
             .init(role: "user", text: String(localized: "I’d like a slightly lighter day.", comment: "Demo data")),
             .init(role: "assistant", text: String(localized: "Let’s make some room.\n\nPick **just one thing** that would make your day feel worthwhile. The rest can wait.\n\nWhat matters most to you today?", comment: "Demo data"))
         ]
+        if ProcessInfo.processInfo.arguments.contains("--demo-long-chat") {
+            // UI tests: a chat long enough to scroll, ending in a reply with reasoning.
+            let earlier = (1...20).flatMap { index -> [ChatMessage] in [
+                .init(role: "user", text: "Question \(index): what should I focus on next?"),
+                .init(role: "assistant", text: "Answer \(index). " + String(repeating: "A longer paragraph so every reply takes real space on screen. ", count: 3))
+            ] }
+            transcript.messages = earlier + transcript.messages
+            if let last = transcript.messages.indices.last {
+                transcript.messages[last].reasoning = String(repeating: "Weighing a few options before answering. ", count: 30)
+                transcript.messages[last].thinkingSeconds = 7
+            }
+        }
+        if ProcessInfo.processInfo.arguments.contains("--demo-delayed-history") {
+            // UI tests: like a real launch, show the cached chat first, then Hermes' copy, which
+            // here lays out shorter (same messages, less text) than the cached one.
+            let cached = transcript.messages
+            transcript.messages = []
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(for: .milliseconds(400))
+                self?.transcript.messages = cached
+                try? await Task.sleep(for: .milliseconds(900))
+                self?.transcript.messages = cached.map { message in
+                    var shorter = message
+                    shorter.text = String(message.text.prefix(60)); shorter.reasoning = nil
+                    return shorter
+                }
+            }
+        }
         sessions = []
         // Preview history uses the same rows and navigation as a connected profile.
         for agent in profiles {
