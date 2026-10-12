@@ -7,8 +7,8 @@ import XCTest
 final class ImagePreparerTests: XCTestCase {
     func testLargePhotoIsCappedAndStripped() throws {
         let source = try encode(makeImage(width: 4000, height: 3000), as: .jpeg, properties: [
-            kCGImagePropertyGPSDictionary: [kCGImagePropertyGPSLatitude: 53.55, kCGImagePropertyGPSLatitudeRef: "N"],
-            kCGImagePropertyExifDictionary: [kCGImagePropertyExifLensModel: "Test lens"]
+            kCGImagePropertyGPSDictionary: [kCGImagePropertyGPSLatitude: 53.55, kCGImagePropertyGPSLatitudeRef: "N"] as [CFString: Any],
+            kCGImagePropertyExifDictionary: [kCGImagePropertyExifLensModel: "Test lens"] as [CFString: Any]
         ])
         XCTAssertNotNil(metadata(source)[kCGImagePropertyGPSDictionary], "fixture should carry GPS")
 

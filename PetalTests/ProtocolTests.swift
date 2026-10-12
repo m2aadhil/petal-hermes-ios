@@ -164,7 +164,7 @@ final class ProtocolTests: XCTestCase {
             XCTFail("Missing audio must fail explicitly")
         } catch let error as RPCFailure {
             XCTAssertEqual(error.code, 404)
-            XCTAssertTrue(error.localizedDescription.contains("transcription depuis l’iPhone"))
+            XCTAssertTrue(error.localizedDescription.contains("transcription from iPhone"))
         }
         let unauthorized = NativeVoiceAPI { _, _, _ in throw RPCFailure("Reconnectez-vous", code: 401) }
         do {
@@ -372,7 +372,7 @@ final class ProtocolTests: XCTestCase {
 
     func testAutolinksFindPlainURLs() {
         let text = "Docs at https://example.com/a?b=1, mirror www.example.org and mail me@example.com. Not ftp://x.y"
-        let links = ChatMarkdown.autolinks(in: text).map(\.url.absoluteString)
+        let links = ChatMarkdown.autolinks(in: text).map { $0.url.absoluteString }
         XCTAssertEqual(links, ["https://example.com/a?b=1", "http://www.example.org", "mailto:me@example.com"])
         XCTAssertTrue(ChatMarkdown.autolinks(in: "no links here").isEmpty)
     }
