@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise HermesIOS's wire contract against scripts/integration_server.py, without real model use."""
+"""Exercise Petal's wire contract against scripts/integration_server.py, without real model use."""
 import asyncio
 import json
 import uuid

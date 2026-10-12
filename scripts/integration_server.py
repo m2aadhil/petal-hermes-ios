@@ -86,7 +86,7 @@ def main():
         profile.mkdir(parents=True)
         profile_config = {**config, "tts": {"provider": "openai", "openai": {"base_url": f"http://127.0.0.1:{args.model_port}/v1", "voice": "nova" if name == "research" else "echo"}}}
         (profile / "config.yaml").write_text(yaml.safe_dump(profile_config))
-        (profile / "profile.yaml").write_text(yaml.safe_dump({"name": name, "description": "Profil de test HermesIOS"}))
+        (profile / "profile.yaml").write_text(yaml.safe_dump({"name": name, "description": "Profil de test Petal"}))
     env = {"PATH": str(Path(sys.executable).parent) + os.pathsep + os.defpath, "LANG": "en_US.UTF-8", "HERMES_HOME": str(home), "HERMES_DASHBOARD_BASIC_AUTH_USERNAME": "hermes-ios-test", "HERMES_DASHBOARD_BASIC_AUTH_PASSWORD": "hermes-ios-local-fixture", "HERMES_DASHBOARD_BASIC_AUTH_SECRET": secrets.token_urlsafe(32), "STT_OPENAI_BASE_URL": f"http://127.0.0.1:{args.model_port}/v1", "OPENAI_API_KEY": "hermes-ios-local-fixture", "OPENAI_BASE_URL": f"http://127.0.0.1:{args.model_port}/v1"}
     model = ThreadingHTTPServer(("127.0.0.1", args.model_port), Model)
     threading.Thread(target=model.serve_forever, daemon=True).start()

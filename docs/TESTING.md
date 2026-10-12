@@ -11,7 +11,7 @@ Behavioral tests cover newline-coalesced JSON-RPC frames, Unicode, reverse-proxy
 ## UI
 
 ```sh
-xcodebuild -scheme HermesIOS \
+xcodebuild -scheme Petal \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' test
 ```
 
@@ -42,12 +42,12 @@ outputs/integration/venv/bin/python scripts/check_hermes_contract.py
 outputs/integration/venv/bin/python scripts/check_tools_contract.py
 outputs/integration/venv/bin/python scripts/check_media_contract.py
 
-xcodebuild -scheme HermesIOSIntegration \
+xcodebuild -scheme PetalIntegration \
   -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
-  -only-testing:HermesIOSUITests/HermesIOSUITests/testNativeHermesConnectionAndResume test
+  -only-testing:PetalUITests/PetalUITests/testNativeHermesConnectionAndResume test
 ```
 
-The fixture binds only to loopback. Its intentionally public test credentials are `hermes-ios-test` / `hermes-ios-local-fixture`; they are for this disposable fixture only. No bridge script is required by Hermès iOS in normal use.
+The fixture binds only to loopback. Its intentionally public test credentials are `hermes-ios-test` / `hermes-ios-local-fixture`; they are for this disposable fixture only. No bridge script is required by Petal in normal use.
 
 The protocol probe verifies authentication gates, ticket minting, native RPC calls, streaming across a closed/reopened socket, replay sequences, exactly one persisted user message, canonical Bot Chat profile isolation, cron create/list/pause and hosted-group creation/logs. The opt-in UI test signs in from iOS, sends a message, backgrounds/reactivates the app during the turn, checks the final reply and relaunches to verify cached history plus saved authentication.
 
@@ -59,7 +59,7 @@ The media probe verifies native image staging/attach/detach with encoded paths, 
 
 ## Background submission and recovery
 
-With the isolated fixture running, select `HermesIOSIntegration` and run `testNativeSendThenImmediatelyBackground`. The test sends `HERMES_IOS_BACKGROUND_TEST` and immediately backgrounds the app without waiting for acknowledgement or the first token. Only that fixture marker slows the deterministic provider stream to about 30 seconds. After 40 seconds away (longer than the native 20-second orphan grace), the test requires exactly one complete answer and one user bubble, then verifies recovery after process relaunch. This exercises native Hermes server-side continuation with no provider outage or production data. It does not guarantee the amount of background execution time granted by iOS or cover force-quitting before transmission.
+With the isolated fixture running, select `PetalIntegration` and run `testNativeSendThenImmediatelyBackground`. The test sends `HERMES_IOS_BACKGROUND_TEST` and immediately backgrounds the app without waiting for acknowledgement or the first token. Only that fixture marker slows the deterministic provider stream to about 30 seconds. After 40 seconds away (longer than the native 20-second orphan grace), the test requires exactly one complete answer and one user bubble, then verifies recovery after process relaunch. This exercises native Hermes server-side continuation with no provider outage or production data. It does not guarantee the amount of background execution time granted by iOS or cover force-quitting before transmission.
 
 ## Streaming Markdown
 

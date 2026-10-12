@@ -1,6 +1,6 @@
 # Architecture and continuity
 
-Hermès iOS is one SwiftUI application with a Foundation-only core package for tests. There are no third-party runtime dependencies. Apple frameworks provide rendering, HTTP, WebSocket, secure credential storage and local data protection. The app has no hosted component.
+Petal is one SwiftUI application with a Foundation-only core package for tests. There are no third-party runtime dependencies. Apple frameworks provide rendering, HTTP, WebSocket, secure credential storage and local data protection. The app has no hosted component.
 
 ## Ownership
 
@@ -11,7 +11,7 @@ SwiftUI views → AppModel → HermesSocket → /api/ws → official Hermes hand
                    └─ LocalCache (display projection and drafts only)
 ```
 
-Hermes owns context, memory, skills, tools, model selection and persisted messages. Hermès iOS never submits a locally reconstructed chat history as model context. A message is `prompt.submit {session_id, text}` on the existing native runtime session.
+Hermes owns context, memory, skills, tools, model selection and persisted messages. Petal never submits a locally reconstructed chat history as model context. A message is `prompt.submit {session_id, text}` on the existing native runtime session.
 
 A saved gateway has a UUID and an endpoint including any proxy prefix. Every cached conversation is scoped by gateway, profile and stored session ID. Runtime IDs are kept separately and rebound by `session.resume`. Selection and connection generations prevent stale async results from taking over a different conversation.
 
@@ -46,15 +46,15 @@ iOS suspends background execution. Temporary inactivity preserves the socket. Wh
 
 ## Sending and ambiguity
 
-An optimistic user bubble appears on submit. The native acknowledgement confirms acceptance. Network loss after transmission leaves an **uncertain** bubble; an explicit RPC refusal marks it **failed**. A later authoritative snapshot can reconcile the optimistic row. Hermès iOS never automatically replays a plain chat submission, because JSON-RPC IDs alone do not provide durable idempotency.
+An optimistic user bubble appears on submit. The native acknowledgement confirms acceptance. Network loss after transmission leaves an **uncertain** bubble; an explicit RPC refusal marks it **failed**. A later authoritative snapshot can reconcile the optimistic row. Petal never automatically replays a plain chat submission, because JSON-RPC IDs alone do not provide durable idempotency.
 
-Hosted groups are different: the native `groups.send` contract includes a durable event ID. Hermès iOS persists that ID before sending and reuses it for a user-requested retry. Group log cursors and event IDs deduplicate replay. Only the visible group polls its native log, at a two-second interval; no Hermès iOS group coordinator or bot relay exists.
+Hosted groups are different: the native `groups.send` contract includes a durable event ID. Petal persists that ID before sending and reuses it for a user-requested retry. Group log cursors and event IDs deduplicate replay. Only the visible group polls its native log, at a two-second interval; no Petal group coordinator or bot relay exists.
 
 ## Privacy
 
 Session cookies/tokens are stored in the Keychain with `AfterFirstUnlockThisDeviceOnly`. Passwords entered at login are cleared after authentication; credential-request values are transient. Cookie restore preserves the actual Secure flag (Foundation treats even a present `"FALSE"` string as secure).
 
-Display caches live in Application Support, with data protection and backup exclusion. The recent cache keeps up to 500 messages per conversation; opening/recovery can retrieve native history. Connection removal erases its local files and Keychain entry. Hermès iOS has no analytics SDK, crash upload endpoint or advertising identifier.
+Display caches live in Application Support, with data protection and backup exclusion. The recent cache keeps up to 500 messages per conversation; opening/recovery can retrieve native history. Connection removal erases its local files and Keychain entry. Petal has no analytics SDK, crash upload endpoint or advertising identifier.
 
 ATS allows HTTP because tailnet IP addresses are user-configurable. Use `NSAllowsArbitraryLoads` alone: adding `NSAllowsLocalNetworking` makes iOS ignore that allowance, including for HTTP tailnet connections that ATS does not classify as local. See [Apple's documented precedence](https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowsarbitraryloads).
 
@@ -67,6 +67,32 @@ Conversation history uses date-grouped cards, a visible active-session state, an
 History cards keep both title and preview on one line, with trailing truncation and a compact 72-point minimum height. Full conversation titles remain available to accessibility.
 
 Conversation lists are persisted per profile with backward-compatible migration from the former single list. Profile switching renders that profile’s cached list immediately and revalidates separately. A slow background response can update its own cached profile without replacing the currently displayed list. The connection indicator remains distinct from the activity label; after 15 seconds without progress during thinking, the label reports that the model response is pending, without claiming a provider outage.
+
+## Image attachments
+
+Every image, from the photo picker or from *Add a file*, goes through `ImagePreparer` (`Petal/Core`) before it is cached or uploaded:
+
+- The long edge is capped at 2048 px and never upscaled. Model providers downscale beyond roughly this size anyway, and uploads travel as base64 inside a WebSocket message, so smaller is faster.
+- PNG sources (screenshots) and images with transparency stay lossless PNG so small text stays readable. Photos, including HEIC, become JPEG starting at quality 0.88.
+- Each image must fit 4 MB. JPEG quality is lowered first (0.88 → 0.8 → 0.72) and resolution last (2048 → 1792 → 1536 → 1280 px), because resolution matters more for reading text. A PNG over budget falls back to JPEG.
+- Only pixels are re-encoded: EXIF, GPS and maker data never leave the device; orientation is applied to the pixels. Small animated GIFs are sent unchanged.
+- Image files up to 50 MB are accepted before resizing. Files that can't be decoded (or SVG/PDF) are sent unchanged as files under the 10 MB limit.
+
+## Files from Hermes
+
+When the agent mentions a file, the reply shows it as a card. Petal recognises Hermes' `MEDIA:/absolute/path` directive (hidden from the text) and bare absolute paths ending in an extension, such as `/tmp/report.pdf` or `~/out/chart.png`. URLs and relative paths are ignored, and cards only appear once a reply has finished streaming.
+
+Tapping a card downloads the file through the authenticated `GET /api/files/download?path=…` route into a temporary folder (cleared on launch) and opens Quick Look, which also offers Share and Save to Files. The server enforces its own rules: a 100 MB limit, no credential files, and a locked root when `HERMES_DASHBOARD_FILES_ROOT` is set.
+
+Petal sessions currently run with the `tui` platform prompt, which tells the agent there is no attachment channel, so it usually writes plain paths rather than `MEDIA:` directives. Both forms work.
+
+## Thinking
+
+Hermes streams the model's reasoning as `reasoning.delta` (or one `reasoning.available` block) when the server's `display.show_reasoning` is on, which is the default. Petal attaches it to the reply as `ChatMessage.reasoning`, times the reasoning phase, and shows a collapsible *Thinking…* / *Thought for 12 s* row above the answer. Reasoning from history (`reasoning` / `reasoning_content` on assistant rows, including tool-call steps) is merged into the reply that follows. `thinking.delta` is spinner and wait text, not reasoning, and only updates the activity line.
+
+*Settings → Show thinking* hides it on this iPhone only. Petal never calls `config.set reasoning show|hide`, because that rewrites the server's global config.
+
+The brain/gauge menu in the chat header sets the reasoning effort (Off, Low, Medium, High) for the open chat only: `session.create reasoning_effort` for a new chat, then `config.set reasoning` with the chat's `session_id`. It is never sent without a session ID, which would change the global default.
 
 ## Streaming and chat rendering
 
